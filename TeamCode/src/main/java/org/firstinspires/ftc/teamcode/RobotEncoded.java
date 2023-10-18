@@ -15,15 +15,21 @@ public class RobotEncoded {
     DcMotorEx frontRight;
     DcMotorEx backLeft;
     DcMotorEx backRight;
-    DcMotorEx linearSlide;
+    DcMotorEx intakeMotor;
+    DcMotorEx slideLeft;
+    DcMotorEx slideRight;
+    Servo pixelBox;
     Telemetry telemetry;
-
 
     static final double TICKS_PER_MOTOR_ROTATION = 537.7;
     static final double GEAR_REDUCTION = 1;
     static final double WHEEL_DIAMETER_INCHES = 3.77953;
     static final double TICKS_PER_INCH = (TICKS_PER_MOTOR_ROTATION * GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * Math.PI);
 
+    static final double LS_DIAMETER_INCHES = 1.404;
+    static final double TICKS_PER_INCH_LS = (TICKS_PER_MOTOR_ROTATION * GEAR_REDUCTION) / (LS_DIAMETER_INCHES * Math.PI);
+    static final double MAX_TICKS_LS = 34;
+    static final double MIN_TICKS_LS = 10;
 
     public RobotEncoded(HardwareMap hardwareMap, Telemetry telemetry) {
         this.telemetry = telemetry;
@@ -31,6 +37,10 @@ public class RobotEncoded {
         frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
         backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
+        intakeMotor = hardwareMap.get(DcMotorEx.class,"intakeMotor");
+        slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
+        slideRight = hardwareMap.get(DcMotorEx.class, "slideRight");
+        pixelBox = hardwareMap.get(Servo.class, "pixelBox");
 
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -38,12 +48,42 @@ public class RobotEncoded {
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        linearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
-        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
+        slideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        slideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        slideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
+    }
+    public void flipBox() {
+        pixelBox.setPosition(0.6);
+    }
+
+    public void unflipBox() {
+        pixelBox.setPosition(0);
+    }
+
+    public void runIntake(double velocity) {
+        intakeMotor.setVelocity(1000);
+    }
+
+    public void slideGo(double velocity, double distanceInches) {
+
+        if (distanceInches > MAX_TICKS_LS || distanceInches < 0)
+            return;
+
+        slideRight.setTargetPosition((int) (distanceInches * TICKS_PER_INCH_LS));
+        slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slideRight.setVelocity(velocity);
+
+        slideLeft.setTargetPosition((int) (distanceInches * TICKS_PER_INCH_LS));
+        slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slideLeft.setVelocity(velocity);
+
+        while(slideLeft.isBusy()) { }
+        while(slideRight.isBusy()) { }
 
     }
 
