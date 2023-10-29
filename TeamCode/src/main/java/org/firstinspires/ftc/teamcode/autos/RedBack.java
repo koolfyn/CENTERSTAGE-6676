@@ -24,7 +24,9 @@ public class RedBack extends LinearOpMode{
         sleep(5000);
         robotencoded.runIntake(1000);
         sleep(500);
-    }
 
+        while (opModeIsActive()) {sleep(20);}
+
+    }
 
 }

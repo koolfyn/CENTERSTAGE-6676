@@ -25,6 +25,7 @@ public class blueFront extends LinearOpMode {
         sleep(800);
         robotencoded.runIntake(0);
         sleep(500);
-        
+
+        while (opModeIsActive()) {sleep(20);}
     }
 }

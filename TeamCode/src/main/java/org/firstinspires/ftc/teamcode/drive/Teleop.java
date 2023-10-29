@@ -72,6 +72,17 @@ public class Teleop extends OpMode {
             intakeMotor.setVelocity(0);
         }
 
+        if(gamepad2.b) {
+            slideHeight = Constants.lowSetLine;
+        }
+        else if(gamepad2.x) {
+            slideHeight = Constants.medSetLine;
+        }
+        else if(gamepad2.y) {
+            slideHeight = Constants.highSetLine;
+        }
+
+
          // cascade slide movement
         if(gamepad2.right_stick_y > 0.1 && slideHeight >= 0) {
             slideHeight = slideLeft.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
