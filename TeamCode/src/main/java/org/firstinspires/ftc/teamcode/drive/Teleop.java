@@ -1,12 +1,13 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.drive;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
+import org.firstinspires.ftc.teamcode.drive.Constants;
 
 @TeleOp (name="main")
 public class Teleop extends OpMode {
@@ -71,7 +72,7 @@ public class Teleop extends OpMode {
             intakeMotor.setVelocity(0);
         }
 
-        // cascade slide movement
+         // cascade slide movement
         if(gamepad2.right_stick_y > 0.1 && slideHeight >= 0) {
             slideHeight = slideLeft.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
             slideHeight -= 1.1;
@@ -88,9 +89,14 @@ public class Teleop extends OpMode {
         }
 
 
-        // 2 motors for CascadeSlide & hanging mechanism
-        // 1 motor for wheel intake
-        // 1 servo for box
+        telemetry.addData("left slide velocity", slideLeft.getVelocity());
+        telemetry.addData("right slide velocity", slideRight.getVelocity());
+        telemetry.addData("left target pos", slideLeft.getTargetPosition());
+        telemetry.addData("right target pos", slideRight.getTargetPosition());
+        telemetry.addData("right cur pos", slideRight.getCurrentPosition());
+        telemetry.addData("left cur pos", slideLeft.getCurrentPosition());
+        telemetry.update();
+
     }
 }
 
