@@ -11,20 +11,22 @@ public class blueBack extends LinearOpMode {
     public void runOpMode(){
         RobotEncoded robotencoded = new RobotEncoded(hardwareMap, telemetry);
 
-        robotencoded.forward(12,800);
+        waitForStart();
+
+        robotencoded.forward(23,1000);
         sleep(1500);
-        robotencoded.runIntake(500);
-        sleep(900);
-        robotencoded.runIntake(0);
-        sleep(100);
-        robotencoded.backward(3,800);
+//        robotencoded.runIntake(500);
+//        sleep(900);
+//        robotencoded.runIntake(0);
+//        sleep(100);
+        robotencoded.backward(5,1000);
         sleep(500);
-        robotencoded.strafeLeft(20,800);
-        sleep(2000);
-        robotencoded.runIntake(1000);
-        sleep(500);
-        robotencoded.runIntake(0);
-        sleep(100);
+        robotencoded.strafeLeft(45,800);
+        sleep(5000);
+//        robotencoded.runIntake(1000);
+//        sleep(500);
+//        robotencoded.runIntake(0);
+//        sleep(100);
 
         while (opModeIsActive()) {sleep(20);}
 
