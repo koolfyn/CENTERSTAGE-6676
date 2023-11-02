@@ -12,7 +12,7 @@ public class blueFront extends LinearOpMode {
         RobotEncoded robotencoded = new RobotEncoded(hardwareMap, telemetry);
         waitForStart();
 
-        robotencoded.forward(30,1000);
+        robotencoded.forward(28,1000);
         sleep(1500);
         robotencoded.backward(25,900);
         sleep(1500);
