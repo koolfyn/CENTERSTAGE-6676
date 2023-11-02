@@ -8,7 +8,6 @@ import org.firstinspires.ftc.teamcode.drive.RobotEncoded;
 public class redBack extends LinearOpMode {
 
     @Override
-
     public void runOpMode(){
         RobotEncoded robotencoded = new RobotEncoded(hardwareMap, telemetry);
         waitForStart();
