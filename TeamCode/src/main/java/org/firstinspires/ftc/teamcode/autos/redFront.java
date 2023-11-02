@@ -12,14 +12,15 @@ public class redFront extends LinearOpMode {
         RobotEncoded robotencoded = new RobotEncoded(hardwareMap, telemetry);
         waitForStart();
 
-        robotencoded.forward(28,750);
+        robotencoded.forward(26,700);
         sleep(1500);
-        robotencoded.backward(25,500);
+        robotencoded.backward(23,500);
         sleep(1500);
-        robotencoded.strafeRight(100,800);
-        sleep(10000);
+        robotencoded.strafeRight(1011,800);
+        sleep(5000);
+        robotencoded.forward(5,1500);
+        robotencoded.backward(5,1500);
 
-        while (opModeIsActive()) {sleep(20);}
 
     }
 }

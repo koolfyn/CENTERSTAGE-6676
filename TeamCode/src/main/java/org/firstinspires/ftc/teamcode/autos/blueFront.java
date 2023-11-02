@@ -14,10 +14,12 @@ public class blueFront extends LinearOpMode {
 
         robotencoded.forward(28,1000);
         sleep(1500);
-        robotencoded.backward(25,900);
+        robotencoded.backward(24,900);
         sleep(1500);
-        robotencoded.strafeLeft(100,900);
-        sleep(10000);
+        robotencoded.strafeLeft(101,800);
+        sleep(8000);
+        robotencoded.forward(5,1500);
+        robotencoded.backward(5,1500);
 
     }
 }

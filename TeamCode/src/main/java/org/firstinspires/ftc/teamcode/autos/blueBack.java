@@ -19,6 +19,8 @@ public class blueBack extends LinearOpMode {
         sleep(500);
         robotencoded.strafeLeft(45,800);
         sleep(5000);
+        robotencoded.forward(5,1500);
+        robotencoded.backward(5,1500);
 
     }
 }
