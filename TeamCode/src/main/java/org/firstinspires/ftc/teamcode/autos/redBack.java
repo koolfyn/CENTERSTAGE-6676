@@ -14,7 +14,7 @@ public class redBack extends LinearOpMode {
 
         waitForStart();
 
-        robotencoded.forward(30,750);
+        robotencoded.forward(28,750);
         sleep(1500);
 //        robotencoded.runIntake(500);
 //        sleep(900);
