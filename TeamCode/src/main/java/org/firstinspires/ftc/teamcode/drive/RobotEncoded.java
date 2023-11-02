@@ -195,7 +195,6 @@ public class RobotEncoded {
     }
 
     public void turnLeft(int distanceInches, double velocity) {
-        //int distanceInches = (int) (degrees / degreesPerInch);
         frontLeft.setTargetPosition(frontLeft.getCurrentPosition() + (int) (-distanceInches * TICKS_PER_INCH));
         frontRight.setTargetPosition(frontRight.getCurrentPosition() + (int) (distanceInches * TICKS_PER_INCH));
         backRight.setTargetPosition(backRight.getCurrentPosition() + (int) (distanceInches * TICKS_PER_INCH));
@@ -221,7 +220,6 @@ public class RobotEncoded {
     }
 
     public void turnRight(int distanceInches, double velocity) {
-        //int distanceInches = (int) (degrees / degreesPerInch);
         frontLeft.setTargetPosition(frontLeft.getCurrentPosition() + (int) (distanceInches * TICKS_PER_INCH));
         frontRight.setTargetPosition(frontRight.getCurrentPosition() + (int) (-distanceInches * TICKS_PER_INCH));
         backRight.setTargetPosition(backRight.getCurrentPosition() + (int) (-distanceInches * TICKS_PER_INCH));

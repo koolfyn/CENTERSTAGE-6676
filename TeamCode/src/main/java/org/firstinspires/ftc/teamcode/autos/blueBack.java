@@ -13,22 +13,12 @@ public class blueBack extends LinearOpMode {
 
         waitForStart();
 
-        robotencoded.forward(30,1000);
+        robotencoded.forward(28,1000);
         sleep(1500);
-//        robotencoded.runIntake(500);
-//        sleep(900);
-//        robotencoded.runIntake(0);
-//        sleep(100);
         robotencoded.backward(5,1000);
         sleep(500);
         robotencoded.strafeLeft(45,800);
         sleep(5000);
-//        robotencoded.runIntake(1000);
-//        sleep(500);
-//        robotencoded.runIntake(0);
-//        sleep(100);
-
-        while (opModeIsActive()) {sleep(20);}
 
     }
 }
