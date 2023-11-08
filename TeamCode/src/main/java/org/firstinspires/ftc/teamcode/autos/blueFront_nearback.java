@@ -5,22 +5,21 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.drive.RobotEncoded;
 
 @Autonomous
-public class redFront extends LinearOpMode {
+public class blueFront_nearback extends LinearOpMode {
 
     @Override
     public void runOpMode(){
         RobotEncoded robotencoded = new RobotEncoded(hardwareMap, telemetry);
         waitForStart();
 
-        robotencoded.forward(26,700);
-        sleep(1500);
-        robotencoded.backward(23,500);
-        sleep(1500);
-        robotencoded.strafeRight(1011,800);
-        sleep(5000);
+        robotencoded.backward(28,700);
+        sleep(1000);
+        robotencoded.forward(23,700);
+        sleep(3000);
+        robotencoded.strafeRight(101,800);
+        sleep(1000);
         robotencoded.forward(5,1500);
         robotencoded.backward(5,1500);
-
 
     }
 }
