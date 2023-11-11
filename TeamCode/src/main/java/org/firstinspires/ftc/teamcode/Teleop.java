@@ -22,7 +22,7 @@ public class Teleop extends OpMode {
     DcMotorEx slideRight;
     Servo pixelBox;
 
-    @Override
+    @Override //declaring motors
     public void init() {
         frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
@@ -57,11 +57,16 @@ public class Teleop extends OpMode {
             frontRight.setPower((y + x + r) * Constants.slowVal);
             backLeft.setPower((y + x + r) * Constants.slowVal);
             backRight.setPower((y + x + r) * Constants.slowVal);
-        } else {
+        } else if (gamepad1.left_bumper){
             frontLeft.setPower((y + x + r) * Constants.defaultVal);
             frontRight.setPower((y + x + r) * Constants.defaultVal);
             backLeft.setPower((y + x + r) * Constants.defaultVal);
             backRight.setPower((y + x + r) * Constants.defaultVal);
+        } else {
+            frontLeft.setPower((y + x + r) * Constants.fastVal);
+            frontRight.setPower((y + x + r) * Constants.fastVal);
+            backLeft.setPower((y + x + r) * Constants.fastVal);
+            backRight.setPower((y + x + r) * Constants.fastVal);
         }
 
         if (gamepad1.a) { //intake motor
@@ -86,6 +91,7 @@ public class Teleop extends OpMode {
             slideHeight = slideRight.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
             slideHeight += 1.1;
         }
+
 
 
         // 2 motors for CascadeSlide & hanging mechanism
