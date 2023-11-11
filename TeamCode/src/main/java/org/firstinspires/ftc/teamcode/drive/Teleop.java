@@ -1,12 +1,13 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.drive;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
+import org.firstinspires.ftc.teamcode.drive.Constants;
 
 @TeleOp (name="main")
 public class Teleop extends OpMode {
@@ -47,21 +48,21 @@ public class Teleop extends OpMode {
     }
 
     @Override
-    public void loop() {   // runs on multiple times
-        double x = -gamepad1.left_stick_x; // stores data in gp
+    public void loop() {
+        double x = -gamepad1.left_stick_x;
         double y = gamepad1.left_stick_y;
         double r = -gamepad1.right_stick_x;
 
         if (gamepad1.right_bumper) {
             frontLeft.setPower((y + x + r) * Constants.slowVal);
-            frontRight.setPower((y + x + r) * Constants.slowVal);
-            backLeft.setPower((y + x + r) * Constants.slowVal);
-            backRight.setPower((y + x + r) * Constants.slowVal);
+            frontRight.setPower((y - x - r) * Constants.slowVal);
+            backLeft.setPower((y - x + r) * Constants.slowVal);
+            backRight.setPower((y + x - r) * Constants.slowVal);
         } else {
             frontLeft.setPower((y + x + r) * Constants.defaultVal);
-            frontRight.setPower((y + x + r) * Constants.defaultVal);
-            backLeft.setPower((y + x + r) * Constants.defaultVal);
-            backRight.setPower((y + x + r) * Constants.defaultVal);
+            frontRight.setPower((y - x - r) * Constants.defaultVal);
+            backLeft.setPower((y - x + r) * Constants.defaultVal);
+            backRight.setPower((y + x - r) * Constants.defaultVal);
         }
 
         if (gamepad1.a) { //intake motor
@@ -71,7 +72,18 @@ public class Teleop extends OpMode {
             intakeMotor.setVelocity(0);
         }
 
-        // cascade slide movement
+        if(gamepad2.b) {
+            slideHeight = Constants.lowSetLine;
+        }
+        else if(gamepad2.x) {
+            slideHeight = Constants.medSetLine;
+        }
+        else if(gamepad2.y) {
+            slideHeight = Constants.highSetLine;
+        }
+
+
+         // cascade slide movement
         if(gamepad2.right_stick_y > 0.1 && slideHeight >= 0) {
             slideHeight = slideLeft.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
             slideHeight -= 1.1;
@@ -87,10 +99,17 @@ public class Teleop extends OpMode {
             slideHeight += 1.1;
         }
 
+        telemetry.addData("left slide velocity", slideLeft.getVelocity());
+        telemetry.addData("right slide velocity", slideRight.getVelocity());
+        telemetry.addData("left target pos", slideLeft.getTargetPosition());
+        telemetry.addData("right target pos", slideRight.getTargetPosition());
+        telemetry.addData("right cur pos", slideRight.getCurrentPosition());
+        telemetry.addData("left cur pos", slideLeft.getCurrentPosition());
+        telemetry.addData("x value", x);
+        telemetry.addData("y value", y);
+        telemetry.addData("r value",r);
+        telemetry.update();
 
-        // 2 motors for CascadeSlide & hanging mechanism
-        // 1 motor for wheel intake
-        // 1 servo for box
     }
 }
 
