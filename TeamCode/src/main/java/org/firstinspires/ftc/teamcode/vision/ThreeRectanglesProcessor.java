@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.bluevision;
+package org.firstinspires.ftc.teamcode.vision;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,30 +11,30 @@ import org.opencv.core.Rect;
 
 public class ThreeRectanglesProcessor implements VisionProcessor {
 public Rect rectLeft = new Rect(110, 60, 300, 240);
-public Rect rectMiddle = new Rect(160, 60, 300, 240);
-public Rect rectRight = new Rect(210, 60, 300, 240);
+public Rect rectMiddle = new Rect(160, 60, 290, 240);
+public Rect rectRight = new Rect(220, 60, 300, 240);
 Selected selection = Selected.NONE;
 
     @Override
     public void init(int width, int height, CameraCalibration calibration) {
-    }
+         }
 
-    @Override
-    public Object processFrame(Mat frame, long captureTimeNanos) {
-        return null;
-    }
+        @Override
+        public Object processFrame(Mat frame, long captureTimeNanos) {
+            return null;
+         }
 
-    private android.graphics.Rect makeGraphicsRect(Rect rect, float scaleBmpPxToCanvasPx) {
+        private android.graphics.Rect makeGraphicsRect(Rect rect, float scaleBmpPxToCanvasPx) {
         int left = Math.round(rect.x * scaleBmpPxToCanvasPx);
         int top = Math.round(rect.y * scaleBmpPxToCanvasPx);
         int right = left + Math.round(rect.width * scaleBmpPxToCanvasPx);
         int bottom = top + Math.round(rect.height * scaleBmpPxToCanvasPx);
 
-        return new android.graphics.Rect(left, top, right, bottom);
-    }
+            return new android.graphics.Rect(left, top, right, bottom);
+        }
 
-    @Override
-    public void onDrawFrame(Canvas canvas, int onscreenWidth, int onscreenHeight, float scaleBmpPxToCanvasPx, float scaleCanvasDensity, Object userContext) {
+        @Override
+        public void onDrawFrame(Canvas canvas, int onscreenWidth, int onscreenHeight, float scaleBmpPxToCanvasPx, float scaleCanvasDensity, Object userContext) {
 
         Paint selectedPaint = new Paint();
         selectedPaint.setColor(Color.RED);
@@ -69,13 +69,13 @@ Selected selection = Selected.NONE;
                 canvas.drawRect(drawRectangleMiddle, nonSelectedPaint);
                 canvas.drawRect(drawRectangleRight, nonSelectedPaint);
                 break;
-        }
-    }
+             }
+         }
 
-    public enum Selected {
-        NONE,
-        LEFT,
-        MIDDLE,
-        RIGHT
+        public enum Selected {
+                NONE,
+                LEFT,
+                MIDDLE,
+                RIGHT
     }
 }

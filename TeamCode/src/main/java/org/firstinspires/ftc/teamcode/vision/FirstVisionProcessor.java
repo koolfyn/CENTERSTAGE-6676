@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.redvision;
+package org.firstinspires.ftc.teamcode.vision;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,9 +13,9 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
 public class FirstVisionProcessor implements VisionProcessor {
-    public Rect rectLeft = new Rect(0, 40, 175, 400);
-    public Rect rectMiddle = new Rect(200, 40, 250, 400);
-    public Rect rectRight = new Rect(450, 40, 175, 400);
+    public Rect rectLeft = new Rect(0, 150, 175, 200);
+    public Rect rectMiddle = new Rect(180, 100, 250, 200);
+    public Rect rectRight = new Rect(450, 150, 175, 200);
     Selected selection = Selected.NONE;
 
     Mat submat = new Mat();
@@ -37,7 +37,7 @@ public class FirstVisionProcessor implements VisionProcessor {
              } else if ((satRectMiddle > satRectLeft) && (satRectMiddle > satRectRight)) {
             return Selected.MIDDLE;
              }
-         return Selected.RIGHT;
+            return Selected.RIGHT;
          }
 
         protected double getAvgSaturation(Mat input, Rect rect) {

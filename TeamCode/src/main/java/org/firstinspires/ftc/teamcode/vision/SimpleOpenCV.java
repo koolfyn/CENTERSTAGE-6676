@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.bluevision;
+package org.firstinspires.ftc.teamcode.vision;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -6,14 +6,14 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 @Autonomous()
-    public class SimpleOpenCVBlue extends OpMode{
+    public class SimpleOpenCV extends OpMode {
 
-    private DrawRectangleProcessorBlue drawRectangleProcessor;
+    private DrawRectangleProcessor drawRectangleProcessor;
     private VisionPortal visionPortal;
 
     @Override
     public void init() {
-        drawRectangleProcessor = new DrawRectangleProcessorBlue();
+        drawRectangleProcessor = new DrawRectangleProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), drawRectangleProcessor);
 
     }
