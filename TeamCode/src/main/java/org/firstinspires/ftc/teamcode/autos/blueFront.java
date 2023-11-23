@@ -35,9 +35,9 @@ import org.firstinspires.ftc.vision.VisionPortal;
             telemetry.addData("Identified", visionProcessor.getSelection());
             switch (visionProcessor.getSelection()) {
                 case LEFT:
-                    robotEncoded.forward(28,700);
-                    robotEncoded.turnLeft(25,700);
-                    robotEncoded.forward(4,700);
+                    robotEncoded.forward(30,700);
+                    robotEncoded.turnLeft(23,700);
+                    robotEncoded.forward(15,700);
                     break;
 
                 case NONE:

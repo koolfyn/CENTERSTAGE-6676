@@ -8,8 +8,8 @@ import org.firstinspires.ftc.teamcode.drive.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="blue Back")
-public class blueBack extends OpMode {
+@Autonomous(name="red Back")
+public class RedBack extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private RobotEncoded robotEncoded;
