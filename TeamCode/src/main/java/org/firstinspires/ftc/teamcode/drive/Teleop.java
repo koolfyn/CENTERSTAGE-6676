@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 @TeleOp (name="main")
-public class   Teleop extends OpMode {
+public class Teleop extends OpMode {
 
     double slideHeight = 0;
 
@@ -54,14 +54,14 @@ public class   Teleop extends OpMode {
 
         if (gamepad1.right_bumper) {
             frontLeft.setPower((y + x + r) * Constants.slowVal);
-            frontRight.setPower((y + x + r) * Constants.slowVal);
-            backLeft.setPower((y + x + r) * Constants.slowVal);
-            backRight.setPower((y + x + r) * Constants.slowVal);
+            frontRight.setPower((y - x - r) * Constants.slowVal);
+            backLeft.setPower((y - x + r) * Constants.slowVal);
+            backRight.setPower((y + x - r) * Constants.slowVal);
         } else {
             frontLeft.setPower((y + x + r) * Constants.defaultVal);
-            frontRight.setPower((y + x + r) * Constants.defaultVal);
-            backLeft.setPower((y + x + r) * Constants.defaultVal);
-            backRight.setPower((y + x + r) * Constants.defaultVal);
+            frontRight.setPower((y - x - r) * Constants.defaultVal);
+            backLeft.setPower((y - x + r) * Constants.defaultVal);
+            backRight.setPower((y + x - r) * Constants.defaultVal);
         }
 
 //        if (gamepad1.a) { //intake motor
