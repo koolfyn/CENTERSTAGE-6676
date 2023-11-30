@@ -14,6 +14,7 @@ public class RobotEncoded {
     DcMotorEx frontRight;
     DcMotorEx backLeft;
     DcMotorEx backRight;
+    DcMotorEx actuatorSuspend;
 //    DcMotorEx intakeMotor;
 //    DcMotorEx slideLeft;
 //    DcMotorEx slideRight;
@@ -36,11 +37,15 @@ public class RobotEncoded {
         frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
         backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
+        actuatorSuspend = hardwareMap.get(DcMotorEx.class, "actuatorSuspend");
+
 //        intakeMotor = hardwareMap.get(DcMotorEx.class,"intakeMotor");
 //        slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
 //        slideRight = hardwareMap.get(DcMotorEx.class, "slideRight");
 //        pixelBox = hardwareMap.get(Servo.class, "pixelBox");
 
+        actuatorSuspend.setDirection(DcMotorSimple.Direction.REVERSE);
+        actuatorSuspend.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -85,6 +90,21 @@ public class RobotEncoded {
 //        while(slideRight.isBusy()) { }
 //
 //    }
+    public void setSlidePosition(double velocity, double distanceInches) {
+
+//        telemetry.addData("Slide distance", distanceInches);
+//        telemetry.update();
+
+        if (distanceInches > MAX_TICKS_LS || distanceInches < 0)
+            return;
+
+        actuatorSuspend.setTargetPosition((int) (distanceInches * TICKS_PER_INCH_LS));
+        actuatorSuspend.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        actuatorSuspend.setVelocity(velocity);
+
+        while(actuatorSuspend.isBusy()) { }
+}
+
 
     public void turnR(double Power) {
         frontRight.setPower(Power);
