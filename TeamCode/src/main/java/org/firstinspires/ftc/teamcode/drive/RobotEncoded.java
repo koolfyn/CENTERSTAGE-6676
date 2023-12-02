@@ -105,7 +105,6 @@ public class RobotEncoded {
         while(actuatorSuspend.isBusy()) { }
 }
 
-
     public void turnR(double Power) {
         frontRight.setPower(Power);
         frontLeft.setPower(-Power);
