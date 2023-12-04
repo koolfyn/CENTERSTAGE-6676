@@ -34,7 +34,7 @@ public class Teleop extends OpMode {
 //        backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
 //        backRight = hardwareMap.get(DcMotorEx.class, "backRight");
 //        actuatorSuspend = hardwareMap.get(DcMotorEx.class, "actuatorSuspend");
-//        robotEncoded = new RobotEncoded(hardwareMap, telemetry);
+        robotEncoded = new RobotEncoded(hardwareMap, telemetry);
 //        slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
 //        slideRight = hardwareMap.get(DcMotorEx.class, "slideRight");
 //        intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
