@@ -46,6 +46,7 @@ public class RobotEncoded {
 
         actuatorSuspend.setDirection(DcMotorSimple.Direction.REVERSE);
         actuatorSuspend.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        actuatorSuspend.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

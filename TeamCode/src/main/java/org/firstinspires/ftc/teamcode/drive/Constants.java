@@ -2,9 +2,9 @@ package org.firstinspires.ftc.teamcode.drive;
 
 public class Constants {
 
-    public static final double slowVal = 0.3;
-    public static final double defaultVal = 0.6;
-    public static final double fastVal = 0.9;
+    public static final double slowVal = 500;
+    public static final double defaultVal = 900;
+    public static final double fastVal = 1000;
 
     public static final double lowSetLine = 20;
     public static final double medSetLine = 30;
