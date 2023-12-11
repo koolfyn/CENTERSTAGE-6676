@@ -36,19 +36,21 @@ public class blueBack extends OpMode {
                 robotEncoded.turnLeft(24,700); // 24
                 robotEncoded.forward(4,700);
                 robotEncoded.backward(4,700);
-                robotEncoded.strafeLeft(30,700);
-                robotEncoded.forward(50,800);
-                robotEncoded.backward(8,2000);
-                robotEncoded.forward(4,2000);
+                robotEncoded.strafeLeft(28,700);
+                robotEncoded.turnLeft(48,400);
+                robotEncoded.backward(50,800);
+                robotEncoded.forward(8,1900);
+                robotEncoded.backward(4,1900);
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.forward(27,900); //31
-                robotEncoded.backward(25,700); //30
-                robotEncoded.strafeLeft(52,700);
-                robotEncoded.forward(8,2000);
-                robotEncoded.backward(4,2000);
+                robotEncoded.forward(31,900); //27
+                robotEncoded.backward(29,700); //35
+                robotEncoded.turnRight(24,500);
+                robotEncoded.backward(48,700);
+                robotEncoded.forward(8,1900);
+                robotEncoded.backward(4,1900);
                 break;
 
             case RIGHT:
@@ -56,10 +58,10 @@ public class blueBack extends OpMode {
                 robotEncoded.turnRight(24,900); // 24
                 robotEncoded.forward(5,700);
                 robotEncoded.backward(5,700);
-                robotEncoded.strafeRight(35,700);
-                robotEncoded.backward(50,700);
+                robotEncoded.strafeRight(30,700);
+                robotEncoded.backward(45,700);
+                robotEncoded.forward(10,2000);
                 robotEncoded.backward(8,2000);
-                robotEncoded.forward(4,2000);
                 break;
 
         }

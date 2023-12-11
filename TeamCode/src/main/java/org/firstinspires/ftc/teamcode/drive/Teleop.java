@@ -69,6 +69,11 @@ public class Teleop extends OpMode {
             robotEncoded.frontRight.setVelocity((y - x - r) * Constants.slowVal);
             robotEncoded.backLeft.setVelocity((y - x + r) * Constants.slowVal);
             robotEncoded.backRight.setVelocity((y + x - r) * Constants.slowVal);
+        } else if (gamepad1.left_bumper) {
+            robotEncoded.frontLeft.setPower((y + x + r) * Constants.fastVal);
+            robotEncoded.frontRight.setPower((y - x - r) * Constants.fastVal);
+            robotEncoded.backLeft.setPower((y - x + r) * Constants.fastVal);
+           robotEncoded.backRight.setPower((y + x - r) * Constants.fastVal);
         } else {
             robotEncoded.frontLeft.setVelocity((y + x + r) * Constants.defaultVal);
             robotEncoded.frontRight.setVelocity((y - x - r) * Constants.defaultVal);
@@ -76,17 +81,12 @@ public class Teleop extends OpMode {
             robotEncoded.backRight.setVelocity((y + x - r) * Constants.defaultVal);
         }
 
-//        if (gamepad1.left_bumper) {
-//            robotEncoded.frontLeft.setPower((y + x + r) * Constants.fastVal);
-//            robotEncoded.frontRight.setPower((y - x - r) * Constants.fastVal);
-//            robotEncoded.backLeft.setPower((y - x + r) * Constants.fastVal);
-//            robotEncoded.backRight.setPower((y + x - r) * Constants.fastVal);
-//        }
+
 
         if (gamepad1.y) {
-            robotEncoded.setSlidePosition(-900, 24);
-        } else {
-            robotEncoded.setSlidePosition(0, 0);
+            slideHeight = -115;
+        } else if (gamepad1.x){
+            slideHeight = -1;
         }
 
         double rawDifference = robotEncoded.actuatorSuspend.getCurrentPosition() - slideHeight * RobotEncoded.TICKS_PER_INCH_LS;
