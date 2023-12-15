@@ -37,14 +37,14 @@ import org.firstinspires.ftc.vision.VisionPortal;
                 case LEFT:
                     robotEncoded.forward(26,700);
                     robotEncoded.turnLeft(23,700);
-                    robotEncoded.forward(6,700);
+                    robotEncoded.forward(4,700);
                     robotEncoded.backward(2,900);
                     break;
 
                 case NONE:
                 case MIDDLE:
                     robotEncoded.forward(30,900);
-                    robotEncoded.backward(2,900);
+                    robotEncoded.backward(4,900);
                     break;
 
                 case RIGHT:

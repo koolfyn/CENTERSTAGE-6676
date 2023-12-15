@@ -20,6 +20,8 @@ public class RobotEncoded {
 //    DcMotorEx slideRight;
 //    Servo pixelBox;
     Telemetry telemetry;
+    Servo pixelHolder;
+    Servo hookRotator;
 
     static final double TICKS_PER_MOTOR_ROTATION = 537.7;
     static final double GEAR_REDUCTION = 1;
@@ -38,13 +40,14 @@ public class RobotEncoded {
         backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
         actuatorSuspend = hardwareMap.get(DcMotorEx.class, "actuatorSuspend");
+        pixelHolder = hardwareMap.get(Servo.class,"pixelHolder");
+        hookRotator = hardwareMap.get(Servo.class,"hookRotator");
 
 //        intakeMotor = hardwareMap.get(DcMotorEx.class,"intakeMotor");
 //        slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
 //        slideRight = hardwareMap.get(DcMotorEx.class, "slideRight");
 //        pixelBox = hardwareMap.get(Servo.class, "pixelBox");
 
-        actuatorSuspend.setDirection(DcMotorSimple.Direction.REVERSE);
         actuatorSuspend.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         actuatorSuspend.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -61,14 +64,21 @@ public class RobotEncoded {
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        pixelHolder.scaleRange(0,1);
     }
-//    public void flipBox() {
-//        pixelBox.setPosition(0.6);
-//    }
-//
-//    public void unflipBox() {
-//        pixelBox.setPosition(0);
-//    }
+
+    public void openBox() {
+        pixelHolder.setPosition(0.6);
+    }
+    public void closeBox() {
+        pixelHolder.setPosition(0);
+    }
+    public void raiseHook() {
+        hookRotator.setPosition(0.6);
+    }
+    public void lowerHook() {
+        hookRotator.setPosition(0);
+    }
 //
 //    public void runIntake(double velocity) {
 //        intakeMotor.setVelocity(1000);

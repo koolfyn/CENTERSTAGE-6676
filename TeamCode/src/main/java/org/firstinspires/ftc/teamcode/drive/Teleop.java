@@ -27,6 +27,7 @@ public class Teleop extends OpMode {
 //    DcMotorEx slideRight;
 //    Servo pixelBox;
 
+
     @Override
     public void init() {
 //        frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft");
@@ -81,13 +82,25 @@ public class Teleop extends OpMode {
             robotEncoded.backRight.setVelocity((y + x - r) * Constants.defaultVal);
         }
 
-
-
-        if (gamepad1.y) {
-            slideHeight = -115;
-        } else if (gamepad1.x){
-            slideHeight = -1;
+        if (gamepad2.y) {
+            slideHeight = 115;
+        } else if(gamepad2.x){
+            slideHeight = 0;
         }
+
+        if(gamepad2.a) {
+            robotEncoded.pixelHolder.setPosition(0);
+        }
+        else {
+            robotEncoded.pixelHolder.setPosition(0.6);
+        }
+        if(gamepad2.b) {
+            robotEncoded.hookRotator.setPosition(0);
+        }
+        else {
+            robotEncoded.hookRotator.setPosition(0.6);
+        }
+
 
         double rawDifference = robotEncoded.actuatorSuspend.getCurrentPosition() - slideHeight * RobotEncoded.TICKS_PER_INCH_LS;
         double difference = Math.abs(rawDifference);
@@ -120,6 +133,7 @@ public class Teleop extends OpMode {
         telemetry.addLine("Left joystick | ")
             .addData("x", gamepad1.left_stick_x)
             .addData("y", gamepad1.left_stick_y);
+        telemetry.addData("servo pos",robotEncoded.pixelHolder.getPosition());
         }
     }
 
