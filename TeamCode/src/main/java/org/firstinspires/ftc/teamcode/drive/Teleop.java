@@ -82,58 +82,59 @@ public class Teleop extends OpMode {
             robotEncoded.backRight.setVelocity((y + x - r) * Constants.defaultVal);
         }
 
-        if (gamepad2.y) {
-            slideHeight = 115;
-        } else if(gamepad2.x){
+        if(gamepad2.b) {
+            slideHeight = Constants.lowSetLine;
+        }
+        else if(gamepad2.x) {
+            slideHeight = Constants.medSetLine;
+        }
+        else if(gamepad2.y) {
+            slideHeight = Constants.highSetLine;
+        }
+        else if(gamepad2.a) {
             slideHeight = 0;
         }
 
-        if(gamepad2.a) {
-            robotEncoded.pixelHolder.setPosition(0);
+        if(gamepad2.left_bumper) {
+            robotEncoded.claw.setPosition(0.3);
         }
-        else {
-            robotEncoded.pixelHolder.setPosition(0.6);
+        else if (gamepad2.right_bumper){
+            robotEncoded.claw.setPosition(0);
         }
-        if(gamepad2.b) {
-            robotEncoded.hookRotator.setPosition(0);
+        if(gamepad2.dpad_down) {
+            robotEncoded.armLift.setPosition(0);
         }
-        else {
-            robotEncoded.hookRotator.setPosition(0.6);
-        }
-
-
-        double rawDifference = robotEncoded.actuatorSuspend.getCurrentPosition() - slideHeight * RobotEncoded.TICKS_PER_INCH_LS;
-        double difference = Math.abs(rawDifference);
-
-        if (difference >= 30) {
-            robotEncoded.actuatorSuspend.setTargetPosition((int)(slideHeight * RobotEncoded.TICKS_PER_INCH_LS));
-            robotEncoded.actuatorSuspend.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robotEncoded.actuatorSuspend.setVelocity(2000);
+        else if(gamepad2.dpad_up){
+            robotEncoded.armLift.setPosition(0.6);
         }
 
-//        if (gamepad1.a) { //intake motor
-//            intakeMotor.setVelocity(1000);
-//        }
-//        else {
-//            intakeMotor.setVelocity(0);
-//        }
-
-        if (gamepad2.right_stick_y > 0.1 && slideHeight >= 0) {
-            slideHeight = robotEncoded.actuatorSuspend.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
+        if(gamepad2.right_stick_y > 0.1 && slideHeight >= 0) {
+            slideHeight = robotEncoded.slideLeft.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
             slideHeight -= 1.1;
-        } else if (gamepad2.right_stick_y < -0.1) {
-            slideHeight = robotEncoded.actuatorSuspend.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
+
+            slideHeight = robotEncoded.slideRight.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
+            slideHeight -= 1.1;
+        }
+        else if(gamepad2.right_stick_y < -0.1) {
+            slideHeight = robotEncoded.slideLeft.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
+            slideHeight += 1.1;
+
+            slideHeight = robotEncoded.slideRight.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
             slideHeight += 1.1;
         }
 
+        telemetry.addData("left slide velocity", robotEncoded.slideLeft.getVelocity());
+        telemetry.addData("right slide velocity", robotEncoded.slideRight.getVelocity());
+        telemetry.addData("left target pos", robotEncoded.slideLeft.getTargetPosition());
+        telemetry.addData("right target pos", robotEncoded.slideRight.getTargetPosition());
+        telemetry.addData("right cur pos", robotEncoded.slideRight.getCurrentPosition());
+        telemetry.addData("left cur pos", robotEncoded.slideLeft.getCurrentPosition());
+        telemetry.update();
 
-        telemetry.addData("slide target height", robotEncoded.actuatorSuspend.getTargetPosition());
-        telemetry.addData("slight cur height", robotEncoded.actuatorSuspend.getCurrentPosition());
-        telemetry.addData("slide velocity", robotEncoded.actuatorSuspend.getVelocity());
         telemetry.addLine("Left joystick | ")
             .addData("x", gamepad1.left_stick_x)
             .addData("y", gamepad1.left_stick_y);
-        telemetry.addData("servo pos",robotEncoded.pixelHolder.getPosition());
+        telemetry.addData("servo pos",robotEncoded.claw.getPosition());
         }
     }
 

@@ -14,14 +14,11 @@ public class RobotEncoded {
     DcMotorEx frontRight;
     DcMotorEx backLeft;
     DcMotorEx backRight;
-    DcMotorEx actuatorSuspend;
-//    DcMotorEx intakeMotor;
-//    DcMotorEx slideLeft;
-//    DcMotorEx slideRight;
-//    Servo pixelBox;
+    DcMotorEx slideLeft;
+    DcMotorEx slideRight;
     Telemetry telemetry;
-    Servo pixelHolder;
-    Servo hookRotator;
+    Servo claw;
+    Servo armLift;
 
     static final double TICKS_PER_MOTOR_ROTATION = 537.7;
     static final double GEAR_REDUCTION = 1;
@@ -39,82 +36,57 @@ public class RobotEncoded {
         frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
         backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
-        actuatorSuspend = hardwareMap.get(DcMotorEx.class, "actuatorSuspend");
-        pixelHolder = hardwareMap.get(Servo.class,"pixelHolder");
-        hookRotator = hardwareMap.get(Servo.class,"hookRotator");
-
-//        intakeMotor = hardwareMap.get(DcMotorEx.class,"intakeMotor");
-//        slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
-//        slideRight = hardwareMap.get(DcMotorEx.class, "slideRight");
-//        pixelBox = hardwareMap.get(Servo.class, "pixelBox");
-
-        actuatorSuspend.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        actuatorSuspend.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
+        slideRight = hardwareMap.get(DcMotorEx.class,"slideRight");
+        claw = hardwareMap.get(Servo.class,"claw");
+        armLift = hardwareMap.get(Servo.class,"armLift");
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-//        slideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-//        slideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
-//        slideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        slideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        slideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        pixelHolder.scaleRange(0,1);
+        claw.scaleRange(0,1);
     }
 
-    public void openBox() {
-        pixelHolder.setPosition(0.6);
+    public void openClaw() {
+        claw.setPosition(0.6);
     }
-    public void closeBox() {
-        pixelHolder.setPosition(0);
+    public void closeClaw() {
+        claw.setPosition(0);
     }
-    public void raiseHook() {
-        hookRotator.setPosition(0.6);
+    public void liftArm() {
+        armLift.setPosition(0.6);
     }
-    public void lowerHook() {
-        hookRotator.setPosition(0);
+    public void lowerArm() {
+        armLift.setPosition(0);
     }
-//
-//    public void runIntake(double velocity) {
-//        intakeMotor.setVelocity(1000);
-//    }
-//
-//    public void slideGo(double velocity, double distanceInches) {
-//
-//        if (distanceInches > MAX_TICKS_LS || distanceInches < 0)
-//            return;
-//
-//        slideRight.setTargetPosition((int) (distanceInches * TICKS_PER_INCH_LS));
-//        slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        slideRight.setVelocity(velocity);
-//
-//        slideLeft.setTargetPosition((int) (distanceInches * TICKS_PER_INCH_LS));
-//        slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        slideLeft.setVelocity(velocity);
-//
-//        while(slideLeft.isBusy()) { }
-//        while(slideRight.isBusy()) { }
-//
-//    }
+
     public void setSlidePosition(double velocity, double distanceInches) {
-
-//        telemetry.addData("Slide distance", distanceInches);
-//        telemetry.update();
 
         if (distanceInches > MAX_TICKS_LS || distanceInches < 0)
             return;
 
-        actuatorSuspend.setTargetPosition((int) (distanceInches * TICKS_PER_INCH_LS));
-        actuatorSuspend.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        actuatorSuspend.setVelocity(velocity);
+        slideRight.setTargetPosition((int) (distanceInches * TICKS_PER_INCH_LS));
+        slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slideRight.setVelocity(velocity);
 
-        while(actuatorSuspend.isBusy()) { }
-}
+        slideLeft.setTargetPosition((int) (distanceInches * TICKS_PER_INCH_LS));
+        slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slideLeft.setVelocity(velocity);
+
+        while(slideLeft.isBusy()) { }
+        while(slideRight.isBusy()) { }
+
+    }
 
     public void turnR(double Power) {
         frontRight.setPower(Power);

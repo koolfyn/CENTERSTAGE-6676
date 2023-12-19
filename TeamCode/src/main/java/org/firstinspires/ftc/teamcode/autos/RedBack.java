@@ -46,7 +46,7 @@ public class RedBack extends OpMode {
             case MIDDLE:
                 robotEncoded.forward(31,900);
                 robotEncoded.backward(26,900); //28
-                robotEncoded.turnLeft(25, 400);
+                robotEncoded.turnLeft(26, 400);
                 robotEncoded.backward(48,700);
                 robotEncoded.forward(8,2000);
                 robotEncoded.backward(5,2000);
@@ -58,7 +58,7 @@ public class RedBack extends OpMode {
                 robotEncoded.forward(4,700);
                 robotEncoded.backward(3,1200);
                 robotEncoded.strafeRight(25,700);
-                robotEncoded.turnRight(48,600);
+                robotEncoded.turnRight(46,600);
                 robotEncoded.backward(48,700);
                 robotEncoded.forward(8,2000);
                 robotEncoded.backward(4,2000);
