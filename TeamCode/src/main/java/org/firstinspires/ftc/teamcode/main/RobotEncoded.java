@@ -17,6 +17,7 @@ public class RobotEncoded {
     DcMotorEx slideLeft;
     DcMotorEx slideRight;
     Telemetry telemetry;
+    Servo intakeWheel;
     Servo claw;
     Servo armLift;
 
@@ -40,6 +41,7 @@ public class RobotEncoded {
         slideRight = hardwareMap.get(DcMotorEx.class,"slideRight");
         claw = hardwareMap.get(Servo.class,"claw");
         armLift = hardwareMap.get(Servo.class,"armLift");
+        intakeWheel = hardwareMap.get(Servo.class, "intakeWheel");
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -68,6 +70,18 @@ public class RobotEncoded {
     }
     public void lowerArm() {
         armLift.setPosition(0);
+    }
+
+    public void intakeIn(){
+        intakeWheel.setPosition(0.5);
+    }
+
+    public void intakeOut(){
+        intakeWheel.setPosition(-0.5);
+    }
+
+    public void intakeStop() {
+        intakeWheel.setPosition(0);
     }
 
     public void setSlidePosition(double velocity, double distanceInches) {

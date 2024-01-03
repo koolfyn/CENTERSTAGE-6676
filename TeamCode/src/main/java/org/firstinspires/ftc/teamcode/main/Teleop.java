@@ -87,16 +87,29 @@ public class Teleop extends OpMode {
             slideHeight = 0;
         }
 
+        if(gamepad2.left_trigger > 0.5){
+            robotEncoded.intakeWheel.setPosition(-0.5);
+        }
+        else {
+            robotEncoded.intakeWheel.setPosition(0);
+        }
+        if(gamepad2.right_trigger > 0.5) {
+            robotEncoded.intakeWheel.setPosition(0.5);
+        }
+        else {
+            robotEncoded.intakeWheel.setPosition(0);
+        }
+
+//        if(gamepad2.left_bumper) {
+//            robotEncoded.claw.setPosition(0.3);
+//        }
+//        else if (gamepad2.right_bumper){
+//            robotEncoded.claw.setPosition(0);
+//        }
         if(gamepad2.left_bumper) {
-            robotEncoded.claw.setPosition(0.3);
-        }
-        else if (gamepad2.right_bumper){
-            robotEncoded.claw.setPosition(0);
-        }
-        if(gamepad2.dpad_down) {
             robotEncoded.armLift.setPosition(0);
         }
-        else if(gamepad2.dpad_up){
+        else if(gamepad2.right_bumper){
             robotEncoded.armLift.setPosition(0.6);
         }
 
