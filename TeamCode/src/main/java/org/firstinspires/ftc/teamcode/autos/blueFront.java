@@ -1,32 +1,62 @@
 package org.firstinspires.ftc.teamcode.autos;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.drive.RobotEncoded;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.main.RobotEncoded;
+import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
+import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous
-public class blueFront extends LinearOpMode {
+    @Autonomous(name="blue Front")
+    public class blueFront extends OpMode {
+        private FirstVisionProcessor visionProcessor;
+        private VisionPortal visionPortal;
+        private RobotEncoded robotEncoded;
 
-    @Override
-    public void runOpMode(){
-        RobotEncoded robotencoded = new RobotEncoded(hardwareMap, telemetry);
-        waitForStart();
+        @Override
+        public void init() {
+            robotEncoded = new RobotEncoded(hardwareMap, telemetry);
+            visionProcessor = new FirstVisionProcessor();
+            visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
+         }
 
-        robotencoded.forward(30,1000);
-        sleep(1500);
-//        robotencoded.runIntake(500);
-//        sleep(800);
-//        robotencoded.runIntake(0);
-//        sleep(500);
-        robotencoded.backward(21,900);
-        sleep(1500);
-        robotencoded.strafeLeft(100,900);
-        sleep(10000);
-//        robotencoded.runIntake(500);
-//        sleep(800);
-//        robotencoded.runIntake(0);
-//        sleep(500);
+        @Override
+        public void init_loop() {
+            telemetry.addData("Identified", visionProcessor.getSelection());
+        }
 
-        while (opModeIsActive()) {sleep(20);}
+        @Override
+        public void start() {
+            visionPortal.stopStreaming();
+            telemetry.addData("Identified", visionProcessor.getSelection());
+            switch (visionProcessor.getSelection()) {
+                case LEFT:
+                    robotEncoded.forward(26,700);
+                    robotEncoded.turnLeft(23,700);
+                    robotEncoded.forward(4,700);
+                    robotEncoded.backward(2,900);
+                    break;
+
+                case NONE:
+                case MIDDLE:
+                    robotEncoded.forward(30,900);
+                    robotEncoded.backward(4,900);
+                    break;
+
+                case RIGHT:
+                    robotEncoded.forward(28,800);
+                    robotEncoded.turnRight(25,900);
+                    robotEncoded.forward(4,700);
+                    robotEncoded.backward(3,900);
+                    break;
+
+                 }
+         }
+
+        @Override
+        public void loop() {
+
+        }
+
     }
-}

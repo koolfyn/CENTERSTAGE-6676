@@ -1,34 +1,62 @@
 package org.firstinspires.ftc.teamcode.autos;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.drive.RobotEncoded;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.main.RobotEncoded;
+import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
+import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous
-public class redFront extends LinearOpMode {
+@Autonomous(name="red Front")
+public class redFront extends OpMode {
+    private FirstVisionProcessor visionProcessor;
+    private VisionPortal visionPortal;
+    private RobotEncoded robotEncoded;
 
     @Override
-    public void runOpMode(){
-        RobotEncoded robotencoded = new RobotEncoded(hardwareMap, telemetry);
+    public void init() {
+        robotEncoded = new RobotEncoded(hardwareMap, telemetry);
+        visionProcessor = new FirstVisionProcessor();
+        visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
+    }
 
-        waitForStart();
+    @Override
+    public void init_loop() {
+        telemetry.addData("Identified", visionProcessor.getSelection());
+    }
 
-        robotencoded.forward(30,750);
-        sleep(1500);
-//        robotencoded.runIntake(500);
-//        sleep(900);
-//        robotencoded.runIntake(0);
-//        sleep(100);
-        robotencoded.backward(25,500);
-        sleep(1500);
-        robotencoded.strafeRight(100,800);
-        sleep(10000);
-//        robotencoded.runIntake(1000);
-//        sleep(500);
-//        robotencoded.runIntake(0);
-//        sleep(100);
+    @Override
+    public void start() {
+        visionPortal.stopStreaming();
+        telemetry.addData("Identified", visionProcessor.getSelection());
+        switch (visionProcessor.getSelection()) {
+            case LEFT:
+                robotEncoded.forward(28,700);
+                robotEncoded.turnLeft(23,700);
+                robotEncoded.forward(4,700);
+                robotEncoded.backward(2,700);
+                break;
 
-        while (opModeIsActive()) {sleep(20);}
+            case NONE:
+            case MIDDLE:
+                robotEncoded.forward(30,900);
+                robotEncoded.backward(3,900);
+                break;
+
+            case RIGHT:
+                robotEncoded.forward(28,800);
+                robotEncoded.turnRight(25,900);
+                robotEncoded.forward(5,700);
+                robotEncoded.backward(2,700);
+                break;
+
+        }
+    }
+
+    @Override
+    public void loop() {
 
     }
+
 }

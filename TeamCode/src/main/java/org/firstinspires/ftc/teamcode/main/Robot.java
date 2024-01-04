@@ -1,10 +1,6 @@
-package org.firstinspires.ftc.teamcode.drive;
+package org.firstinspires.ftc.teamcode.main;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Robot {
     DcMotor frontLeft;
@@ -33,7 +29,6 @@ public class Robot {
         backLeft.setPower(Power);
     }
 
-    //strafing to the left
     public void strafeR(double Power) {
         frontRight.setPower(Power);
         frontLeft.setPower(-Power);
@@ -41,7 +36,6 @@ public class Robot {
         backLeft.setPower(Power);
     }
 
-    // strafing to the right
     public void strafeL(double Power) {
         frontRight.setPower(-Power);
         frontLeft.setPower(Power);
@@ -49,7 +43,6 @@ public class Robot {
         backLeft.setPower(-Power);
     }
 
-    //turning left
     public void turnR(double Power) {
         frontRight.setPower(Power);
         frontLeft.setPower(-Power);
@@ -57,15 +50,12 @@ public class Robot {
         backLeft.setPower(-Power);
     }
 
-    //turning right
     public void turnL(double Power) {
         frontRight.setPower(-Power);
         frontLeft.setPower(Power);
         backRight.setPower(-Power);
         backLeft.setPower(Power);
     }
-
-    //no carousel
 
     public void forwardRight(double Power) {
         frontRight.setPower(0);
