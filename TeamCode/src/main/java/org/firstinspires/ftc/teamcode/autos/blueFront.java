@@ -2,12 +2,9 @@ package org.firstinspires.ftc.teamcode.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.drive.RobotEncoded;
-import org.firstinspires.ftc.teamcode.drive.Robot;
+import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
@@ -35,20 +32,23 @@ import org.firstinspires.ftc.vision.VisionPortal;
             telemetry.addData("Identified", visionProcessor.getSelection());
             switch (visionProcessor.getSelection()) {
                 case LEFT:
-                    robotEncoded.forward(28,700);
-                    robotEncoded.turnLeft(25,700);
+                    robotEncoded.forward(26,700);
+                    robotEncoded.turnLeft(23,700);
                     robotEncoded.forward(4,700);
+                    robotEncoded.backward(2,900);
                     break;
 
                 case NONE:
                 case MIDDLE:
-                    robotEncoded.forward(28,900);
+                    robotEncoded.forward(30,900);
+                    robotEncoded.backward(4,900);
                     break;
 
                 case RIGHT:
                     robotEncoded.forward(28,800);
                     robotEncoded.turnRight(25,900);
                     robotEncoded.forward(4,700);
+                    robotEncoded.backward(3,900);
                     break;
 
                  }

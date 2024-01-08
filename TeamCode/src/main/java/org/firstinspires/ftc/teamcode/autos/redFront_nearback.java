@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.autos;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.drive.RobotEncoded;
+import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 
 @Autonomous
 public class redFront_nearback extends LinearOpMode {
