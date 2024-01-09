@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode.main;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -16,10 +15,10 @@ public class RobotEncoded {
     DcMotorEx backRight;
     DcMotorEx slideLeft;
     DcMotorEx slideRight;
+    DcMotorEx intakeWheel;
     Telemetry telemetry;
-    Servo intakeWheel;
     Servo claw;
-    Servo armLift;
+    Servo boxTilt;
 
     static final double TICKS_PER_MOTOR_ROTATION = 537.7;
     static final double GEAR_REDUCTION = 1;
@@ -40,8 +39,8 @@ public class RobotEncoded {
         slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
         slideRight = hardwareMap.get(DcMotorEx.class,"slideRight");
         claw = hardwareMap.get(Servo.class,"claw");
-        armLift = hardwareMap.get(Servo.class,"armLift");
-        intakeWheel = hardwareMap.get(Servo.class, "intakeWheel");
+        boxTilt = hardwareMap.get(Servo.class,"armLift");
+        intakeWheel = hardwareMap.get(DcMotorEx.class, "intakeWheel");
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -66,22 +65,22 @@ public class RobotEncoded {
         claw.setPosition(0);
     }
     public void liftArm() {
-        armLift.setPosition(0.6);
+        boxTilt.setPosition(0.6);
     }
     public void lowerArm() {
-        armLift.setPosition(0);
+        boxTilt.setPosition(0);
     }
 
     public void intakeIn(){
-        intakeWheel.setPosition(0.5);
+        intakeWheel.setVelocity(1000);
     }
 
     public void intakeOut(){
-        intakeWheel.setPosition(-0.5);
+        intakeWheel.setVelocity(-1000);
     }
 
     public void intakeStop() {
-        intakeWheel.setPosition(0);
+        intakeWheel.setVelocity(0);
     }
 
     public void setSlidePosition(double velocity, double distanceInches) {
@@ -329,7 +328,7 @@ public class RobotEncoded {
         backLeft.setVelocity(0);
     }
 
-    public void stopBot() {
+    public void stopBot(int seconds) {
         frontLeft.setVelocity(0);
         frontRight.setVelocity(0);
         backLeft.setVelocity(0);
