@@ -57,7 +57,7 @@ public class Teleop extends OpMode {
         double y = -gamepad1.left_stick_y;
         double r = gamepad1.right_stick_x;
 
-        if (gamepad1.right_bumper) {
+        if (gamepad1.right_bumper) { // driver movements
             robotEncoded.frontLeft.setVelocity((y + x + r) * Constants.slowVal);
             robotEncoded.frontRight.setVelocity((y - x - r) * Constants.slowVal);
             robotEncoded.backLeft.setVelocity((y - x + r) * Constants.slowVal);
@@ -74,7 +74,7 @@ public class Teleop extends OpMode {
             robotEncoded.backRight.setVelocity((y + x - r) * Constants.defaultVal);
         }
 
-        if(gamepad2.b) {
+        if(gamepad2.b) { // height for linear slide raised
             slideHeight = Constants.lowSetLine;
         }
         else if(gamepad2.x) {
@@ -87,17 +87,17 @@ public class Teleop extends OpMode {
             slideHeight = 0;
         }
 
-        if(gamepad2.left_trigger > 0.5){
-            robotEncoded.intakeWheel.setPosition(-0.5);
+        if(gamepad2.left_trigger > 0.5){ // intake out
+            robotEncoded.intakeWheel.setVelocity(-1000);
         }
         else {
-            robotEncoded.intakeWheel.setPosition(0);
+            robotEncoded.intakeWheel.setVelocity(0);
         }
-        if(gamepad2.right_trigger > 0.5) {
-            robotEncoded.intakeWheel.setPosition(0.5);
+        if(gamepad2.right_trigger > 0.5) { // intake in
+            robotEncoded.intakeWheel.setVelocity(1000);
         }
         else {
-            robotEncoded.intakeWheel.setPosition(0);
+            robotEncoded.intakeWheel.setVelocity(0);
         }
 
 //        if(gamepad2.left_bumper) {
@@ -106,14 +106,14 @@ public class Teleop extends OpMode {
 //        else if (gamepad2.right_bumper){
 //            robotEncoded.claw.setPosition(0);
 //        }
-        if(gamepad2.left_bumper) {
-            robotEncoded.armLift.setPosition(0);
+        if(gamepad2.left_bumper) { // returns box to original state
+            robotEncoded.boxTilt.setPosition(0);
         }
-        else if(gamepad2.right_bumper){
-            robotEncoded.armLift.setPosition(0.6);
+        else if(gamepad2.right_bumper){  // rotate-dumping the box
+            robotEncoded.boxTilt.setPosition(0.6);
         }
 
-        if(gamepad2.right_stick_y > 0.1 && slideHeight >= 0) {
+        if(gamepad2.right_stick_y > 0.1 && slideHeight >= 0) { // manual linear slide lift
             slideHeight = robotEncoded.slideLeft.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
             slideHeight -= 1.1;
 
