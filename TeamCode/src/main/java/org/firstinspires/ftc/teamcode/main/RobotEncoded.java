@@ -15,10 +15,10 @@ public class RobotEncoded {
     DcMotorEx backRight;
     DcMotorEx slideLeft;
     DcMotorEx slideRight;
-    DcMotorEx intakeWheel;
+    DcMotorEx arm;
     Telemetry telemetry;
     Servo claw;
-    Servo boxTilt;
+    Servo clawTilt;
 
     static final double TICKS_PER_MOTOR_ROTATION = 537.7;
     static final double GEAR_REDUCTION = 1;
@@ -39,8 +39,8 @@ public class RobotEncoded {
         slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
         slideRight = hardwareMap.get(DcMotorEx.class,"slideRight");
         claw = hardwareMap.get(Servo.class,"claw");
-        boxTilt = hardwareMap.get(Servo.class,"armLift");
-        intakeWheel = hardwareMap.get(DcMotorEx.class, "intakeWheel");
+        clawTilt = hardwareMap.get(Servo.class,"armLift");
+        arm = hardwareMap.get(DcMotorEx.class,"arm");
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -64,23 +64,21 @@ public class RobotEncoded {
     public void closeClaw() {
         claw.setPosition(0);
     }
-    public void liftArm() {
-        boxTilt.setPosition(0.6);
+    public void raiseArm() {
+        arm.setTargetPosition(30);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(1000);
     }
     public void lowerArm() {
-        boxTilt.setPosition(0);
+        arm.setTargetPosition(0);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(1000);
     }
-
-    public void intakeIn(){
-        intakeWheel.setVelocity(1000);
+    public void tiltClaw() {
+        clawTilt.setPosition(0.7);
     }
-
-    public void intakeOut(){
-        intakeWheel.setVelocity(-1000);
-    }
-
-    public void intakeStop() {
-        intakeWheel.setVelocity(0);
+    public void untiltClaw() {
+        clawTilt.setPosition(0);
     }
 
     public void setSlidePosition(double velocity, double distanceInches) {
