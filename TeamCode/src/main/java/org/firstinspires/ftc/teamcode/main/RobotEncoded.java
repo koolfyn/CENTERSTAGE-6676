@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode.main;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -16,10 +15,10 @@ public class RobotEncoded {
     DcMotorEx backRight;
     DcMotorEx slideLeft;
     DcMotorEx slideRight;
+    DcMotorEx arm;
     Telemetry telemetry;
-    Servo intakeWheel;
     Servo claw;
-    Servo armLift;
+    Servo clawTilt;
 
     static final double TICKS_PER_MOTOR_ROTATION = 537.7;
     static final double GEAR_REDUCTION = 1;
@@ -40,8 +39,8 @@ public class RobotEncoded {
         slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
         slideRight = hardwareMap.get(DcMotorEx.class,"slideRight");
         claw = hardwareMap.get(Servo.class,"claw");
-        armLift = hardwareMap.get(Servo.class,"armLift");
-        intakeWheel = hardwareMap.get(Servo.class, "intakeWheel");
+        clawTilt = hardwareMap.get(Servo.class,"armLift");
+        arm = hardwareMap.get(DcMotorEx.class,"arm");
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -65,23 +64,21 @@ public class RobotEncoded {
     public void closeClaw() {
         claw.setPosition(0);
     }
-    public void liftArm() {
-        armLift.setPosition(0.6);
+    public void raiseArm() {
+        arm.setTargetPosition(30);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(1000);
     }
     public void lowerArm() {
-        armLift.setPosition(0);
+        arm.setTargetPosition(0);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(1000);
     }
-
-    public void intakeIn(){
-        intakeWheel.setPosition(0.5);
+    public void tiltClaw() {
+        clawTilt.setPosition(0.7);
     }
-
-    public void intakeOut(){
-        intakeWheel.setPosition(-0.5);
-    }
-
-    public void intakeStop() {
-        intakeWheel.setPosition(0);
+    public void untiltClaw() {
+        clawTilt.setPosition(0);
     }
 
     public void setSlidePosition(double velocity, double distanceInches) {
@@ -329,7 +326,7 @@ public class RobotEncoded {
         backLeft.setVelocity(0);
     }
 
-    public void stopBot() {
+    public void stopBot(int seconds) {
         frontLeft.setVelocity(0);
         frontRight.setVelocity(0);
         backLeft.setVelocity(0);

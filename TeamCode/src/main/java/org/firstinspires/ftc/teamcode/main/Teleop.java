@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode.main;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp (name="Teleop main")
 public class Teleop extends OpMode {
 
     double slideHeight = 0;
 
-//    DcMotorEx frontLeft;
+    //    DcMotorEx frontLeft;
 //    DcMotorEx frontRight;
 //    DcMotorEx backLeft;
 //    DcMotorEx backRight;
@@ -57,7 +58,7 @@ public class Teleop extends OpMode {
         double y = -gamepad1.left_stick_y;
         double r = gamepad1.right_stick_x;
 
-        if (gamepad1.right_bumper) {
+        if (gamepad1.right_bumper) { // driver movements
             robotEncoded.frontLeft.setVelocity((y + x + r) * Constants.slowVal);
             robotEncoded.frontRight.setVelocity((y - x - r) * Constants.slowVal);
             robotEncoded.backLeft.setVelocity((y - x + r) * Constants.slowVal);
@@ -66,7 +67,7 @@ public class Teleop extends OpMode {
             robotEncoded.frontLeft.setPower((y + x + r) * Constants.fastVal);
             robotEncoded.frontRight.setPower((y - x - r) * Constants.fastVal);
             robotEncoded.backLeft.setPower((y - x + r) * Constants.fastVal);
-           robotEncoded.backRight.setPower((y + x - r) * Constants.fastVal);
+            robotEncoded.backRight.setPower((y + x - r) * Constants.fastVal);
         } else {
             robotEncoded.frontLeft.setVelocity((y + x + r) * Constants.defaultVal);
             robotEncoded.frontRight.setVelocity((y - x - r) * Constants.defaultVal);
@@ -74,73 +75,51 @@ public class Teleop extends OpMode {
             robotEncoded.backRight.setVelocity((y + x - r) * Constants.defaultVal);
         }
 
-        if(gamepad2.b) {
-            slideHeight = Constants.lowSetLine;
-        }
-        else if(gamepad2.x) {
-            slideHeight = Constants.medSetLine;
-        }
-        else if(gamepad2.y) {
-            slideHeight = Constants.highSetLine;
-        }
-        else if(gamepad2.a) {
+        if (gamepad2.x) { // suspend
+            slideHeight = Constants.suspendHeight;
+        } else if (gamepad2.y) {
             slideHeight = 0;
         }
 
-        if(gamepad2.left_trigger > 0.5){
-            robotEncoded.intakeWheel.setPosition(-0.5);
-        }
-        else {
-            robotEncoded.intakeWheel.setPosition(0);
-        }
-        if(gamepad2.right_trigger > 0.5) {
-            robotEncoded.intakeWheel.setPosition(0.5);
-        }
-        else {
-            robotEncoded.intakeWheel.setPosition(0);
+        if (gamepad2.left_bumper) { // open claw
+            robotEncoded.claw.setPosition(0.5);
+        } else if (gamepad2.right_bumper) { // close claw
+            robotEncoded.claw.setPosition(0);
         }
 
-//        if(gamepad2.left_bumper) {
-//            robotEncoded.claw.setPosition(0.3);
-//        }
-//        else if (gamepad2.right_bumper){
-//            robotEncoded.claw.setPosition(0);
-//        }
-        if(gamepad2.left_bumper) {
-            robotEncoded.armLift.setPosition(0);
-        }
-        else if(gamepad2.right_bumper){
-            robotEncoded.armLift.setPosition(0.6);
+        if (gamepad2.left_trigger > 0.5) { // un-tilt claw
+            robotEncoded.clawTilt.setPosition(0);
+        } else if (gamepad2.right_trigger > 0.5) {  // tilts claw
+            robotEncoded.clawTilt.setPosition(0.6);
         }
 
-        if(gamepad2.right_stick_y > 0.1 && slideHeight >= 0) {
-            slideHeight = robotEncoded.slideLeft.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
-            slideHeight -= 1.1;
+        double rawDifference = robotEncoded.slideLeft.getCurrentPosition() - slideHeight * RobotEncoded.TICKS_PER_INCH_LS;
+        double difference = Math.abs(rawDifference);
 
-            slideHeight = robotEncoded.slideRight.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
-            slideHeight -= 1.1;
-        }
-        else if(gamepad2.right_stick_y < -0.1) {
-            slideHeight = robotEncoded.slideLeft.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
-            slideHeight += 1.1;
+        if (difference >= 30) {
+            robotEncoded.slideLeft.setTargetPosition((int)(slideHeight * RobotEncoded.TICKS_PER_INCH_LS));
+            robotEncoded.slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robotEncoded.slideLeft.setVelocity(1500);
 
-            slideHeight = robotEncoded.slideRight.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
-            slideHeight += 1.1;
+            robotEncoded.slideRight.setTargetPosition((int)(slideHeight * RobotEncoded.TICKS_PER_INCH_LS));
+            robotEncoded.slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robotEncoded.slideLeft.setVelocity(1500);
         }
 
-        telemetry.addData("left slide velocity", robotEncoded.slideLeft.getVelocity());
-        telemetry.addData("right slide velocity", robotEncoded.slideRight.getVelocity());
-        telemetry.addData("left target pos", robotEncoded.slideLeft.getTargetPosition());
-        telemetry.addData("right target pos", robotEncoded.slideRight.getTargetPosition());
-        telemetry.addData("right cur pos", robotEncoded.slideRight.getCurrentPosition());
-        telemetry.addData("left cur pos", robotEncoded.slideLeft.getCurrentPosition());
-        telemetry.update();
+            telemetry.addData("left slide velocity", robotEncoded.slideLeft.getVelocity());
+            telemetry.addData("right slide velocity", robotEncoded.slideRight.getVelocity());
+            telemetry.addData("left target pos", robotEncoded.slideLeft.getTargetPosition());
+            telemetry.addData("right target pos", robotEncoded.slideRight.getTargetPosition());
+            telemetry.addData("right cur pos", robotEncoded.slideRight.getCurrentPosition());
+            telemetry.addData("left cur pos", robotEncoded.slideLeft.getCurrentPosition());
+            telemetry.update();
 
-        telemetry.addLine("Left joystick | ")
-            .addData("x", gamepad1.left_stick_x)
-            .addData("y", gamepad1.left_stick_y);
-        telemetry.addData("servo pos",robotEncoded.claw.getPosition());
+            telemetry.addLine("Left joystick | ")
+                    .addData("x", gamepad1.left_stick_x)
+                    .addData("y", gamepad1.left_stick_y);
+            telemetry.addData("servo pos", robotEncoded.claw.getPosition());
         }
     }
+
 
 
