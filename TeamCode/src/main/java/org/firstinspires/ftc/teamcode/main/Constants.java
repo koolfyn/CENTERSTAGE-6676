@@ -10,4 +10,6 @@ public class Constants {
     public static final double medSetLine = 30;
     public static final double highSetLine = 40;
 
+    public static final double suspendHeight = 24;
+
 }
