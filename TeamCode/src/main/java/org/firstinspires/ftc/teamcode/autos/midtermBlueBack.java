@@ -35,7 +35,6 @@ public class midtermBlueBack extends OpMode {
                 robotEncoded.forward(28,700);
                 robotEncoded.turnLeft(24,700);
                 robotEncoded.forward(4,700);
-                robotEncoded.intakeOut();
                 robotEncoded.backward(3,700);
 
                 break;
