@@ -7,7 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp (name="Teleop main")
 public class Teleop extends OpMode {
 
-    double slideHeight = 0;
+    double rightslideHeight = 0;
+    double leftslideHeight = 0;
 
     //    DcMotorEx frontLeft;
 //    DcMotorEx frontRight;
@@ -75,10 +76,12 @@ public class Teleop extends OpMode {
             robotEncoded.backRight.setVelocity((y + x - r) * Constants.defaultVal);
         }
 
-        if (gamepad2.x) { // suspend
-            slideHeight = Constants.suspendHeight;
-        } else if (gamepad2.y) {
-            slideHeight = 0;
+        if (gamepad2.y) { // suspend
+            leftslideHeight = Constants.suspendHeight;
+            rightslideHeight = -Constants.suspendHeight;
+        } else if (gamepad2.x) {
+            leftslideHeight = 0;
+            rightslideHeight = 0;
         }
 
         if (gamepad2.left_bumper) { // open claw
@@ -93,17 +96,20 @@ public class Teleop extends OpMode {
             robotEncoded.clawTilt.setPosition(0.6);
         }
 
-        double rawDifference = robotEncoded.slideLeft.getCurrentPosition() - slideHeight * RobotEncoded.TICKS_PER_INCH_LS;
-        double difference = Math.abs(rawDifference);
+        double rawDifference1 = robotEncoded.slideLeft.getCurrentPosition() - leftslideHeight * RobotEncoded.TICKS_PER_INCH_LS;
+        double difference1 = Math.abs(rawDifference1);
+        double rawDifference2 = robotEncoded.slideRight.getCurrentPosition() - rightslideHeight*RobotEncoded.TICKS_PER_INCH_LS;
+        double difference2 = Math.abs(rawDifference2);
 
-        if (difference >= 30) {
-            robotEncoded.slideLeft.setTargetPosition((int)(slideHeight * RobotEncoded.TICKS_PER_INCH_LS));
-            robotEncoded.slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robotEncoded.slideLeft.setVelocity(1500);
-
-            robotEncoded.slideRight.setTargetPosition((int)(slideHeight * RobotEncoded.TICKS_PER_INCH_LS));
+        if (difference2 >= 30) {
+            robotEncoded.slideRight.setTargetPosition((int)(rightslideHeight * RobotEncoded.TICKS_PER_INCH_LS));
             robotEncoded.slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robotEncoded.slideLeft.setVelocity(1500);
+            robotEncoded.slideRight.setVelocity(1000);
+        }
+        if(difference1 >= 30) {
+            robotEncoded.slideLeft.setTargetPosition((int)(leftslideHeight * RobotEncoded.TICKS_PER_INCH_LS));
+            robotEncoded.slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robotEncoded.slideLeft.setVelocity(1000);
         }
 
             telemetry.addData("left slide velocity", robotEncoded.slideLeft.getVelocity());

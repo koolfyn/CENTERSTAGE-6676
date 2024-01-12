@@ -39,7 +39,7 @@ public class RobotEncoded {
         slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
         slideRight = hardwareMap.get(DcMotorEx.class,"slideRight");
         claw = hardwareMap.get(Servo.class,"claw");
-        clawTilt = hardwareMap.get(Servo.class,"armLift");
+        clawTilt = hardwareMap.get(Servo.class,"clawTilt");
         arm = hardwareMap.get(DcMotorEx.class,"arm");
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
