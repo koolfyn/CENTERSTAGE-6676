@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="midterm BLUE BACK")
+@Autonomous(name="mBB")
 public class midtermBlueBack extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
@@ -40,34 +40,35 @@ public class midtermBlueBack extends OpMode {
 
             case NONE:
             case MIDDLE:
-                robotEncoded.backward(31,800);
+                robotEncoded.backward(30,800);
                 robotEncoded.forward(4,800);
                 robotEncoded.raiseArm();
-                robotEncoded.turnRight(24,700);
-                robotEncoded.forward(30,800);
-                robotEncoded.stopBot(2);
+                robotEncoded.turnRight(20,700);
+                robotEncoded.forward(34,800);
+                robotEncoded.stopBot(1);
                 robotEncoded.tiltClaw();
                 robotEncoded.openClaw();
                 robotEncoded.backward(2,800);
-                robotEncoded.strafeLeft(20,800);
+                robotEncoded.strafeLeft(26,800);
                 robotEncoded.lowerArm();
-                robotEncoded.forward(2,800);
+                robotEncoded.forward(12,800);
                 break;
 
             case RIGHT:
-                robotEncoded.backward(28,800);
-                robotEncoded.turnRight(24,700);
+                robotEncoded.backward(29,800);
+                robotEncoded.turnRight(20,300);
                 robotEncoded.backward(4,700);
                 robotEncoded.raiseArm();
-                robotEncoded.forward(30,900);
-                robotEncoded.strafeLeft(4,700);
+                robotEncoded.forward(34,900);
+                robotEncoded.strafeRight(10,900);
+                robotEncoded.forward(5,900);
                 robotEncoded.stopBot(2);
                 robotEncoded.tiltClaw();
                 robotEncoded.openClaw();
-                robotEncoded.backward(1,700);
-                robotEncoded.strafeLeft(20,800);
+                robotEncoded.backward(2, 900);
+                robotEncoded.strafeLeft(38,900);
                 robotEncoded.lowerArm();
-                robotEncoded.forward(2,700);
+                robotEncoded.forward(12,900);
                 break;
 
         }

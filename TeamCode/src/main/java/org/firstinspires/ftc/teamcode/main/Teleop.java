@@ -90,6 +90,13 @@ public class Teleop extends OpMode {
             robotEncoded.claw.setPosition(0);
         }
 
+        if(gamepad2.a) {
+            robotEncoded.raiseArm();
+        }
+        if(gamepad2.b) {
+            robotEncoded.lowerArm();
+        }
+
         if (gamepad2.left_trigger > 0.5) { // un-tilt claw
             robotEncoded.clawTilt.setPosition(0);
         } else if (gamepad2.right_trigger > 0.5) {  // tilts claw
@@ -112,12 +119,9 @@ public class Teleop extends OpMode {
             robotEncoded.slideLeft.setVelocity(1000);
         }
 
-            telemetry.addData("left slide velocity", robotEncoded.slideLeft.getVelocity());
-            telemetry.addData("right slide velocity", robotEncoded.slideRight.getVelocity());
-            telemetry.addData("left target pos", robotEncoded.slideLeft.getTargetPosition());
-            telemetry.addData("right target pos", robotEncoded.slideRight.getTargetPosition());
-            telemetry.addData("right cur pos", robotEncoded.slideRight.getCurrentPosition());
-            telemetry.addData("left cur pos", robotEncoded.slideLeft.getCurrentPosition());
+            telemetry.addData("arm current position", robotEncoded.arm.getCurrentPosition());
+            telemetry.addData("arm target position", robotEncoded.arm.getTargetPosition());
+            telemetry.addData("arm velocity",robotEncoded.arm.getVelocity());
             telemetry.update();
 
             telemetry.addLine("Left joystick | ")

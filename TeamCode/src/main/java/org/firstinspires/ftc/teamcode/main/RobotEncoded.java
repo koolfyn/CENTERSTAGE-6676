@@ -55,6 +55,9 @@ public class RobotEncoded {
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        arm.setDirection(DcMotorSimple.Direction.REVERSE);
+        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         claw.scaleRange(0,1);
     }
 
@@ -65,14 +68,14 @@ public class RobotEncoded {
         claw.setPosition(0);
     }
     public void raiseArm() {
-        arm.setTargetPosition(30);
+        arm.setTargetPosition(600);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
     public void lowerArm() {
         arm.setTargetPosition(0);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(1000);
+        arm.setVelocity(700);
     }
     public void tiltClaw() {
         clawTilt.setPosition(0.7);
@@ -326,17 +329,31 @@ public class RobotEncoded {
         backLeft.setVelocity(0);
     }
 
-    public void stopBot(int seconds) {
+    public void stopBot(double seconds) {
+
+        long startTime = System.currentTimeMillis();
+        long duration = (long) (seconds * 1000);
+
+        while (System.currentTimeMillis() - startTime < duration) {
+            try {
+                Thread.sleep(10); // Adjust the delay as needed
+            } catch (InterruptedException e) {
+                // Handle the exception if needed
+                e.printStackTrace();
+            }
+        }
+
         frontLeft.setVelocity(0);
         frontRight.setVelocity(0);
         backLeft.setVelocity(0);
         backRight.setVelocity(0);
-
-        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
+
+//        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
     public void setTelemetry(Telemetry telemetry) {
         this.telemetry = telemetry;
