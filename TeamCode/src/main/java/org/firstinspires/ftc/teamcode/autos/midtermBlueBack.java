@@ -34,7 +34,6 @@ public class midtermBlueBack extends OpMode {
             case LEFT:
                 robotEncoded.backward(28,800);
                 robotEncoded.turnLeft(24,700);
-                
 
                 break;
 
