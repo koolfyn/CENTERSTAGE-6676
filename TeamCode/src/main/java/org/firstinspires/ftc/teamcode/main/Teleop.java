@@ -7,49 +7,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp (name="Teleop main")
 public class Teleop extends OpMode {
 
-    double slideHeight = 0;
-
-    //    DcMotorEx frontLeft;
-//    DcMotorEx frontRight;
-//    DcMotorEx backLeft;
-//    DcMotorEx backRight;
-//    DcMotorEx actuatorSuspend;
+    double slideRightHeight = 0;
+    double slideLeftHeight = 0;
     RobotEncoded robotEncoded;
-//    DcMotorEx intakeMotor;
-//    DcMotorEx slideLeft;
-//    DcMotorEx slideRight;
-//    Servo pixelBox;
-
 
     @Override
     public void init() {
-//        frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft");
-//        frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
-//        backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
-//        backRight = hardwareMap.get(DcMotorEx.class, "backRight");
-//        actuatorSuspend = hardwareMap.get(DcMotorEx.class, "actuatorSuspend");
         robotEncoded = new RobotEncoded(hardwareMap, telemetry);
-
-//        slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
-//        slideRight = hardwareMap.get(DcMotorEx.class, "slideRight");
-//        intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
-//        pixelBox = hardwareMap.get(Servo.class, "pixelBox");
-//
-//        robotEncoded.frontRight.setDirection(DcMotor.Direction.REVERSE);
-//        robotEncoded.backRight.setDirection(DcMotor.Direction.REVERSE);
-////
-//        robotEncoded.actuatorSuspend.setDirection(DcMotorSimple.Direction.REVERSE);
-//        robotEncoded.actuatorSuspend.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robotEncoded.actuatorSuspend.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-//        slideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-//        slideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        slideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
-//        slideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        slideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//
-//        pixelBox.scaleRange(0, 1);
     }
 
     @Override
@@ -75,43 +39,56 @@ public class Teleop extends OpMode {
             robotEncoded.backRight.setVelocity((y + x - r) * Constants.defaultVal);
         }
 
-        if (gamepad2.x) { // suspend
-            slideHeight = Constants.suspendHeight;
-        } else if (gamepad2.y) {
-            slideHeight = 0;
+        if (gamepad2.dpad_up) { // suspend
+            slideLeftHeight = Constants.suspendHeight;
+            slideRightHeight = -Constants.suspendHeight;
+            
+        } else if (gamepad2.dpad_down) {
+            slideLeftHeight = 0;
+            slideRightHeight = 0;
         }
 
         if (gamepad2.left_bumper) { // open claw
-            robotEncoded.claw.setPosition(0.5);
+            robotEncoded.claw.setPosition(0.7);
+            
         } else if (gamepad2.right_bumper) { // close claw
             robotEncoded.claw.setPosition(0);
         }
 
-        if (gamepad2.left_trigger > 0.5) { // un-tilt claw
-            robotEncoded.clawTilt.setPosition(0);
-        } else if (gamepad2.right_trigger > 0.5) {  // tilts claw
-            robotEncoded.clawTilt.setPosition(0.6);
+        if(gamepad2.y) { // arm control
+            robotEncoded.raiseArm();
+        }
+        if(gamepad2.x) { // lower arm and make sure clawTilt is not disoriented
+            robotEncoded.lowerArm();
+        }
+        if(gamepad2.b) {
+            robotEncoded.backdropClawTilt();
+        }
+        if(gamepad2.a) { // get the claw parallel to floor
+            robotEncoded.parallelClawPosArm();
         }
 
-        double rawDifference = robotEncoded.slideLeft.getCurrentPosition() - slideHeight * RobotEncoded.TICKS_PER_INCH_LS;
-        double difference = Math.abs(rawDifference);
+        double rawDifference1 = robotEncoded.slideLeft.getCurrentPosition() - slideLeftHeight * RobotEncoded.TICKS_PER_INCH_LS;
+        double difference1 = Math.abs(rawDifference1);
+        double rawDifference2 = robotEncoded.slideRight.getCurrentPosition() - slideRightHeight *RobotEncoded.TICKS_PER_INCH_LS;
+        double difference2 = Math.abs(rawDifference2);
 
-        if (difference >= 30) {
-            robotEncoded.slideLeft.setTargetPosition((int)(slideHeight * RobotEncoded.TICKS_PER_INCH_LS));
-            robotEncoded.slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robotEncoded.slideLeft.setVelocity(1500);
-
-            robotEncoded.slideRight.setTargetPosition((int)(slideHeight * RobotEncoded.TICKS_PER_INCH_LS));
+        if (difference2 >= 30) {
+            robotEncoded.slideRight.setTargetPosition((int)(slideRightHeight * RobotEncoded.TICKS_PER_INCH_LS));
             robotEncoded.slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robotEncoded.slideLeft.setVelocity(1500);
+            robotEncoded.slideRight.setVelocity(1000);
+        }
+        
+        if(difference1 >= 30) {
+            robotEncoded.slideLeft.setTargetPosition((int)(slideLeftHeight * RobotEncoded.TICKS_PER_INCH_LS));
+            robotEncoded.slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robotEncoded.slideLeft.setVelocity(1000);
         }
 
-            telemetry.addData("left slide velocity", robotEncoded.slideLeft.getVelocity());
-            telemetry.addData("right slide velocity", robotEncoded.slideRight.getVelocity());
-            telemetry.addData("left target pos", robotEncoded.slideLeft.getTargetPosition());
-            telemetry.addData("right target pos", robotEncoded.slideRight.getTargetPosition());
-            telemetry.addData("right cur pos", robotEncoded.slideRight.getCurrentPosition());
-            telemetry.addData("left cur pos", robotEncoded.slideLeft.getCurrentPosition());
+            telemetry.addData("claw tilt pos", robotEncoded.clawTilt.getPosition());
+            telemetry.addData("claw tilt target pos", robotEncoded.clawTilt.getPosition());
+            telemetry.addData("arm target position", robotEncoded.arm.getTargetPosition());
+            telemetry.addData("arm velocity",robotEncoded.arm.getVelocity());
             telemetry.update();
 
             telemetry.addLine("Left joystick | ")
