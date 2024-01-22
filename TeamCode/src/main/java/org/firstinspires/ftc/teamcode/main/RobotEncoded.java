@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class RobotEncoded {
@@ -68,15 +69,25 @@ public class RobotEncoded {
         claw.setPosition(0);
     }
     public void raiseArm() {
-        arm.setTargetPosition(600);
+        arm.setTargetPosition(500);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
     public void lowerArm() {
+        clawTilt.setPosition(Constants.clawTiltPos);
         arm.setTargetPosition(0);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(700);
     }
+    public void parallelClawPosArm() {
+        arm.setTargetPosition(140);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(1000);
+    }
+    public void backdropClawTilt() {
+        clawTilt.setPosition(Constants.backdropPos);
+    }
+
     public void tiltClaw() {
         clawTilt.setPosition(0.7);
     }
