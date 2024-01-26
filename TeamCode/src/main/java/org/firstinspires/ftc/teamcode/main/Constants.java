@@ -6,13 +6,12 @@ public class Constants {
     public static final double defaultVal = 1000;
     public static final double fastVal = 1500;
 
-    public static final double lowSetLine = 20;
-    public static final double medSetLine = 30;
-    public static final double highSetLine = 40;
+    // arm setpoints based on ticks
+    public static final int lowSetLine = 300;
+    public static final int medSetLine = 500;
+    public static final int highSetLine = 700;
 
     public static final double suspendHeight = 20;
 
-    public static final double clawTiltPos = 0.5;
-    public static final double backdropPos = 0.2;
 
 }
