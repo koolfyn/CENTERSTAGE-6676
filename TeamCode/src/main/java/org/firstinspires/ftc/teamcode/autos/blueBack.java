@@ -8,10 +8,8 @@ import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-
-@Autonomous(name="Blue Front")
-public class blueFront extends OpMode {
-
+@Autonomous(name="mBB0")
+public class blueBack extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private RobotEncoded robotEncoded;
@@ -27,67 +25,58 @@ public class blueFront extends OpMode {
     public void init_loop() {
         telemetry.addData("Identified", visionProcessor.getSelection());
     }
+
     @Override
     public void start() {
         visionPortal.stopStreaming();
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                robotEncoded.backward(27, 700);
-                robotEncoded.turnLeft(24, 700);
-                robotEncoded.backward(5, 500);
-                robotEncoded.forward(5, 700);
-                robotEncoded.stopBot(1);
-                robotEncoded.turnRight(48, 700);
-                robotEncoded.strafeLeft(24, 700);
-                robotEncoded.forward(12, 800); // forward enough to pass into back
-                robotEncoded.armtoLowSetLine(); // raise when in back to avoid hitting truss
-                robotEncoded.forward(35, 800); // resume going to backdrop
-                robotEncoded.strafeRight(9, 500);
-                robotEncoded.stopBot(1);
-                robotEncoded.backdropClawTilt();
-                robotEncoded.openClaw();
+                robotEncoded.backward(28,800);
+                robotEncoded.turnLeft(24,700);
+                
 
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.backward(31,700);
-                robotEncoded.forward(28, 700);
-                robotEncoded.turnRight(26, 700);
-                robotEncoded.forward(12, 800);
+                robotEncoded.backward(30,800);
+                robotEncoded.forward(4,800);
                 robotEncoded.armtoLowSetLine();
-                robotEncoded.forward(35,800);
-                robotEncoded.strafeRight(14, 500);
-                robotEncoded.stopBot(2);
+                robotEncoded.turnRight(20,700);
+                robotEncoded.forward(34,800);
+                robotEncoded.stopBot(1);
                 robotEncoded.backdropClawTilt();
                 robotEncoded.openClaw();
-
+                robotEncoded.backward(2,800);
+                robotEncoded.strafeLeft(26,800);
+                robotEncoded.lowerArm();
+                robotEncoded.forward(12,800);
                 break;
 
             case RIGHT:
-                robotEncoded.backward(27,700);
-                robotEncoded.turnRight(24, 700);
-                robotEncoded.backward(5, 500);
-                robotEncoded.forward(5, 700);
-                robotEncoded.stopBot(1);
-                robotEncoded.strafeLeft(24, 700);
-                robotEncoded.forward(12, 800);
+                robotEncoded.backward(29,800);
+                robotEncoded.turnRight(20,300);
+                robotEncoded.backward(4,700);
                 robotEncoded.armtoLowSetLine();
-                robotEncoded.forward(35, 800);
-                robotEncoded.strafeRight(19, 500);
-                robotEncoded.stopBot(1);
+                robotEncoded.forward(34,900);
+                robotEncoded.strafeRight(10,900);
+                robotEncoded.forward(5,900);
+                robotEncoded.stopBot(2);
                 robotEncoded.backdropClawTilt();
                 robotEncoded.openClaw();
-
+                robotEncoded.backward(2, 900);
+                robotEncoded.strafeLeft(38,900);
+                robotEncoded.lowerArm();
+                robotEncoded.forward(12,900);
                 break;
 
         }
     }
+
     @Override
     public void loop() {
 
     }
+
 }
-
-

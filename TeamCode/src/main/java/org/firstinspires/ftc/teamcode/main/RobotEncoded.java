@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.apache.commons.math3.analysis.function.Constant;
 import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -56,7 +57,7 @@ public class RobotEncoded {
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        arm.setDirection(DcMotorSimple.Direction.REVERSE);
+//        arm.setDirection(DcMotorSimple.Direction.REVERSE);
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         claw.scaleRange(0,1);
@@ -65,34 +66,61 @@ public class RobotEncoded {
     public void openClaw() {
         claw.setPosition(0.6);
     }
+
+//    public void raiseArm() {
+//        arm.setTargetPosition(490);
     public void closeClaw() {
         claw.setPosition(0);
     }
-    public void raiseArm() {
-        arm.setTargetPosition(500);
+
+    public void armtoGround() {
+        arm.setTargetPosition(Constants.ground);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
-    public void lowerArm() {
-        clawTilt.setPosition(Constants.clawTiltPos);
-        arm.setTargetPosition(0);
+    public void armtoLowSetLine() {
+        arm.setTargetPosition(Constants.lowSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(700);
+        arm.setVelocity(1000);
     }
+    public void armtoMidSetLine() {
+        arm.setTargetPosition(Constants.medSetLine);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(1000);
+    }
+    public void armtoHighSetLine() {
+        arm.setTargetPosition(Constants.highSetLine);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(1000);
+        clawTilt.setPosition(0.4);
+    }
+
     public void parallelClawPosArm() {
+        clawTilt.setPosition(0.57);
         arm.setTargetPosition(140);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
-    public void backdropClawTilt() {
-        clawTilt.setPosition(Constants.backdropPos);
+
+    public void armOffGround() {
+        arm.setTargetPosition(200);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(700);
     }
 
-    public void tiltClaw() {
-        clawTilt.setPosition(0.7);
+    public void lowerArm() {
+        tiltToGround();
+        arm.setTargetPosition(0);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(700);
     }
-    public void untiltClaw() {
-        clawTilt.setPosition(0);
+
+    public void backdropClawTilt() {
+        clawTilt.setPosition(0.85);
+    }
+
+    public void tiltToGround() {
+        clawTilt.setPosition(0.18);
     }
 
     public void setSlidePosition(double velocity, double distanceInches) {

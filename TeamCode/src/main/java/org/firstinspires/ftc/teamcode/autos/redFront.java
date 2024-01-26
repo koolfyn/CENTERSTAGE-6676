@@ -39,11 +39,11 @@ public class redFront extends OpMode {
                 robotEncoded.forward(5, 700);
                 robotEncoded.strafeRight(24, 700);
                 robotEncoded.forward(12, 700); // forward enough to pass into back
-                robotEncoded.raiseArm(); // raise when in back to avoid hitting truss
+                robotEncoded.armtoLowSetLine(); // raise when in back to avoid hitting truss
                 robotEncoded.forward(25, 700); // resume going to backdrop
                 robotEncoded.strafeLeft(15, 600);
                 robotEncoded.stopBot(2);
-                robotEncoded.tiltClaw();
+                robotEncoded.backdropClawTilt();
                 robotEncoded.openClaw();
 
                 break;
@@ -55,11 +55,11 @@ public class redFront extends OpMode {
                 robotEncoded.turnLeft(24, 700);
                 robotEncoded.stopBot(2);
                 robotEncoded.forward(12, 700);
-                robotEncoded.raiseArm();
+                robotEncoded.armtoLowSetLine();
                 robotEncoded.forward(25, 700);
                 robotEncoded.strafeLeft(12, 600);
                 robotEncoded.stopBot(1);
-                robotEncoded.tiltClaw();
+                robotEncoded.backdropClawTilt();
                 robotEncoded.openClaw();
 
                 break;
@@ -73,11 +73,11 @@ public class redFront extends OpMode {
                 robotEncoded.turnRight(48, 700);
                 robotEncoded.stopBot(2);
                 robotEncoded.forward(12, 700);
-                robotEncoded.raiseArm();
+                robotEncoded.armtoLowSetLine();
                 robotEncoded.forward(25, 700);
                 robotEncoded.strafeLeft(9, 700);
                 robotEncoded.stopBot(1);
-                robotEncoded.tiltClaw();
+                robotEncoded.backdropClawTilt();
                 robotEncoded.openClaw();
 
                 break;
