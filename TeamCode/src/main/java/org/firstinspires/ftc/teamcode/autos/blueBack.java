@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="mBB0")
+@Autonomous(name="blue Back")
 public class blueBack extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
@@ -34,7 +34,6 @@ public class blueBack extends OpMode {
             case LEFT:
                 robotEncoded.backward(28,800);
                 robotEncoded.turnLeft(24,700);
-                
 
                 break;
 
