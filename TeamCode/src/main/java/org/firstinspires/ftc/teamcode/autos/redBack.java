@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 @Autonomous(name="midterm RED BACK")
-public class midtermRedBack extends OpMode {
+public class redBack extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private RobotEncoded robotEncoded;
@@ -38,15 +38,15 @@ public class midtermRedBack extends OpMode {
                 //purple scored
                 robotEncoded.strafeLeft(5,700);
                 robotEncoded.stopBot(1);
-                robotEncoded.raiseArm();
-                robotEncoded.tiltClaw();
+                robotEncoded.armtoLowSetLine();
+                robotEncoded.backdropClawTilt();
                 robotEncoded.forward(20,700);
                 robotEncoded.openClaw();
                 //yellow pixel scored
                 robotEncoded.stopBot(2);
                 robotEncoded.closeClaw();
                 robotEncoded.backward(5,700);
-                robotEncoded.untiltClaw();
+//                robotEncoded.retractTilt();
                 robotEncoded.lowerArm();
                 robotEncoded.strafeRight(10,700);
                 robotEncoded.forward(5,700);
@@ -63,15 +63,15 @@ public class midtermRedBack extends OpMode {
                 //purple scored
                 robotEncoded.strafeRight(5,700);
                 robotEncoded.stopBot(1);
-                robotEncoded.raiseArm();
-                robotEncoded.tiltClaw();
+                robotEncoded.armtoLowSetLine();
+                robotEncoded.backdropClawTilt();
                 robotEncoded.forward(20,700);
                 robotEncoded.openClaw();
                 //yellow scored
                 robotEncoded.stopBot(2);
                 robotEncoded.closeClaw();
                 robotEncoded.backward(5,700);
-                robotEncoded.untiltClaw();
+                robotEncoded.backdropClawTilt();
                 robotEncoded.lowerArm();
                 robotEncoded.strafeRight(20,700);
                 robotEncoded.forward(10,700);
@@ -88,15 +88,15 @@ public class midtermRedBack extends OpMode {
                 robotEncoded.turnLeft(20,700);
                 robotEncoded.strafeRight(15,700);
                 robotEncoded.stopBot(1);
-                robotEncoded.raiseArm();
-                robotEncoded.tiltClaw();
+                robotEncoded.armtoLowSetLine();
+                robotEncoded.backdropClawTilt();
                 robotEncoded.forward(20,700);
                 robotEncoded.openClaw();
                 //yellow pixel scored
                 robotEncoded.stopBot(2);
                 robotEncoded.closeClaw();
                 robotEncoded.backward(5,700);
-                robotEncoded.untiltClaw();
+//                robotEncoded.retractTilt();
                 robotEncoded.lowerArm();
                 robotEncoded.strafeRight(10,700);
                 robotEncoded.forward(5,700);

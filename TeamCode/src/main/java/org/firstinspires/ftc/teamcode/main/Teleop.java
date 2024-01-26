@@ -9,6 +9,7 @@ public class Teleop extends OpMode {
 
     double slideRightHeight = 0;
     double slideLeftHeight = 0;
+    double armHeight = 0;
     RobotEncoded robotEncoded;
 
     @Override
@@ -42,7 +43,6 @@ public class Teleop extends OpMode {
         if (gamepad2.dpad_up) { // suspend
             slideLeftHeight = Constants.suspendHeight;
             slideRightHeight = -Constants.suspendHeight;
-            
         } else if (gamepad2.dpad_down) {
             slideLeftHeight = 0;
             slideRightHeight = 0;
@@ -50,22 +50,36 @@ public class Teleop extends OpMode {
 
         if (gamepad2.left_bumper) { // open claw
             robotEncoded.claw.setPosition(0.7);
-            
+
         } else if (gamepad2.right_bumper) { // close claw
             robotEncoded.claw.setPosition(0);
         }
 
         if(gamepad2.y) { // arm control
-            robotEncoded.raiseArm();
+            robotEncoded.armtoHighSetLine();
         }
-        if(gamepad2.x) { // lower arm and make sure clawTilt is not disoriented
-            robotEncoded.lowerArm();
+        if(gamepad2.x) {
+            robotEncoded.armtoMidSetLine();
         }
         if(gamepad2.b) {
+            robotEncoded.armtoLowSetLine();
+        }
+        if(gamepad2.a) {
             robotEncoded.backdropClawTilt();
         }
-        if(gamepad2.a) { // get the claw parallel to floor
-            robotEncoded.parallelClawPosArm();
+        if(gamepad2.right_trigger > 0.5) {
+            robotEncoded.backdropClawTilt();
+        }
+        if(gamepad2.left_trigger > 0.5) {
+            robotEncoded.tiltToGround();
+        }
+
+        if (gamepad2.right_stick_y > 0.1 && armHeight >= 0) { // manual arm control
+            armHeight = robotEncoded.arm.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
+            armHeight -= 10;
+        } else if (gamepad2.right_stick_y < -0.1) {
+            armHeight = robotEncoded.arm.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
+            armHeight += 10;
         }
 
         double rawDifference1 = robotEncoded.slideLeft.getCurrentPosition() - slideLeftHeight * RobotEncoded.TICKS_PER_INCH_LS;
@@ -85,10 +99,11 @@ public class Teleop extends OpMode {
             robotEncoded.slideLeft.setVelocity(1000);
         }
 
-            telemetry.addData("claw tilt pos", robotEncoded.clawTilt.getPosition());
+            telemetry.addData("claw tilt cur pos", robotEncoded.clawTilt.getPosition());
             telemetry.addData("claw tilt target pos", robotEncoded.clawTilt.getPosition());
             telemetry.addData("arm target position", robotEncoded.arm.getTargetPosition());
             telemetry.addData("arm velocity",robotEncoded.arm.getVelocity());
+            telemetry.addData("arm curr pos", robotEncoded.arm.getCurrentPosition());
             telemetry.update();
 
             telemetry.addLine("Left joystick | ")
