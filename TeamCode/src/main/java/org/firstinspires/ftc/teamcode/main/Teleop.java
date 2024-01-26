@@ -49,7 +49,7 @@ public class Teleop extends OpMode {
         }
 
         if (gamepad2.left_bumper) { // open claw
-            robotEncoded.claw.setPosition(0.7);
+            robotEncoded.claw.setPosition(0.3);
             
         } else if (gamepad2.right_bumper) { // close claw
             robotEncoded.claw.setPosition(0);
@@ -57,6 +57,7 @@ public class Teleop extends OpMode {
 
         if(gamepad2.y) { // arm control
             robotEncoded.raiseArm();
+
         }
         if(gamepad2.x) { // lower arm and make sure clawTilt is not disoriented
             robotEncoded.lowerArm();

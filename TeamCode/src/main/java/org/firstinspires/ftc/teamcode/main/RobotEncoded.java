@@ -65,24 +65,30 @@ public class RobotEncoded {
     public void openClaw() {
         claw.setPosition(0.6);
     }
-    public void closeClaw() {
-        claw.setPosition(0);
-    }
+    public void closeClaw() {claw.setPosition(0.4);}
+
     public void raiseArm() {
-        arm.setTargetPosition(500);
+        arm.setTargetPosition(490);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(1000);
+        arm.setVelocity(100);
     }
     public void lowerArm() {
         clawTilt.setPosition(Constants.clawTiltPos);
-        arm.setTargetPosition(0);
+        arm.setTargetPosition(10);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(700);
     }
     public void parallelClawPosArm() {
+        clawTilt.setPosition(0.57);
         arm.setTargetPosition(140);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
+    }
+
+    public void armOffGround() {
+        arm.setTargetPosition(200);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(700);
     }
     public void backdropClawTilt() {
         clawTilt.setPosition(Constants.backdropPos);
