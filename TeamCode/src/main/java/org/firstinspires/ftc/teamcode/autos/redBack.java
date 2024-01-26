@@ -52,7 +52,6 @@ public class redBack extends OpMode {
                 robotEncoded.forward(5,700);
                 //robot parked
 
-
                 break;
 
             case NONE:

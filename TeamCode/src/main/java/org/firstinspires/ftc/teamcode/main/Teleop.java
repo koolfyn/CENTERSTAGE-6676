@@ -19,9 +19,9 @@ public class Teleop extends OpMode {
 
     @Override
     public void loop() {
-        double x = gamepad1.left_stick_x;
-        double y = -gamepad1.left_stick_y;
-        double r = gamepad1.right_stick_x;
+        double x = gamepad2.left_stick_x;
+        double y = -gamepad2.left_stick_y;
+        double r = gamepad2.right_stick_x;
 
         if (gamepad1.right_bumper) { // driver movements
             robotEncoded.frontLeft.setVelocity((y + x + r) * Constants.slowVal);
@@ -50,7 +50,6 @@ public class Teleop extends OpMode {
 
         if (gamepad2.left_bumper) { // open claw
             robotEncoded.claw.setPosition(0.7);
-
         } else if (gamepad2.right_bumper) { // close claw
             robotEncoded.claw.setPosition(0);
         }
@@ -65,7 +64,7 @@ public class Teleop extends OpMode {
             robotEncoded.armtoLowSetLine();
         }
         if(gamepad2.a) {
-            robotEncoded.backdropClawTilt();
+            robotEncoded.armtoGround();
         }
         if(gamepad2.right_trigger > 0.5) {
             robotEncoded.backdropClawTilt();

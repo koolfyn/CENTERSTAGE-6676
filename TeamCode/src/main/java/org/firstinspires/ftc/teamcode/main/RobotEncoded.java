@@ -66,10 +66,18 @@ public class RobotEncoded {
     public void openClaw() {
         claw.setPosition(0.6);
     }
+
+//    public void raiseArm() {
+//        arm.setTargetPosition(490);
     public void closeClaw() {
         claw.setPosition(0);
     }
 
+    public void armtoGround() {
+        arm.setTargetPosition(Constants.ground);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(1000);
+    }
     public void armtoLowSetLine() {
         arm.setTargetPosition(Constants.lowSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -84,6 +92,20 @@ public class RobotEncoded {
         arm.setTargetPosition(Constants.highSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
+        clawTilt.setPosition(0.4);
+    }
+
+    public void parallelClawPosArm() {
+        clawTilt.setPosition(0.57);
+        arm.setTargetPosition(140);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(1000);
+    }
+
+    public void armOffGround() {
+        arm.setTargetPosition(200);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(700);
     }
 
     public void lowerArm() {
@@ -98,7 +120,7 @@ public class RobotEncoded {
     }
 
     public void tiltToGround() {
-        clawTilt.setPosition(0);
+        clawTilt.setPosition(0.18);
     }
 
     public void setSlidePosition(double velocity, double distanceInches) {
