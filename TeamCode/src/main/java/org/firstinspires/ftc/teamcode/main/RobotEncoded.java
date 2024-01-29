@@ -108,19 +108,19 @@ public class RobotEncoded {
         arm.setVelocity(700);
     }
 
-    public void lowerArm() {
-        tiltToGround();
-        arm.setTargetPosition(0);
-        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(700);
-    }
+//    public void lowerArm() {
+//        tiltToGround();
+//        arm.setTargetPosition(0);
+//        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        arm.setVelocity(700);
+//    }
 
     public void backdropClawTilt() {
-        clawTilt.setPosition(0.85);
+        clawTilt.setPosition(0.18);
     }
 
     public void tiltToGround() {
-        clawTilt.setPosition(0.18);
+        clawTilt.setPosition(0.85);
     }
 
     public void setSlidePosition(double velocity, double distanceInches) {
