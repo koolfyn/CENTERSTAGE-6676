@@ -34,9 +34,9 @@ public class blueBack extends OpMode {
             case LEFT:
                 robotEncoded.closeClaw();
                 robotEncoded.backward(23,800);
-                robotEncoded.strafeRight(13,800);
+                robotEncoded.strafeRight(12,800);
                 robotEncoded.backward(4,800);
-                robotEncoded.forward(7.5,500);
+                robotEncoded.forward(8,500);
                 robotEncoded.turnRight(20,800);
                 robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
@@ -55,16 +55,17 @@ public class blueBack extends OpMode {
                 robotEncoded.closeClaw();
                 robotEncoded.backward(30,800);
                 robotEncoded.forward(4,800);
-                robotEncoded.turnRight(20,700);
+                robotEncoded.turnRight(19.5,700);
+                robotEncoded.forward(10,800);
                 robotEncoded.strafeRight(2,800);
                 robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
-                robotEncoded.forward(41,800);
+                robotEncoded.forward(31,800);
                 robotEncoded.stopBot(2);
                 robotEncoded.openClaw();
                 robotEncoded.stopBot(1);
                 robotEncoded.backward(4,800);
-                robotEncoded.strafeLeft(28,800);
+                robotEncoded.strafeLeft(30,800);
                 robotEncoded.armtoGround();
                 robotEncoded.forward(8,800);
                 break;
@@ -73,11 +74,11 @@ public class blueBack extends OpMode {
                 robotEncoded.closeClaw();
                 robotEncoded.backward(29,800);
                 robotEncoded.turnRight(20,300);
-                robotEncoded.backward(4,700);
+                robotEncoded.backward(3,700);
                 robotEncoded.forward(34,900);
                 robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
-                robotEncoded.strafeRight(10,900);
+                robotEncoded.strafeRight(8,900);
                 robotEncoded.forward(5,900);
                 robotEncoded.stopBot(2);
                 robotEncoded.openClaw();

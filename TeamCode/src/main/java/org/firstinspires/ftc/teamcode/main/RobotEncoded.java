@@ -79,7 +79,8 @@ public class RobotEncoded {
         arm.setVelocity(1000);
     }
     public void armScoreAuto() {
-        arm.setTargetPosition(300);
+        clawTilt.setPosition(0.2);
+        arm.setTargetPosition(200);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
@@ -254,7 +255,7 @@ public class RobotEncoded {
         backRight.setVelocity(0);
     }
 
-    public void turnLeft(int distanceInches, double velocity) {
+    public void turnLeft(double distanceInches, double velocity) {
         frontLeft.setTargetPosition(frontLeft.getCurrentPosition() + (int) (-distanceInches * TICKS_PER_INCH));
         frontRight.setTargetPosition(frontRight.getCurrentPosition() + (int) (distanceInches * TICKS_PER_INCH));
         backRight.setTargetPosition(backRight.getCurrentPosition() + (int) (distanceInches * TICKS_PER_INCH));
@@ -279,7 +280,7 @@ public class RobotEncoded {
         backRight.setVelocity(0);
     }
 
-    public void turnRight(int distanceInches, double velocity) {
+    public void turnRight(double distanceInches, double velocity) {
         frontLeft.setTargetPosition(frontLeft.getCurrentPosition() + (int) (distanceInches * TICKS_PER_INCH));
         frontRight.setTargetPosition(frontRight.getCurrentPosition() + (int) (-distanceInches * TICKS_PER_INCH));
         backRight.setTargetPosition(backRight.getCurrentPosition() + (int) (-distanceInches * TICKS_PER_INCH));
