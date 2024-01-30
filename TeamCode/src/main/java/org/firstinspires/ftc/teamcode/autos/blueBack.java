@@ -33,20 +33,21 @@ public class blueBack extends OpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 robotEncoded.closeClaw();
-                robotEncoded.backward(28,800);
-                robotEncoded.turnLeft(24,700);
+                robotEncoded.backward(23,800);
+                robotEncoded.strafeRight(13,800);
                 robotEncoded.backward(4,800);
-                robotEncoded.strafeRight(6,800);
-                robotEncoded.turnRight(40,800);
-                robotEncoded.armtoLowSetLine();
+                robotEncoded.forward(7.5,500);
+                robotEncoded.turnRight(20,800);
+                robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
-                robotEncoded.forward(30,800);
+                robotEncoded.forward(32,800);
                 robotEncoded.stopBot(1);
                 robotEncoded.openClaw();
-                robotEncoded.backward(1,800);
+                robotEncoded.stopBot(1);
+                robotEncoded.backward(3,800);
+                robotEncoded.strafeLeft(24,800);
                 robotEncoded.armtoGround();
-                robotEncoded.strafeLeft(30,800);
-                robotEncoded.forward(12,800);
+                robotEncoded.forward(8,800);
                 break;
 
             case NONE:
@@ -55,16 +56,17 @@ public class blueBack extends OpMode {
                 robotEncoded.backward(30,800);
                 robotEncoded.forward(4,800);
                 robotEncoded.turnRight(20,700);
-                robotEncoded.armtoLowSetLine();
+                robotEncoded.strafeRight(2,800);
+                robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
-                robotEncoded.forward(34,800);
-                robotEncoded.stopBot(1);
-                robotEncoded.backdropClawTilt();
+                robotEncoded.forward(41,800);
+                robotEncoded.stopBot(2);
                 robotEncoded.openClaw();
-                robotEncoded.backward(2,800);
-                robotEncoded.strafeLeft(26,800);
+                robotEncoded.stopBot(1);
+                robotEncoded.backward(4,800);
+                robotEncoded.strafeLeft(28,800);
                 robotEncoded.armtoGround();
-                robotEncoded.forward(12,800);
+                robotEncoded.forward(8,800);
                 break;
 
             case RIGHT:
@@ -73,7 +75,7 @@ public class blueBack extends OpMode {
                 robotEncoded.turnRight(20,300);
                 robotEncoded.backward(4,700);
                 robotEncoded.forward(34,900);
-                robotEncoded.armtoLowSetLine();
+                robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
                 robotEncoded.strafeRight(10,900);
                 robotEncoded.forward(5,900);

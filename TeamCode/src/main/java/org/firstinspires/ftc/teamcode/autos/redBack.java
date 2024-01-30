@@ -47,7 +47,7 @@ public class redBack extends OpMode {
                 robotEncoded.closeClaw();
                 robotEncoded.backward(5,700);
 //                robotEncoded.retractTilt();
-                robotEncoded.lowerArm();
+                robotEncoded.armtoGround();
                 robotEncoded.strafeRight(10,700);
                 robotEncoded.forward(5,700);
                 //robot parked
@@ -71,7 +71,7 @@ public class redBack extends OpMode {
                 robotEncoded.closeClaw();
                 robotEncoded.backward(5,700);
                 robotEncoded.backdropClawTilt();
-                robotEncoded.lowerArm();
+                robotEncoded.armtoGround();
                 robotEncoded.strafeRight(20,700);
                 robotEncoded.forward(10,700);
                 //park
@@ -96,7 +96,7 @@ public class redBack extends OpMode {
                 robotEncoded.closeClaw();
                 robotEncoded.backward(5,700);
 //                robotEncoded.retractTilt();
-                robotEncoded.lowerArm();
+                robotEncoded.armtoGround();
                 robotEncoded.strafeRight(10,700);
                 robotEncoded.forward(5,700);
                 //robot parked

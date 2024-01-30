@@ -64,13 +64,13 @@ public class RobotEncoded {
     }
 
     public void openClaw() {
-        claw.setPosition(0.6);
+        claw.setPosition(0);
     }
 
 //    public void raiseArm() {
 //        arm.setTargetPosition(490);
     public void closeClaw() {
-        claw.setPosition(0);
+        claw.setPosition(0.7);
     }
 
     public void armtoGround() {
@@ -78,6 +78,12 @@ public class RobotEncoded {
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
+    public void armScoreAuto() {
+        arm.setTargetPosition(300);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(1000);
+    }
+
     public void armtoLowSetLine() {
         arm.setTargetPosition(Constants.lowSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
