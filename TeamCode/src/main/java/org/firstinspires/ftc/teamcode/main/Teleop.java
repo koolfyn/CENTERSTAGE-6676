@@ -48,9 +48,10 @@ public class Teleop extends OpMode {
             slideRightHeight = 0;
         }
 
-        if (gamepad2.left_bumper) { // open claw
+        if (gamepad2.left_bumper) { // close claw
             robotEncoded.claw.setPosition(0.7);
-        } else if (gamepad2.right_bumper) { // close claw
+        }
+        if (gamepad2.right_bumper) { // open claw
             robotEncoded.claw.setPosition(0);
         }
 

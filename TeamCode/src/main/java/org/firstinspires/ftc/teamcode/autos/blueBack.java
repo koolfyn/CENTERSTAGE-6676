@@ -50,7 +50,7 @@ public class blueBack extends OpMode {
                 robotEncoded.openClaw();
                 robotEncoded.backward(2,800);
                 robotEncoded.strafeLeft(26,800);
-                robotEncoded.lowerArm();
+                robotEncoded.armtoGround();
                 robotEncoded.forward(12,800);
                 break;
 
@@ -67,7 +67,7 @@ public class blueBack extends OpMode {
                 robotEncoded.openClaw();
                 robotEncoded.backward(2, 900);
                 robotEncoded.strafeLeft(38,900);
-                robotEncoded.lowerArm();
+                robotEncoded.armtoGround();
                 robotEncoded.forward(12,900);
                 break;
 

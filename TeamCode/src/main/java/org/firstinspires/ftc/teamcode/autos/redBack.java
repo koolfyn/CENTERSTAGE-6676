@@ -33,10 +33,10 @@ public class redBack extends OpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 robotEncoded.backward(28,700);
-                robotEncoded.turnLeft(24,700);
-                robotEncoded.backward(4,700);
+                robotEncoded.turnLeft(20,700);
+                robotEncoded.forward(3,700);
                 //purple scored
-                robotEncoded.strafeLeft(5,700);
+                robotEncoded.turnLeft(30,700);
                 robotEncoded.stopBot(1);
                 robotEncoded.armtoLowSetLine();
                 robotEncoded.backdropClawTilt();
@@ -47,8 +47,8 @@ public class redBack extends OpMode {
                 robotEncoded.closeClaw();
                 robotEncoded.backward(5,700);
 //                robotEncoded.retractTilt();
-                robotEncoded.lowerArm();
-                robotEncoded.strafeRight(10,700);
+                robotEncoded.armtoGround();
+                robotEncoded.strafeLeft(10,700);
                 robotEncoded.forward(5,700);
                 //robot parked
 
@@ -56,48 +56,50 @@ public class redBack extends OpMode {
 
             case NONE:
             case MIDDLE:
-                robotEncoded.backward(28,700);
-                robotEncoded.forward(2,700);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(30,700);
+                robotEncoded.forward(3,700);
                 robotEncoded.turnLeft(20,700);
                 //purple scored
-                robotEncoded.strafeRight(5,700);
                 robotEncoded.stopBot(1);
                 robotEncoded.armtoLowSetLine();
                 robotEncoded.backdropClawTilt();
-                robotEncoded.forward(20,700);
+                robotEncoded.forward(47,700);
                 robotEncoded.openClaw();
                 //yellow scored
                 robotEncoded.stopBot(2);
                 robotEncoded.closeClaw();
-                robotEncoded.backward(5,700);
+                robotEncoded.backward(10,700);
                 robotEncoded.backdropClawTilt();
-                robotEncoded.lowerArm();
+                robotEncoded.armtoGround();
                 robotEncoded.strafeRight(20,700);
-                robotEncoded.forward(10,700);
+                robotEncoded.forward(13,700);
                 //park
 
                 break;
 
             case RIGHT:
-                robotEncoded.backward(25,700);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(34,700);
                 robotEncoded.turnRight(20,700);
-                robotEncoded.backward(5,700);
-                //purple pixel scored
-                robotEncoded.forward(5,700);
-                robotEncoded.turnLeft(20,700);
-                robotEncoded.strafeRight(15,700);
                 robotEncoded.stopBot(1);
+                robotEncoded.backward(3,700);
+                //purple pixel scored
+                robotEncoded.forward(3,700);
+                robotEncoded.strafeLeft(12,700);
+                robotEncoded.turnLeft(41,700);
+                robotEncoded.stopBot(0.5);
                 robotEncoded.armtoLowSetLine();
                 robotEncoded.backdropClawTilt();
-                robotEncoded.forward(20,700);
+                robotEncoded.forward(42,700);
                 robotEncoded.openClaw();
                 //yellow pixel scored
-                robotEncoded.stopBot(2);
+                robotEncoded.stopBot(1);
                 robotEncoded.closeClaw();
                 robotEncoded.backward(5,700);
 //                robotEncoded.retractTilt();
-                robotEncoded.lowerArm();
-                robotEncoded.strafeRight(10,700);
+                robotEncoded.armtoGround();
+                robotEncoded.strafeRight(17,700);
                 robotEncoded.forward(5,700);
                 //robot parked
 

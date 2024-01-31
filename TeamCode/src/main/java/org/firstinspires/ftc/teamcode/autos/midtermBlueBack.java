@@ -39,6 +39,7 @@ public class midtermBlueBack extends OpMode {
 
             case NONE:
             case MIDDLE:
+                robotEncoded.closeClaw();
                 robotEncoded.backward(30,800);
                 robotEncoded.forward(4,800);
                 //robotEncoded.raiseArm();
@@ -49,7 +50,7 @@ public class midtermBlueBack extends OpMode {
                 robotEncoded.openClaw();
                 robotEncoded.backward(2,800);
                 robotEncoded.strafeLeft(26,800);
-                robotEncoded.lowerArm();
+                robotEncoded.armtoGround();
                 robotEncoded.forward(12,800);
                 break;
 
@@ -63,10 +64,10 @@ public class midtermBlueBack extends OpMode {
                 robotEncoded.forward(5,900);
                 robotEncoded.stopBot(2);
                 //robotEncoded.tiltClaw();
-                robotEncoded.openClaw();
+                robotEncoded.closeClaw();
                 robotEncoded.backward(2, 900);
                 robotEncoded.strafeLeft(38,900);
-                robotEncoded.lowerArm();
+                robotEncoded.armtoGround();
                 robotEncoded.forward(12,900);
                 break;
 
