@@ -19,9 +19,9 @@ public class Teleop extends OpMode {
 
     @Override
     public void loop() {
-        double x = gamepad2.left_stick_x;
-        double y = -gamepad2.left_stick_y;
-        double r = gamepad2.right_stick_x;
+        double x = gamepad1.left_stick_x;
+        double y = -gamepad1.left_stick_y;
+        double r = gamepad1.right_stick_x;
 
         if (gamepad1.right_bumper) { // driver movements
             robotEncoded.frontLeft.setVelocity((y + x + r) * Constants.slowVal);
