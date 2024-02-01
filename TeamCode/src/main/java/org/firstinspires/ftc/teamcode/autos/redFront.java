@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
+
 @Autonomous(name="Red Front")
 public class redFront extends OpMode {
 
@@ -91,11 +92,12 @@ public class redFront extends OpMode {
 
                 break;
 
-
         }
     }
     @Override
     public void loop () {
 
+         
+
+        }
     }
-}
