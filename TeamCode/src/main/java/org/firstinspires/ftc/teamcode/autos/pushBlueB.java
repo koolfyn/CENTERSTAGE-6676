@@ -32,25 +32,25 @@ public class pushBlueB extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(28,700);
-                robotEncoded.turnLeft(20,900);
-                robotEncoded.forward(4,800);
-
+                robotEncoded.closeClaw();
+                robotEncoded.backward(23,800);
+                robotEncoded.strafeRight(12,800);
+                robotEncoded.backward(4,800);
+                robotEncoded.forward(8,500);
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(28,800);
-                robotEncoded.forward(6,800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(30,800);
+                robotEncoded.forward(4,800);
                 break;
 
             case RIGHT:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(25,800);
-                robotEncoded.turnRight(20,900);
-                robotEncoded.backward(2,700);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(29,800);
+                robotEncoded.turnRight(20,300);
+                robotEncoded.backward(3,700);
                 robotEncoded.forward(4,800);
                 break;
 

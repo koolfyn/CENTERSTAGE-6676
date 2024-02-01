@@ -32,6 +32,7 @@ public class redBack extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
+                robotEncoded.closeClaw();
                 robotEncoded.backward(28,700);
                 robotEncoded.turnLeft(24,700);
                 robotEncoded.backward(4,700);
@@ -56,6 +57,7 @@ public class redBack extends OpMode {
 
             case NONE:
             case MIDDLE:
+                robotEncoded.closeClaw();
                 robotEncoded.backward(28,700);
                 robotEncoded.forward(2,700);
                 robotEncoded.turnLeft(20,700);
@@ -79,6 +81,7 @@ public class redBack extends OpMode {
                 break;
 
             case RIGHT:
+                robotEncoded.closeClaw();
                 robotEncoded.backward(25,700);
                 robotEncoded.turnRight(20,700);
                 robotEncoded.backward(5,700);

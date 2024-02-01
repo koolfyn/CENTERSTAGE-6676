@@ -33,23 +33,31 @@ public class redFront extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                robotEncoded.backward(27, 700);
-                robotEncoded.turnLeft(24, 700);
-                robotEncoded.backward(5, 500);
-                robotEncoded.forward(5, 700);
-                robotEncoded.strafeRight(24, 700);
-                robotEncoded.forward(12, 700); // forward enough to pass into back
-                robotEncoded.armtoLowSetLine(); // raise when in back to avoid hitting truss
-                robotEncoded.forward(25, 700); // resume going to backdrop
-                robotEncoded.strafeLeft(15, 600);
-                robotEncoded.stopBot(2);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(34, 700);
+                robotEncoded.turnLeft(20, 700);
+                robotEncoded.backward(3, 500);
+                robotEncoded.forward(3, 700);
+                robotEncoded.strafeLeft(23, 700);
+                robotEncoded.forward(30, 700); // forward enough to pass into back
+                robotEncoded.forward(56, 700); // resume going to backdrop
+                robotEncoded.strafeRight(21, 700);
+               //. robotEncoded.turnLeft(1,750);
+                robotEncoded.stopBot(1);
+                robotEncoded.armScoreAuto(); // raise when in back to avoid hitting truss
                 robotEncoded.backdropClawTilt();
                 robotEncoded.openClaw();
+                robotEncoded.stopBot(1);
+                robotEncoded.backward(4,700);
+                robotEncoded.strafeLeft(23,700);
+                robotEncoded.armtoGround();
+                robotEncoded.forward(5,750);
 
                 break;
 
             case NONE:
             case MIDDLE:
+                robotEncoded.closeClaw();
                 robotEncoded.backward(31, 700);
                 robotEncoded.forward(28, 700);
                 robotEncoded.turnLeft(24, 700);
@@ -65,6 +73,7 @@ public class redFront extends OpMode {
                 break;
 
             case RIGHT:
+                robotEncoded.closeClaw();
                 robotEncoded.backward(27, 700);
                 robotEncoded.turnRight(24, 700);
                 robotEncoded.backward(5, 700);

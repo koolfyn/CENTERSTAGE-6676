@@ -60,18 +60,19 @@ public class Teleop extends OpMode {
         }
         if(gamepad2.x) {
             robotEncoded.armtoMidSetLine();
+            robotEncoded.clawTilt.setPosition(0.22);
         }
         if(gamepad2.b) {
             robotEncoded.armtoLowSetLine();
+            robotEncoded.backdropClawTilt();
         }
         if(gamepad2.a) {
             robotEncoded.armtoGround();
-        }
-        if(gamepad2.right_trigger > 0.5) {
             robotEncoded.backdropClawTilt();
         }
+
         if(gamepad2.left_trigger > 0.5) {
-            robotEncoded.tiltToGround();
+            robotEncoded.armScoreAuto();
         }
 
         if (gamepad2.right_stick_y > 0.1 && armHeight >= 0) { // manual arm control

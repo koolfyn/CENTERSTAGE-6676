@@ -33,6 +33,7 @@ public class blueFront extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
+                robotEncoded.closeClaw();
                 robotEncoded.backward(27, 700);
                 robotEncoded.turnLeft(24, 700);
                 robotEncoded.backward(5, 500);
@@ -41,31 +42,30 @@ public class blueFront extends OpMode {
                 robotEncoded.turnRight(48, 700);
                 robotEncoded.strafeLeft(24, 700);
                 robotEncoded.forward(12, 800); // forward enough to pass into back
-                robotEncoded.armtoLowSetLine(); // raise when in back to avoid hitting truss
+                robotEncoded.armScoreAuto();
                 robotEncoded.forward(35, 800); // resume going to backdrop
                 robotEncoded.strafeRight(9, 500);
                 robotEncoded.stopBot(1);
-                robotEncoded.backdropClawTilt();
                 robotEncoded.openClaw();
 
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.backward(31,700);
-                robotEncoded.forward(28, 700);
-                robotEncoded.turnRight(26, 700);
-                robotEncoded.forward(12, 800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(30,700);
+                robotEncoded.forward(27, 700);
+                robotEncoded.turnRight(20, 700);
+                robotEncoded.forward(67, 800);
                 robotEncoded.armtoLowSetLine();
-                robotEncoded.forward(35,800);
                 robotEncoded.strafeRight(14, 500);
                 robotEncoded.stopBot(2);
                 robotEncoded.backdropClawTilt();
                 robotEncoded.openClaw();
-
                 break;
 
             case RIGHT:
+                robotEncoded.closeClaw();
                 robotEncoded.backward(27,700);
                 robotEncoded.turnRight(24, 700);
                 robotEncoded.backward(5, 500);

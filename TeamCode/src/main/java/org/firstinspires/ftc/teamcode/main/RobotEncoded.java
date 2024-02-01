@@ -74,13 +74,14 @@ public class RobotEncoded {
     }
 
     public void armtoGround() {
+        clawTilt.setPosition(0.18);
         arm.setTargetPosition(Constants.ground);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
     public void armScoreAuto() {
-        clawTilt.setPosition(0.2);
-        arm.setTargetPosition(200);
+        clawTilt.setPosition(0.18);
+        arm.setTargetPosition(250);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
