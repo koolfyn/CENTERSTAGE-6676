@@ -78,14 +78,15 @@ public class blueBack extends OpMode {
                 robotEncoded.forward(34,900);
                 robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
-                robotEncoded.strafeRight(8,900);
-                robotEncoded.forward(5,900);
-                robotEncoded.stopBot(2);
+                robotEncoded.strafeRight(4,900);
+                robotEncoded.forward(9,900);
+                robotEncoded.stopBot(1);
                 robotEncoded.openClaw();
-                robotEncoded.backward(2, 900);
-                robotEncoded.strafeLeft(38,900);
+                robotEncoded.stopBot(1);
+                robotEncoded.backward(4, 900);
+                robotEncoded.strafeLeft(40,900);
                 robotEncoded.armtoGround();
-                robotEncoded.forward(12,900);
+                robotEncoded.forward(10,900);
                 break;
         }
     }
