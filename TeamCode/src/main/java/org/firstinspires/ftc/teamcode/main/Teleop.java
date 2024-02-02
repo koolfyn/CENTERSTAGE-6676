@@ -72,7 +72,7 @@ public class Teleop extends OpMode {
         }
 
         if(gamepad2.left_trigger > 0.5) {
-            robotEncoded.armScoreAuto();
+            robotEncoded.retractTilt();
         }
 
         if (gamepad2.right_stick_y > 0.1 && armHeight >= 0) { // manual arm control

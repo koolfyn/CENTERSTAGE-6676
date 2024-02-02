@@ -103,11 +103,9 @@ public class RobotEncoded {
         clawTilt.setPosition(0.4);
     }
 
-    public void parallelClawPosArm() {
-        clawTilt.setPosition(0.57);
-        arm.setTargetPosition(140);
-        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(1000);
+    public void retractTilt() {
+        clawTilt.setPosition(0);
+
     }
 
     public void armOffGround() {
@@ -116,12 +114,6 @@ public class RobotEncoded {
         arm.setVelocity(700);
     }
 
-//    public void lowerArm() {
-//        tiltToGround();
-//        arm.setTargetPosition(0);
-//        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        arm.setVelocity(700);
-//    }
 
     public void backdropClawTilt() {
         clawTilt.setPosition(0.18);

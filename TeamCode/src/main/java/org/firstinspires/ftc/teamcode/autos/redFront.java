@@ -40,12 +40,35 @@ public class redFront extends OpMode {
                 robotEncoded.backward(3, 500);
                 robotEncoded.forward(3, 700);
                 robotEncoded.strafeLeft(23, 700);
-                robotEncoded.forward(30, 700); // forward enough to pass into back
-                robotEncoded.forward(56, 700); // resume going to backdrop
-                robotEncoded.strafeRight(21, 700);
-               //. robotEncoded.turnLeft(1,750);
+                robotEncoded.forward(36, 700);
+                robotEncoded.armScoreAuto();
+                robotEncoded.forward(43, 700);
+                robotEncoded.strafeRight(21, 700); //apriltag scan placement
+                robotEncoded.forward(9,700);
+                // robotEncoded.forward(3,700);
                 robotEncoded.stopBot(1);
-                robotEncoded.armScoreAuto(); // raise when in back to avoid hitting truss
+                robotEncoded.backdropClawTilt();
+                robotEncoded.openClaw();
+                robotEncoded.stopBot(1);
+                robotEncoded.backward(5,700);
+                robotEncoded.armtoGround();
+                robotEncoded.strafeLeft(20,700);
+                robotEncoded.forward(15,750);
+
+                break;
+
+            case NONE:
+            case MIDDLE:
+                robotEncoded.closeClaw();
+                robotEncoded.backward(34, 700);
+                robotEncoded.forward(5, 700);
+                robotEncoded.strafeRight(10,700);
+                robotEncoded.backward(12,700);
+                robotEncoded.turnLeft(30,700); // to get claw front-facing
+                robotEncoded.forward(56, 800);
+                robotEncoded.strafeRight(25,700); // apriltag scan placement
+                robotEncoded.stopBot(1);
+                robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
                 robotEncoded.openClaw();
                 robotEncoded.stopBot(1);
@@ -56,39 +79,26 @@ public class redFront extends OpMode {
 
                 break;
 
-            case NONE:
-            case MIDDLE:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(31, 700);
-                robotEncoded.forward(28, 700);
-                robotEncoded.turnLeft(24, 700);
-                robotEncoded.stopBot(2);
-                robotEncoded.forward(12, 700);
-                robotEncoded.armtoLowSetLine();
-                robotEncoded.forward(25, 700);
-                robotEncoded.strafeLeft(12, 600);
-                robotEncoded.stopBot(1);
-                robotEncoded.backdropClawTilt();
-                robotEncoded.openClaw();
-
-                break;
-
             case RIGHT:
                 robotEncoded.closeClaw();
-                robotEncoded.backward(27, 700);
-                robotEncoded.turnRight(24, 700);
-                robotEncoded.backward(5, 700);
-                robotEncoded.forward(5, 600);
-                robotEncoded.strafeLeft(24, 700);
-                robotEncoded.turnRight(48, 700);
-                robotEncoded.stopBot(2);
-                robotEncoded.forward(12, 700);
-                robotEncoded.armtoLowSetLine();
-                robotEncoded.forward(25, 700);
-                robotEncoded.strafeLeft(9, 700);
+                robotEncoded.backward(34, 700);
+                robotEncoded.turnRight(20, 700);
+                robotEncoded.backward(3, 500);
+                robotEncoded.forward(3, 700);
+                robotEncoded.strafeRight(23, 700);
+                robotEncoded.turnRight(40,700); // to get claw front-facing
+                robotEncoded.forward(30, 700);
+                robotEncoded.forward(56, 700);
+                robotEncoded.strafeRight(21, 700); // apriltag scan placement
                 robotEncoded.stopBot(1);
+                robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
                 robotEncoded.openClaw();
+                robotEncoded.stopBot(1);
+                robotEncoded.backward(4,700);
+                robotEncoded.strafeLeft(23,700);
+                robotEncoded.armtoGround();
+                robotEncoded.forward(5,750);
 
                 break;
 
@@ -97,7 +107,7 @@ public class redFront extends OpMode {
     @Override
     public void loop () {
 
-         
 
-        }
+
     }
+}

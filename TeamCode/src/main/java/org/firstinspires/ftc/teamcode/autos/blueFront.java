@@ -56,12 +56,18 @@ public class blueFront extends OpMode {
                 robotEncoded.backward(30,700);
                 robotEncoded.forward(27, 700);
                 robotEncoded.turnRight(20, 700);
-                robotEncoded.forward(67, 800);
-                robotEncoded.armtoLowSetLine();
-                robotEncoded.strafeRight(14, 500);
-                robotEncoded.stopBot(2);
+                robotEncoded.forward(84, 800);
+                robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
+                robotEncoded.strafeRight(20, 500);
+                robotEncoded.forward(7,800);
+                robotEncoded.stopBot(1);
                 robotEncoded.openClaw();
+                robotEncoded.stopBot(1);
+                robotEncoded.backward(4,800);
+                robotEncoded.strafeLeft(18,800);
+                robotEncoded.armtoGround();
+                robotEncoded.forward(10,800);
                 break;
 
             case RIGHT:

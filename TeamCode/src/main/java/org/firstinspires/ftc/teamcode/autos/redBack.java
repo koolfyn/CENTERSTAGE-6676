@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="midterm RED BACK")
+@Autonomous(name="Red Back")
 public class redBack extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
@@ -33,24 +33,24 @@ public class redBack extends OpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 robotEncoded.closeClaw();
-                robotEncoded.backward(28,700);
-                robotEncoded.turnLeft(24,700);
-                robotEncoded.backward(4,700);
+                robotEncoded.backward(28,600);
+                robotEncoded.turnLeft(20,500);
+                robotEncoded.backward(3,600);
+                robotEncoded.forward(2,600);
                 //purple scored
-                robotEncoded.strafeLeft(5,700);
-                robotEncoded.stopBot(1);
-                robotEncoded.armtoLowSetLine();
+                robotEncoded.strafeLeft(8,700);
+                robotEncoded.stopBot(0.5);
+                robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
-                robotEncoded.forward(20,700);
+                robotEncoded.forward(40,700);
                 robotEncoded.openClaw();
+                robotEncoded.stopBot(1);
+                robotEncoded.backward(10,700);
                 //yellow pixel scored
-                robotEncoded.stopBot(2);
                 robotEncoded.closeClaw();
-                robotEncoded.backward(5,700);
-//                robotEncoded.retractTilt();
                 robotEncoded.armtoGround();
-                robotEncoded.strafeRight(10,700);
-                robotEncoded.forward(5,700);
+                robotEncoded.strafeRight(32,700);
+                robotEncoded.forward(18,700);
                 //robot parked
 
                 break;
@@ -58,50 +58,49 @@ public class redBack extends OpMode {
             case NONE:
             case MIDDLE:
                 robotEncoded.closeClaw();
-                robotEncoded.backward(28,700);
-                robotEncoded.forward(2,700);
-                robotEncoded.turnLeft(20,700);
-                //purple scored
-                robotEncoded.strafeRight(5,700);
+                robotEncoded.backward(31,600);
+                robotEncoded.forward(3,700);
+                robotEncoded.turnLeft(20,400);
                 robotEncoded.stopBot(1);
-                robotEncoded.armtoLowSetLine();
+                //purple scored
+                robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
-                robotEncoded.forward(20,700);
+                robotEncoded.forward(40,700);
                 robotEncoded.openClaw();
+                robotEncoded.stopBot(0.8);
                 //yellow scored
-                robotEncoded.stopBot(2);
+                robotEncoded.backward(10,700);
                 robotEncoded.closeClaw();
-                robotEncoded.backward(5,700);
-                robotEncoded.backdropClawTilt();
                 robotEncoded.armtoGround();
-                robotEncoded.strafeRight(20,700);
-                robotEncoded.forward(10,700);
+                robotEncoded.strafeRight(27,700);
+                robotEncoded.forward(15,700);
                 //park
 
                 break;
 
             case RIGHT:
                 robotEncoded.closeClaw();
-                robotEncoded.backward(25,700);
-                robotEncoded.turnRight(20,700);
-                robotEncoded.backward(5,700);
-                //purple pixel scored
-                robotEncoded.forward(5,700);
-                robotEncoded.turnLeft(20,700);
-                robotEncoded.strafeRight(15,700);
+                robotEncoded.backward(20,500);
+                robotEncoded.strafeLeft(12,500);
                 robotEncoded.stopBot(1);
-                robotEncoded.armtoLowSetLine();
+                robotEncoded.backward(1,400);
+                robotEncoded.forward(5,600);
+                //purple pixel scored
+                robotEncoded.strafeLeft(16,700);
+                robotEncoded.backward(4,600);
+                robotEncoded.turnLeft(21,700);
+                robotEncoded.stopBot(1);
+                robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
-                robotEncoded.forward(20,700);
+                robotEncoded.forward(18,700);
                 robotEncoded.openClaw();
                 //yellow pixel scored
-                robotEncoded.stopBot(2);
+                robotEncoded.stopBot(1);
+                robotEncoded.backward(10,700);
                 robotEncoded.closeClaw();
-                robotEncoded.backward(5,700);
-//                robotEncoded.retractTilt();
                 robotEncoded.armtoGround();
-                robotEncoded.strafeRight(10,700);
-                robotEncoded.forward(5,700);
+                robotEncoded.strafeRight(18,700);
+                robotEncoded.forward(15,700);
                 //robot parked
 
                 break;
