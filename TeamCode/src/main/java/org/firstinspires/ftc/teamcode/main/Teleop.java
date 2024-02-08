@@ -44,31 +44,28 @@ public class Teleop extends OpMode {
             slideLeftHeight = Constants.suspendHeight;
             slideRightHeight = -Constants.suspendHeight;
         } else if (gamepad2.dpad_down) {
-
             slideLeftHeight = 0;
             slideRightHeight = 0;
         }
 
         if (gamepad2.left_bumper) { // open claw
-            robotEncoded.claw.setPosition(0.7);
+            robotEncoded.openClaw();
         } else if (gamepad2.right_bumper) { // close claw
-            robotEncoded.claw.setPosition(0);
+            robotEncoded.closeClaw();
         }
 
-        if(gamepad2.y) { // arm control
-            robotEncoded.armtoHighSetLine();
+        if(gamepad2.y) { // arm to pixel stack
+            robotEncoded.armtoPixelStack();
         }
+
         if(gamepad2.x) {
             robotEncoded.armtoMidSetLine();
-            robotEncoded.clawTilt.setPosition(0.22);
         }
         if(gamepad2.b) {
             robotEncoded.armtoLowSetLine();
-            robotEncoded.backdropClawTilt();
         }
         if(gamepad2.a) {
             robotEncoded.armtoGround();
-            robotEncoded.backdropClawTilt();
         }
 
         if(gamepad2.left_trigger > 0.5) {

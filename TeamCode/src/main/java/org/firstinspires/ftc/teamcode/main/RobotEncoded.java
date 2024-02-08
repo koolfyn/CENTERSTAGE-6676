@@ -67,8 +67,6 @@ public class RobotEncoded {
         claw.setPosition(0);
     }
 
-//    public void raiseArm() {
-//        arm.setTargetPosition(490);
     public void closeClaw() {
         claw.setPosition(0.7);
     }
@@ -80,47 +78,41 @@ public class RobotEncoded {
         arm.setVelocity(1000);
     }
     public void armScoreAuto() {
-        clawTilt.setPosition(0.18);
-        arm.setTargetPosition(250);
+        clawTilt.setPosition(0.17);
+        arm.setTargetPosition(260);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
 
     public void armtoLowSetLine() {
+        clawTilt.setPosition(0.18);
         arm.setTargetPosition(Constants.lowSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
+
     public void armtoMidSetLine() {
         arm.setTargetPosition(Constants.medSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
+        clawTilt.setPosition(0.22);
     }
-    public void armtoHighSetLine() {
-        arm.setTargetPosition(Constants.highSetLine);
+
+    public void armtoPixelStack() {
+        arm.setTargetPosition(200);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
-        clawTilt.setPosition(0.4);
+        clawTilt.setPosition(0.1);
     }
 
     public void retractTilt() {
         clawTilt.setPosition(0);
-
     }
 
-    public void armOffGround() {
-        arm.setTargetPosition(200);
-        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(700);
-    }
-
-
-    public void backdropClawTilt() {
-        clawTilt.setPosition(0.18);
-    }
+    public void backdropClawTilt() { clawTilt.setPosition(0.18); }
 
     public void tiltToGround() {
-        clawTilt.setPosition(0.85);
+        clawTilt.setPosition(0.19);
     }
 
     public void setSlidePosition(double velocity, double distanceInches) {
