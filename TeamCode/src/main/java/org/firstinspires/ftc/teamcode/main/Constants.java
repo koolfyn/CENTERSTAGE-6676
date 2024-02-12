@@ -7,7 +7,7 @@ public class Constants {
     public static final double fastVal = 1700;
 
     // arm setpoints based on ticks
-    public static final int lowSetLine = 390;
+    public static final int lowSetLine = 150;
     public static final int medSetLine = 500;
     public static final int highSetLine = 600;
     public static final int ground = 0;

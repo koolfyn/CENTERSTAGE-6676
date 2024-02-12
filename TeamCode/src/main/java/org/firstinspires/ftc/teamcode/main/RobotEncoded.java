@@ -72,10 +72,10 @@ public class RobotEncoded {
     }
 
     public void armtoGround() {
-        clawTilt.setPosition(0.18);
+        clawTilt.setPosition(0.17);
         arm.setTargetPosition(Constants.ground);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(1000);
+        arm.setVelocity(500);
     }
     public void armScoreAuto() {
         clawTilt.setPosition(0.17);
@@ -85,7 +85,7 @@ public class RobotEncoded {
     }
 
     public void armtoLowSetLine() {
-        clawTilt.setPosition(0.18);
+        clawTilt.setPosition(0);
         arm.setTargetPosition(Constants.lowSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
@@ -95,14 +95,14 @@ public class RobotEncoded {
         arm.setTargetPosition(Constants.medSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
-        clawTilt.setPosition(0.22);
+        clawTilt.setPosition(0.16);
     }
 
     public void armtoPixelStack() {
-        arm.setTargetPosition(200);
+        arm.setTargetPosition(106);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
-        clawTilt.setPosition(0.1);
+        clawTilt.setPosition(0.15);
     }
 
     public void retractTilt() {
