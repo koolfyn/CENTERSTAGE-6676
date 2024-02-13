@@ -45,13 +45,13 @@ public class pushBlueF extends OpMode {
             case MIDDLE:
                 robotEncoded.closeClaw();
                 robotEncoded.backward(30,700);
-                robotEncoded.forward(27, 700);
+                robotEncoded.forward(24, 700);
                 break;
 
             case RIGHT:
                 robotEncoded.closeClaw();
-                robotEncoded.backward(28,700);
-                robotEncoded.turnRight(20, 700);
+                robotEncoded.backward(23,700);
+                robotEncoded.strafeLeft(13, 700);
                 robotEncoded.backward(3, 500);
                 robotEncoded.forward(5, 700);
                 break;

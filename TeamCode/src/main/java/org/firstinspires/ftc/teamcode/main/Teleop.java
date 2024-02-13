@@ -71,6 +71,10 @@ public class Teleop extends OpMode {
         if(gamepad2.left_trigger > 0.5) {
             robotEncoded.retractTilt();
         }
+        if(gamepad2.right_trigger > 0.5) {
+            robotEncoded.armScoreAuto();
+        }
+
 
         if (gamepad2.right_stick_y > 0.1 && armHeight >= 0) { // manual arm control
             armHeight = robotEncoded.arm.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
