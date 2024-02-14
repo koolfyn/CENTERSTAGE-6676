@@ -63,57 +63,56 @@ public class RobotEncoded {
         claw.scaleRange(0,1);
     }
 
-    public void closeClaw() {
-        claw.setPosition(0.6);
-    }
-
-//    public void raiseArm() {
-//        arm.setTargetPosition(490);
     public void openClaw() {
         claw.setPosition(0);
     }
 
+    public void closeClaw() {
+        claw.setPosition(0.7);
+    }
+
     public void armtoGround() {
+        clawTilt.setPosition(0.35);
         arm.setTargetPosition(Constants.ground);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(500);
+    }
+    public void armScoreAuto() {
+        clawTilt.setPosition(0.2);
+        arm.setTargetPosition(90);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
+
     public void armtoLowSetLine() {
+        clawTilt.setPosition(0.2);
         arm.setTargetPosition(Constants.lowSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
+
     public void armtoMidSetLine() {
         arm.setTargetPosition(Constants.medSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
+        clawTilt.setPosition(0.3);
     }
-    public void armtoHighSetLine() {
-        arm.setTargetPosition(Constants.highSetLine);
+
+    public void armtoPixelStack() {
+        arm.setTargetPosition(80);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
-        clawTilt.setPosition(0.4);
+        clawTilt.setPosition(0.35);
     }
 
-    public void parallelClawPosArm() {
-        clawTilt.setPosition(0.57);
-        arm.setTargetPosition(140);
-        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(1000);
+    public void retractTilt() {
+        clawTilt.setPosition(0.2);
     }
 
-    public void armOffGround() {
-        arm.setTargetPosition(200);
-        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(700);
-    }
-
-    public void backdropClawTilt() {
-        clawTilt.setPosition(0.18);
-    }
+    public void backdropClawTilt() { clawTilt.setPosition(0.18); }
 
     public void tiltToGround() {
-        clawTilt.setPosition(0.85);
+        clawTilt.setPosition(0.19);
     }
 
     public void setSlidePosition(double velocity, double distanceInches) {
@@ -241,7 +240,7 @@ public class RobotEncoded {
         backRight.setVelocity(0);
     }
 
-    public void turnLeft(int distanceInches, double velocity) {
+    public void turnLeft(double distanceInches, double velocity) {
         frontLeft.setTargetPosition(frontLeft.getCurrentPosition() + (int) (-distanceInches * TICKS_PER_INCH));
         frontRight.setTargetPosition(frontRight.getCurrentPosition() + (int) (distanceInches * TICKS_PER_INCH));
         backRight.setTargetPosition(backRight.getCurrentPosition() + (int) (distanceInches * TICKS_PER_INCH));
@@ -266,7 +265,7 @@ public class RobotEncoded {
         backRight.setVelocity(0);
     }
 
-    public void turnRight(int distanceInches, double velocity) {
+    public void turnRight(double distanceInches, double velocity) {
         frontLeft.setTargetPosition(frontLeft.getCurrentPosition() + (int) (distanceInches * TICKS_PER_INCH));
         frontRight.setTargetPosition(frontRight.getCurrentPosition() + (int) (-distanceInches * TICKS_PER_INCH));
         backRight.setTargetPosition(backRight.getCurrentPosition() + (int) (-distanceInches * TICKS_PER_INCH));

@@ -8,8 +8,10 @@ import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="midterm push RED BACK")
-public class pushMidRedB extends OpMode {
+
+@Autonomous(name="PUSH Blue Front")
+public class pushBlueF extends OpMode {
+
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private RobotEncoded robotEncoded;
@@ -25,40 +27,39 @@ public class pushMidRedB extends OpMode {
     public void init_loop() {
         telemetry.addData("Identified", visionProcessor.getSelection());
     }
-
     @Override
     public void start() {
         visionPortal.stopStreaming();
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(28,700);
-                robotEncoded.turnLeft(20,800);
-                robotEncoded.forward(4,800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(29, 700);
+                robotEncoded.turnLeft(20, 700);
+                robotEncoded.backward(3, 500);
+                robotEncoded.forward(5, 700);
+
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(28,800);
-                robotEncoded.forward(6,800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(30,700);
+                robotEncoded.forward(24, 700);
                 break;
 
             case RIGHT:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(25,800);
-                robotEncoded.turnRight(20,900);
-                robotEncoded.backward(2,700);
-                robotEncoded.forward(4,800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(23,700);
+                robotEncoded.strafeLeft(13, 700);
+                robotEncoded.backward(3, 500);
+                robotEncoded.forward(5, 700);
                 break;
 
         }
     }
-
     @Override
     public void loop() {
 
     }
-
 }

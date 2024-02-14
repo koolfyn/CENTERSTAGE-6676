@@ -8,8 +8,8 @@ import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="midterm push BLUE BACK")
-public class pushMidBlueB extends OpMode {
+@Autonomous (name="push Red Front")
+public class pushRedF extends OpMode{
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private RobotEncoded robotEncoded;
@@ -18,9 +18,9 @@ public class pushMidBlueB extends OpMode {
     public void init() {
         robotEncoded = new RobotEncoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
-        visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
-    }
+        visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"),visionProcessor);;
 
+    }
     @Override
     public void init_loop() {
         telemetry.addData("Identified", visionProcessor.getSelection());
@@ -32,34 +32,35 @@ public class pushMidBlueB extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(28,700);
-                robotEncoded.turnLeft(20,900);
-                robotEncoded.forward(4,800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(33, 700);
+                robotEncoded.turnLeft(20, 350);
+                robotEncoded.backward(2, 700);
+                robotEncoded.forward(3, 700);
 
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(28,800);
-                robotEncoded.forward(6,800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(31, 500);
+                robotEncoded.forward(8, 700);
+
                 break;
 
             case RIGHT:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(25,800);
-                robotEncoded.turnRight(20,900);
-                robotEncoded.backward(2,700);
-                robotEncoded.forward(4,800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(34, 700);
+                robotEncoded.turnRight(20, 350);
+                robotEncoded.backward(3, 500);
+                robotEncoded.forward(4, 700);
+
                 break;
 
         }
-    }
 
+    }
     @Override
-    public void loop() {
-
+    public void loop () {
     }
-
 }
