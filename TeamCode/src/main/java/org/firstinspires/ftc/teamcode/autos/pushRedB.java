@@ -34,26 +34,30 @@ public class pushRedB extends OpMode {
             case LEFT:
                 robotEncoded.closeClaw();
                 robotEncoded.backward(28,600);
-                robotEncoded.turnLeft(20,500);
+                robotEncoded.turnLeft(20,700);
                 robotEncoded.backward(3,600);
                 robotEncoded.forward(2,600);
+                //purple scored
                 break;
 
             case NONE:
             case MIDDLE:
                 robotEncoded.closeClaw();
                 robotEncoded.backward(31,600);
-                robotEncoded.forward(3,700);
-                robotEncoded.turnLeft(20,400);
+                robotEncoded.retractTilt();
+                robotEncoded.forward(4,700);
+                robotEncoded.turnLeft(19.5,400);
+                //purple scored
                 break;
 
             case RIGHT:
                 robotEncoded.closeClaw();
-                robotEncoded.backward(20,500);
-                robotEncoded.strafeLeft(13,500);
+                robotEncoded.backward(20,700);
+                robotEncoded.retractTilt();
+                robotEncoded.strafeLeft(13,600);
                 robotEncoded.stopBot(1);
-                robotEncoded.backward(1,400);
-                robotEncoded.forward(3,600);
+                robotEncoded.backward(1,700);
+                robotEncoded.forward(3,700);
                 break;
 
         }
