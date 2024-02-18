@@ -94,26 +94,23 @@ public class Teleop extends OpMode {
             robotEncoded.slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robotEncoded.slideRight.setVelocity(1000);
         }
-        
+
         if(difference1 >= 30) {
             robotEncoded.slideLeft.setTargetPosition((int)(slideLeftHeight * RobotEncoded.TICKS_PER_INCH_LS));
             robotEncoded.slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robotEncoded.slideLeft.setVelocity(1000);
         }
 
-            telemetry.addData("claw tilt cur pos", robotEncoded.clawTilt.getPosition());
-            telemetry.addData("claw tilt target pos", robotEncoded.clawTilt.getPosition());
-            telemetry.addData("arm target position", robotEncoded.arm.getTargetPosition());
-            telemetry.addData("arm velocity",robotEncoded.arm.getVelocity());
-            telemetry.addData("arm curr pos", robotEncoded.arm.getCurrentPosition());
-            telemetry.update();
+        telemetry.addData("claw tilt cur pos", robotEncoded.clawTilt.getPosition());
+        telemetry.addData("claw tilt target pos", robotEncoded.clawTilt.getPosition());
+        telemetry.addData("arm target position", robotEncoded.arm.getTargetPosition());
+        telemetry.addData("arm velocity",robotEncoded.arm.getVelocity());
+        telemetry.addData("arm curr pos", robotEncoded.arm.getCurrentPosition());
+        telemetry.update();
 
-            telemetry.addLine("Left joystick | ")
-                    .addData("x", gamepad1.left_stick_x)
-                    .addData("y", gamepad1.left_stick_y);
-            telemetry.addData("servo pos", robotEncoded.claw.getPosition());
-        }
+        telemetry.addLine("Left joystick | ")
+                .addData("x", gamepad1.left_stick_x)
+                .addData("y", gamepad1.left_stick_y);
+        telemetry.addData("servo pos", robotEncoded.claw.getPosition());
     }
-
-
-
+}
