@@ -21,6 +21,7 @@ public class RobotEncoded {
     Telemetry telemetry;
     Servo claw;
     Servo clawTilt;
+    Servo droneLauncher;
 
     static final double TICKS_PER_MOTOR_ROTATION = 537.7;
     static final double GEAR_REDUCTION = 1;
@@ -43,6 +44,7 @@ public class RobotEncoded {
         claw = hardwareMap.get(Servo.class,"claw");
         clawTilt = hardwareMap.get(Servo.class,"clawTilt");
         arm = hardwareMap.get(DcMotorEx.class,"arm");
+        droneLauncher = hardwareMap.get(Servo.class,"drone");
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -85,7 +87,7 @@ public class RobotEncoded {
     }
 
     public void armtoLowSetLine() {
-        clawTilt.setPosition(0.2);
+        clawTilt.setPosition(0.20);
         arm.setTargetPosition(Constants.lowSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
@@ -95,14 +97,20 @@ public class RobotEncoded {
         arm.setTargetPosition(Constants.medSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
-        clawTilt.setPosition(0.3);
+        clawTilt.setPosition(0.36);
     }
 
     public void armtoPixelStack() {
-        arm.setTargetPosition(80);
+        arm.setTargetPosition(65);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
-        clawTilt.setPosition(0.35);
+        clawTilt.setPosition(0.37);
+    }
+
+    public void launchDrone() {
+        armtoGround();
+        stopBot(1);
+        droneLauncher.setPosition(0.5);
     }
 
     public void retractTilt() {

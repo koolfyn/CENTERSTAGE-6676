@@ -68,11 +68,11 @@ public class Teleop extends OpMode {
             robotEncoded.armtoGround();
         }
 
-        if(gamepad2.left_trigger > 0.5) {
-            robotEncoded.retractTilt();
-        }
         if(gamepad2.right_trigger > 0.5) {
             robotEncoded.armScoreAuto();
+        }
+        if(gamepad1.x) {
+            robotEncoded.launchDrone();
         }
 
 
