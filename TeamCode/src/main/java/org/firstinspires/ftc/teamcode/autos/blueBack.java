@@ -36,7 +36,7 @@ public class blueBack extends OpMode {
                 robotEncoded.backward(23,800);
                 robotEncoded.strafeRight(12.5,800);
                 robotEncoded.backward(4,800);
-                robotEncoded.forward(6,500);
+                robotEncoded.forward(7,500);
                 robotEncoded.turnRight(20,800);
                 robotEncoded.armScoreAuto();
                 robotEncoded.forward(27,800);
