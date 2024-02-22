@@ -19,7 +19,8 @@ public class RobotEncoded {
     DcMotorEx slideRight;
     DcMotorEx arm;
     Telemetry telemetry;
-    Servo claw;
+    Servo clawBottom;
+    Servo clawTop;
     Servo clawTilt;
     Servo droneLauncher;
 
@@ -41,7 +42,8 @@ public class RobotEncoded {
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
         slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
         slideRight = hardwareMap.get(DcMotorEx.class,"slideRight");
-        claw = hardwareMap.get(Servo.class,"claw");
+        clawBottom = hardwareMap.get(Servo.class,"clawBottom");
+        clawTop = hardwareMap.get(Servo.class,"clawTop");
         clawTilt = hardwareMap.get(Servo.class,"clawTilt");
         arm = hardwareMap.get(DcMotorEx.class,"arm");
         droneLauncher = hardwareMap.get(Servo.class,"drone");
@@ -62,15 +64,20 @@ public class RobotEncoded {
 //        arm.setDirection(DcMotorSimple.Direction.REVERSE);
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        claw.scaleRange(0,1);
+        clawBottom.scaleRange(0,1);
+        clawTop.scaleRange(0,1);
     }
 
-    public void openClaw() {
-        claw.setPosition(0);
+    public void openBottomClaw() {
+        clawBottom.setPosition(0);
+    }
+    public void openTopClaw() {
+        clawTop.setPosition(0);
     }
 
     public void closeClaw() {
-        claw.setPosition(0.7);
+        clawBottom.setPosition(0.7);
+        clawTop.setPosition(0.7);
     }
 
     public void armtoGround() {
