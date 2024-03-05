@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 
-@Autonomous(name = "test roadrunner1")
+@Autonomous(name = "red front")
 public class testRoadRunner extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
@@ -40,7 +40,7 @@ public class testRoadRunner extends OpMode {
                 .lineTo(new Vector2d(1,1))
                 .build();
 
-        TrajectorySequence l = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence frontL = drive.trajectorySequenceBuilder(startPose)
                 .lineTo(new Vector2d(-47,-52))
                 .waitSeconds(2)
                 .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
@@ -62,26 +62,71 @@ public class testRoadRunner extends OpMode {
                 .addTemporalMarker(8,()-> {robotEncoded.armtoGround();})
                 .addTemporalMarker(9,()-> {robotEncoded.openClaw();})
                 .build();
+
+        TrajectorySequence frontM = drive.trajectorySequenceBuilder(startPose)
+                .lineTo(new Vector2d(-37,-41))
+                //purple dropped
+                .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
+                .waitSeconds(1)
+                .splineTo(new Vector2d(10,-59),Math.toRadians(0))
+                .splineTo(new Vector2d(48,-35),Math.toRadians(0))
+                .waitSeconds(1)
+                //yellow dropped
+                .setReversed(true)
+                .splineTo(new Vector2d(10,-59),Math.toRadians(180))
+                .splineTo(new Vector2d(-35,-59),Math.toRadians(180))
+                .setReversed(false)
+                .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
+                .build();
+
+        TrajectorySequence frontR =drive.trajectorySequenceBuilder(startPose)
+                .lineToSplineHeading(new Pose2d(-38,-48,Math.toRadians(45)))
+                //purple dropped
+                .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
+                .waitSeconds(1)
+                .splineTo(new Vector2d(10,-59),Math.toRadians(0))
+                .splineTo(new Vector2d(48,-40),Math.toRadians(0))
+                .waitSeconds(1)
+                //yellow dropped
+                .setReversed(true)
+                .splineTo(new Vector2d(10,-59),Math.toRadians(180))
+                .splineTo(new Vector2d(-35,-59),Math.toRadians(180))
+                .setReversed(false)
+                .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
+                .build();
+
+        TrajectorySequence backL =drive.trajectorySequenceBuilder(startPose)
+
+                .build();
+        TrajectorySequence backM =drive.trajectorySequenceBuilder(startPose)
+
+                .build();
+        TrajectorySequence backR =drive.trajectorySequenceBuilder(startPose)
+                .lineToSplineHeading(new Pose2d(23.5,-54,Math.toRadians(90)))
+                //purple dropped
+                .waitSeconds(1)
+                .lineToSplineHeading(new Pose2d(48,-42,Math.toRadians(0)))
+                .waitSeconds(1)
+                //yellow dropped
+                .build();
         visionPortal.stopStreaming();
 
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
              // remember to create a start pose before trajectory creation and name them appropriately
-                //drive.followTrajectorySequence(l);
-                drive.followTrajectory(a);
+                drive.followTrajectorySequence(frontL);
+                //drive.followTrajectory(a);
                 break;
 
             case NONE:
             case MIDDLE:
-                TrajectorySequence m = drive.trajectorySequenceBuilder(startPose)
-                        .waitSeconds(3) // Waits 3 seconds
-                        .build();
+                drive.followTrajectorySequence(frontM);
 
                 break;
 
             case RIGHT:
-
+                drive.followTrajectorySequence(frontR);
                 break;
         }
     }

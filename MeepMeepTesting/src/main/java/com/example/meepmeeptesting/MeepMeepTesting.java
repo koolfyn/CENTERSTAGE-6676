@@ -14,21 +14,19 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-35, -61.5, Math.toRadians(90)))
-                                .lineTo(new Vector2d(-47,-52))
+                        drive.trajectorySequenceBuilder(new Pose2d(12, -61.5, Math.toRadians(90)))
+                                .lineToSplineHeading(new Pose2d(15,-47,Math.toRadians(135)))
                                 //purple dropped
-                                .lineToSplineHeading(new Pose2d(-35,-59,Math.toRadians(0)))
-                                .waitSeconds(1)
-                                .splineTo(new Vector2d(10,-59),Math.toRadians(0))
-                                .splineTo(new Vector2d(48,-31),Math.toRadians(0))
+                                .lineToSplineHeading(new Pose2d(48,-31,Math.toRadians(0)))
                                 .waitSeconds(1)
                                 //yellow dropped
-                                .setReversed(true)
-                                .splineTo(new Vector2d(10,-59),Math.toRadians(180))
-                                .splineTo(new Vector2d(-35,-59),Math.toRadians(180))
-                                .setReversed(false)
-                                .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
+//                                .setReversed(true)
+//                                .splineTo(new Vector2d(10,-59),Math.toRadians(180))
+//                                .splineTo(new Vector2d(-35,-59),Math.toRadians(180))
+//                                .setReversed(false)
+//                                .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
                                 .build()
+
                 );
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
