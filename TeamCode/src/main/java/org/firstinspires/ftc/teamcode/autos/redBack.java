@@ -43,7 +43,7 @@ public class redBack extends OpMode {
                 robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
                 robotEncoded.forward(40,700);
-                robotEncoded.openClaw();
+                robotEncoded.openTopClaw();
                 robotEncoded.stopBot(1);
                 robotEncoded.backward(16,700);
                 //yellow pixel scored
@@ -68,7 +68,7 @@ public class redBack extends OpMode {
                 robotEncoded.armScoreAuto();
                 robotEncoded.backdropClawTilt();
                 robotEncoded.forward(41,700);
-                robotEncoded.openClaw();
+                robotEncoded.openTopClaw();
                 robotEncoded.stopBot(0.8);
                 //yellow scored
                 robotEncoded.backward(10,700);
@@ -95,7 +95,7 @@ public class redBack extends OpMode {
                 robotEncoded.stopBot(1);
                 robotEncoded.armScoreAuto();
                 robotEncoded.forward(15,700);
-                robotEncoded.openClaw();
+                robotEncoded.openTopClaw();
                 //yellow pixel scored
                 robotEncoded.stopBot(1);
                 robotEncoded.backward(12,700);

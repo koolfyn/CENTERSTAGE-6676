@@ -69,15 +69,15 @@ public class RobotEncoded {
     }
 
     public void openBottomClaw() {
-        clawBottom.setPosition(0);
+        clawBottom.setPosition(0.7);
     }
     public void openTopClaw() {
-        clawTop.setPosition(0);
+        clawTop.setPosition(0.7);
     }
 
     public void closeClaw() {
-        clawBottom.setPosition(0.7);
-        clawTop.setPosition(0.7);
+        clawBottom.setPosition(0);
+        clawTop.setPosition(0);
     }
 
     public void armtoGround() {

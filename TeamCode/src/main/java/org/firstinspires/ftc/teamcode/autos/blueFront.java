@@ -46,7 +46,7 @@ public class blueFront extends OpMode {
                 robotEncoded.forward(35, 800); // resume going to backdrop
                 robotEncoded.strafeRight(9, 500);
                 robotEncoded.stopBot(1);
-                robotEncoded.openClaw();
+                robotEncoded.openTopClaw();
 
                 break;
 
@@ -62,7 +62,7 @@ public class blueFront extends OpMode {
                 robotEncoded.strafeRight(20, 500);
                 robotEncoded.forward(7,800);
                 robotEncoded.stopBot(1);
-                robotEncoded.openClaw();
+                robotEncoded.openTopClaw();
                 robotEncoded.stopBot(1);
                 robotEncoded.backward(4,800);
                 robotEncoded.strafeLeft(18,800);
@@ -84,7 +84,7 @@ public class blueFront extends OpMode {
                 robotEncoded.strafeRight(19, 500);
                 robotEncoded.stopBot(1);
                 robotEncoded.backdropClawTilt();
-                robotEncoded.openClaw();
+                robotEncoded.openTopClaw();
 
                 break;
 
