@@ -40,41 +40,46 @@ public class Teleop extends OpMode {
             robotEncoded.backRight.setVelocity((y + x - r) * Constants.defaultVal);
         }
 
-        if (gamepad2.dpad_up) { // suspend
+        if (gamepad1.dpad_up) { // suspend
             slideLeftHeight = Constants.suspendHeight;
             slideRightHeight = -Constants.suspendHeight;
-        } else if (gamepad2.dpad_down) {
+        } else if (gamepad1.dpad_down) {
             slideLeftHeight = 0;
             slideRightHeight = 0;
-        }
-
-        if (gamepad2.left_bumper) { // open claw
-            robotEncoded.openClaw();
-        } else if (gamepad2.right_bumper) { // close claw
-            robotEncoded.closeClaw();
-        }
-
-        if(gamepad2.y) { // arm to pixel stack
-            robotEncoded.armtoPixelStack();
-        }
-
-        if(gamepad2.x) {
-            robotEncoded.armtoMidSetLine();
-        }
-        if(gamepad2.b) {
-            robotEncoded.armtoLowSetLine();
-        }
-        if(gamepad2.a) {
-            robotEncoded.armtoGround();
-        }
-
-        if(gamepad2.right_trigger > 0.5) {
-            robotEncoded.armScoreAuto();
         }
         if(gamepad1.x) {
             robotEncoded.launchDrone();
         }
 
+        if (gamepad2.left_bumper) { // open top claw
+            robotEncoded.openTopClaw();
+        }
+        else if(gamepad2.left_trigger > 0.5) { // open bottom claw
+            robotEncoded.openBottomClaw();
+        }
+        else if (gamepad2.right_bumper) { // close both claws
+            robotEncoded.closeClaw();
+        }
+
+        if(gamepad2.y) {
+            robotEncoded.armtoMidSetLine();
+        }
+        if(gamepad2.x) {
+            robotEncoded.armtoLowSetLine();
+        }
+        if(gamepad2.b) {
+            robotEncoded.armScoreAuto();
+        }
+        if(gamepad2.a) {
+            robotEncoded.armtoGround();
+        }
+        if(gamepad2.dpad_up) {
+            robotEncoded.armtoPixelStack();
+        }
+        if(gamepad2.right_stick_y > 0.5) {
+            robotEncoded.openBottomClaw();
+            robotEncoded.openTopClaw();
+        }
 
         if (gamepad2.right_stick_y > 0.1 && armHeight >= 0) { // manual arm control
             armHeight = robotEncoded.arm.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
@@ -111,6 +116,5 @@ public class Teleop extends OpMode {
         telemetry.addLine("Left joystick | ")
                 .addData("x", gamepad1.left_stick_x)
                 .addData("y", gamepad1.left_stick_y);
-        telemetry.addData("servo pos", robotEncoded.claw.getPosition());
     }
 }
