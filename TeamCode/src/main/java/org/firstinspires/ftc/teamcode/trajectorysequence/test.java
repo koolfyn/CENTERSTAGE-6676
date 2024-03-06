@@ -41,7 +41,7 @@ public class test extends OpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-                Pose2d startPose = new Pose2d(0, 0, 0);
+                Pose2d startPose = new Pose2d(-30, -30, Math.toRadians(90));
                 drive.setPoseEstimate(startPose);
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
                         .forward(30)
