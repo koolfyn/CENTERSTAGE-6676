@@ -35,32 +35,42 @@ public class rrBlueBackGATE extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(90)))
+                drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(90))) // 20 seconds
                         .lineToConstantHeading(new Vector2d(23,35)) // to spikemark
-                        .waitSeconds(.5) // drop pixel and put claw at bd height
+                       //purple down
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
+                        .addTemporalMarker(0.5,()->{robotEncoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(23, 40)) // back up
                         .splineToLinearHeading(new Pose2d(50,42), Math.toRadians(0)) // to bd
-                        .waitSeconds(.5) // place yellow
+                        //yellow on bd
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
+                        .addTemporalMarker(0.5,()-> {robotEncoded.closeClaw();})
                         .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
                         .lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
                         .lineToConstantHeading(new Vector2d(-55,11)) // to white stack
-                        .waitSeconds(.5) // pick up stack
+                        //pick up pixel stack
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.armtoPixelStack();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.closeClaw();})
                         .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) //  orientate
                         .lineToConstantHeading(new Vector2d(38,11)) // "safe spot"
                         .splineToConstantHeading(new Vector2d(50,42), Math.toRadians(0)) // to bd
-                        .waitSeconds(.5) // place 1st stack
-                        //if we have enough time
-                        .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
-                        .lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
-                        .lineToConstantHeading(new Vector2d(-55,11)) // to white stack
-                        .waitSeconds(.5) // pick up stack
-                        .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) // orientate
-                        .lineToConstantHeading(new Vector2d(38,11)) // // "safe spot"
-                        .splineToConstantHeading(new Vector2d(50,42), Math.toRadians(0)) // to bd
-                        .waitSeconds(.5) // place 2nd stack
+                        //drop pixel stack on bd
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(42, 42)) // back up from bd
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+                        //if we have enough time
+                        //.lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
+                        //.lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
+                        //.lineToConstantHeading(new Vector2d(-55,11)) // to white stack
+                        //  .waitSeconds(.5) // pick up stack
+                        //  .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) // orientate
+                        // .lineToConstantHeading(new Vector2d(38,11)) // // "safe spot"
+                        // .splineToConstantHeading(new Vector2d(50,42), Math.toRadians(0)) // to bd
+                        // .waitSeconds(.5) // place 2nd stack
+                        // .lineToConstantHeading(new Vector2d(42, 42)) // back up from bd
 
 
                         .build();
@@ -69,64 +79,80 @@ public class rrBlueBackGATE extends OpMode {
 
             case NONE:
             case MIDDLE:
-                           drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(90)))
-                            .lineToConstantHeading(new Vector2d(12,24)) // to spikemark
-                            .waitSeconds(.5) // drop pixel and put claw at bd height
-                            .lineToConstantHeading(new Vector2d(12, 35)) // back up
-                            .splineToLinearHeading(new Pose2d(50,36), Math.toRadians(0)) // to bd
-                            .waitSeconds(.5) // place yellow
-                            .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
-                            .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(180))) // middle + orientate
-                            .lineToConstantHeading(new Vector2d(-60,11)) // to white stack
-                            .waitSeconds(.5) // pick up stack
-                            .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(0))) // middle + orientate
-                            .lineToConstantHeading(new Vector2d(38,11)) // "safe spot"
-                            .splineToConstantHeading(new Vector2d(50,36), Math.toRadians(0)) // to bd
-                            .waitSeconds(.5) // place 1st stack
-                            //if we have enough time to go for a 2nd time
-                            .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
-                            .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(180))) // middle + orientate
-                            .lineToConstantHeading(new Vector2d(-60,11)) // to white stack
-                            .waitSeconds(.5) // pick up stack
-                            .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(0))) // middle + orientate
-                            .lineToConstantHeading(new Vector2d(38,11)) // // "safe spot"
-                            .splineToConstantHeading(new Vector2d(50,36), Math.toRadians(0)) // to bd
-                            .waitSeconds(.5) // place 2nd stack
-                            .lineToConstantHeading(new Vector2d(42, 36)) // back up from bd
-                                   .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
-                                   //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+                drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(90))) // 21 seconds
+                        .lineToConstantHeading(new Vector2d(12,32)) // to spikemark
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
+                        .addTemporalMarker(0.5,()->{robotEncoded.openBottomClaw();})
+                        .lineToConstantHeading(new Vector2d(12, 37)) // back up
+                        .splineToLinearHeading(new Pose2d(50,36), Math.toRadians(0)) // to bd
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
+                        .addTemporalMarker(0.5,()-> {robotEncoded.closeClaw();})
+                        .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
+                        .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(180))) // middle + orientate
+                        .lineToConstantHeading(new Vector2d(-60,11)) // to white stack
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.armtoPixelStack();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.closeClaw();})
+                        .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(0))) // middle + orientate
+                        .lineToConstantHeading(new Vector2d(38,11)) // "safe spot"
+                        .splineToConstantHeading(new Vector2d(50,36), Math.toRadians(0)) // to bd
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
+                        .lineToConstantHeading(new Vector2d(42, 36)) // back up from bd
+                        .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
+                        //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+                        //if we have enough time to go for a 2nd time
+                        // .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
+                        // .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(180))) // middle + orientate
+                        //.lineToConstantHeading(new Vector2d(-60,11)) // to white stack
+                        // .waitSeconds(.5) // pick up stack
+                        // .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(0))) // middle + orientate
+                        //.lineToConstantHeading(new Vector2d(38,11)) // // "safe spot"
+                        //.splineToConstantHeading(new Vector2d(50,36), Math.toRadians(0)) // to bd
+                        // .waitSeconds(.5) // place 2nd stack
+                        //.lineToConstantHeading(new Vector2d(42, 36)) // back up from bd
+                        //  .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
+                        //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
                             .build();
                 break;
 
             case RIGHT:
-                drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(90)))
+                drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(90))) // 21 seconds
                         .lineToConstantHeading(new Vector2d(23,31)) // safely move
                         .lineToLinearHeading(new Pose2d(19,31, Math.toRadians(0))) // orientate
                         .lineToConstantHeading(new Vector2d(9, 30)) // right spikemark
-                        .waitSeconds(.5) // drop pixel and put claw at bd height
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
+                        .addTemporalMarker(0.5,()->{robotEncoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(12, 30)) // back up
                         .splineToLinearHeading(new Pose2d(50,29), Math.toRadians(0)) // to bd
-                        .waitSeconds(.5) // place yellow
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
+                        .addTemporalMarker(0.5,()-> {robotEncoded.closeClaw();})
                         .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
                         .lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
                         .lineToConstantHeading(new Vector2d(-60,11)) // to white stack
-                        .waitSeconds(.5) // pick up stack
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.armtoPixelStack();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.closeClaw();})
                         .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) //  orientate
                         .lineToConstantHeading(new Vector2d(38,11)) // "safe spot"
                         .splineToConstantHeading(new Vector2d(50,29), Math.toRadians(0)) // to bd
-                        .waitSeconds(.5) // place 1st stack
-                        //if we have enough time
-                        .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
-                        .lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
-                        .lineToConstantHeading(new Vector2d(-60,11)) // to white stack
-                        .waitSeconds(.5) // pick up stack
-                        .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) // orientate
-                        .lineToConstantHeading(new Vector2d(38,11)) // // "safe spot"
-                        .splineToConstantHeading(new Vector2d(50,29), Math.toRadians(0)) // to bd
-                        .waitSeconds(.5) // place 2nd stack
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(42, 29)) // back up from bd
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
+                        //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+                        //if we have enough time
+                        // .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
+                        // .lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
+                        //   .lineToConstantHeading(new Vector2d(-60,11)) // to white stack
+                        // .waitSeconds(.5) // pick up stack
+                        // .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) // orientate
+                        //  .lineToConstantHeading(new Vector2d(38,11)) // // "safe spot"
+                        //  .splineToConstantHeading(new Vector2d(50,29), Math.toRadians(0)) // to bd
+                        //   .waitSeconds(.5) // place 2nd stack
+                        // .lineToConstantHeading(new Vector2d(42, 29)) // back up from bd
+                        // .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
                 break;
