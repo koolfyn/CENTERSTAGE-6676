@@ -44,14 +44,14 @@ public class testRoadRunner extends OpMode {
                 .lineTo(new Vector2d(-47,-52))
                 .waitSeconds(2)
                 .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
-                .addTemporalMarker(0.5,()-> {robotEncoded.openClaw();})
+               // .addTemporalMarker(0.5,()-> {robotEncoded.openClaw();})
                 //purple dropped
                 .lineToSplineHeading(new Pose2d(-35,-59,Math.toRadians(0)))
                 .waitSeconds(1)
                 .splineTo(new Vector2d(10,-59),Math.toRadians(0))
                 .splineTo(new Vector2d(48,-31),Math.toRadians(0))
                 .addTemporalMarker(5,()-> {robotEncoded.armScoreAuto();})
-                .addTemporalMarker(6,()-> {robotEncoded.openClaw();})
+               // .addTemporalMarker(6,()-> {robotEncoded.openClaw();})
                 .waitSeconds(1)
                 //yellow dropped
                 .setReversed(true)
@@ -60,7 +60,7 @@ public class testRoadRunner extends OpMode {
                 .setReversed(false)
                 .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
                 .addTemporalMarker(8,()-> {robotEncoded.armtoGround();})
-                .addTemporalMarker(9,()-> {robotEncoded.openClaw();})
+                //.addTemporalMarker(9,()-> {robotEncoded.openClaw();})
                 .build();
 
         TrajectorySequence frontM = drive.trajectorySequenceBuilder(startPose)
