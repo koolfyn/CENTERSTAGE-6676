@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.autos;
 
+import com.acmerobotics.roadrunner.drive.Drive;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.main.RobotEncoded;
+import org.firstinspires.ftc.teamcode.main.DriveTrain;
+import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
@@ -12,11 +14,13 @@ import org.firstinspires.ftc.vision.VisionPortal;
 public class pushRedF extends OpMode{
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
-    private RobotEncoded robotEncoded;
+    private Encoded encoded;
+    private DriveTrain driveTrain;
 
     @Override
     public void init() {
-        robotEncoded = new RobotEncoded(hardwareMap, telemetry);
+        encoded = new Encoded(hardwareMap, telemetry);
+        driveTrain = new DriveTrain(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"),visionProcessor);;
 
@@ -32,28 +36,28 @@ public class pushRedF extends OpMode{
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(33, 700);
-                robotEncoded.turnLeft(20, 350);
-                robotEncoded.backward(2, 700);
-                robotEncoded.forward(3, 700);
+                encoded.closeClaw();
+                driveTrain.backward(33, 700);
+                driveTrain.turnLeft(20, 350);
+                driveTrain.backward(2, 700);
+                driveTrain.forward(3, 700);
 
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(31, 500);
-                robotEncoded.forward(8, 700);
+                encoded.closeClaw();
+                driveTrain.backward(31, 500);
+                driveTrain.forward(8, 700);
 
                 break;
 
             case RIGHT:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(34, 700);
-                robotEncoded.turnRight(20, 350);
-                robotEncoded.backward(3, 500);
-                robotEncoded.forward(4, 700);
+                encoded.closeClaw();
+                driveTrain.backward(34, 700);
+                driveTrain.turnRight(20, 350);
+                driveTrain.backward(3, 500);
+                driveTrain.forward(4, 700);
 
                 break;
 

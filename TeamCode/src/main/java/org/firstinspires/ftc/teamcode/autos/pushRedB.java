@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.autos;
 
+import com.acmerobotics.roadrunner.drive.Drive;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.main.RobotEncoded;
+import org.firstinspires.ftc.teamcode.main.DriveTrain;
+import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
@@ -12,11 +14,13 @@ import org.firstinspires.ftc.vision.VisionPortal;
 public class pushRedB extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
-    private RobotEncoded robotEncoded;
+    private Encoded encoded;
+    private DriveTrain driveTrain;
 
     @Override
     public void init() {
-        robotEncoded = new RobotEncoded(hardwareMap, telemetry);
+        encoded = new Encoded(hardwareMap, telemetry);
+        driveTrain = new DriveTrain(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
     }
@@ -32,32 +36,32 @@ public class pushRedB extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(28,600);
-                robotEncoded.turnLeft(20,700);
-                robotEncoded.backward(3,600);
-                robotEncoded.forward(2,600);
+                encoded.closeClaw();
+                driveTrain.backward(28,600);
+                driveTrain.turnLeft(20,700);
+                driveTrain.backward(3,600);
+                driveTrain.forward(2,600);
                 //purple scored
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(31,600);
-                robotEncoded.retractTilt();
-                robotEncoded.forward(4,700);
-                robotEncoded.turnLeft(19.5,400);
+                encoded.closeClaw();
+                driveTrain.backward(31,600);
+                encoded.retractTilt();
+                driveTrain.forward(4,700);
+                driveTrain.turnLeft(19.5,400);
                 //purple scored
                 break;
 
             case RIGHT:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(20,700);
-                robotEncoded.retractTilt();
-                robotEncoded.strafeLeft(13,600);
-                robotEncoded.stopBot(1);
-                robotEncoded.backward(1,700);
-                robotEncoded.forward(3,700);
+                encoded.closeClaw();
+                driveTrain.backward(20,700);
+                encoded.retractTilt();
+                driveTrain.strafeLeft(13,600);
+                encoded.stopBot(1);
+                driveTrain.backward(1,700);
+                driveTrain.forward(3,700);
                 break;
 
         }

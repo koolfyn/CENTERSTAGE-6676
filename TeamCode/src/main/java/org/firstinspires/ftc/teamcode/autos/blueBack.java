@@ -4,7 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.main.RobotEncoded;
+import org.firstinspires.ftc.teamcode.main.DriveTrain;
+import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
@@ -12,11 +13,12 @@ import org.firstinspires.ftc.vision.VisionPortal;
 public class blueBack extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
-    private RobotEncoded robotEncoded;
+    private Encoded encoded;
+    private DriveTrain driveTrain;
 
     @Override
     public void init() {
-        robotEncoded = new RobotEncoded(hardwareMap, telemetry);
+        encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
     }
@@ -32,59 +34,58 @@ public class blueBack extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(23,800);
-                robotEncoded.strafeRight(12.5,800);
-                robotEncoded.backward(4,800);
-                robotEncoded.forward(7,500);
-                robotEncoded.turnRight(20,800);
-                robotEncoded.armScoreAuto();
-                robotEncoded.forward(27,800);
-                robotEncoded.stopBot(1);
-//                robotEncoded.openClaw();
-                robotEncoded.stopBot(1);
-                robotEncoded.backward(4,800);
-                robotEncoded.strafeLeft(22,800);
-                robotEncoded.armtoGround();
-                robotEncoded.forward(6,800);
+                encoded.closeClaw();
+                driveTrain.backward(23,800);
+                driveTrain.strafeRight(12.5,800);
+                driveTrain.backward(4,800);
+                driveTrain.forward(7,500);
+                driveTrain.turnRight(20,800);
+                encoded.armScoreAuto();
+                driveTrain.forward(27,800);
+                encoded.stopBot(1);
+//                encoded.openClaw();
+                driveTrain.backward(4,800);
+                driveTrain.strafeLeft(22,800);
+                encoded.armtoGround();
+                driveTrain.forward(6,800);
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(29,800);
-                robotEncoded.retractTilt();
-                robotEncoded.forward(4,800);
-                robotEncoded.turnRight(19.5,700);
-                robotEncoded.forward(10,800);
-                robotEncoded.strafeRight(3,800);
-                robotEncoded.armScoreAuto();
-                robotEncoded.forward(25,800);
-                robotEncoded.stopBot(2);
+                encoded.closeClaw();
+                driveTrain.backward(29,800);
+                encoded.retractTilt();
+                driveTrain.forward(4,800);
+                driveTrain.turnRight(19.5,700);
+                driveTrain.forward(10,800);
+                driveTrain.strafeRight(3,800);
+                encoded.armScoreAuto();
+                driveTrain.forward(25,800);
+                encoded.stopBot(2);
 //                robotEncoded.openClaw();
-                robotEncoded.stopBot(1);
-                robotEncoded.backward(4,800);
-                robotEncoded.strafeLeft(30,800);
-                robotEncoded.armtoGround();
-                robotEncoded.forward(4,800);
+                encoded.stopBot(1);
+                driveTrain.backward(4,800);
+                driveTrain.strafeLeft(30,800);
+                encoded.armtoGround();
+                driveTrain.forward(4,800);
                 break;
 
             case RIGHT:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(29,800);
-                robotEncoded.turnRight(20.5,300);
-                robotEncoded.backward(3,700);
-                robotEncoded.armScoreAuto();
-                robotEncoded.forward(32,900);
-                robotEncoded.strafeRight(6,900);
-                robotEncoded.forward(8,900);
-                robotEncoded.stopBot(1);
+                encoded.closeClaw();
+                driveTrain.backward(29,800);
+                driveTrain.turnRight(20.5,300);
+                driveTrain.backward(3,700);
+                encoded.armScoreAuto();
+                driveTrain.forward(32,900);
+                driveTrain.strafeRight(6,900);
+                driveTrain.forward(8,900);
+                encoded.stopBot(1);
 //                robotEncoded.openClaw();
-                robotEncoded.stopBot(2);
-                robotEncoded.backward(4, 900);
-                robotEncoded.strafeLeft(38,900);
-                robotEncoded.armtoGround();
-                robotEncoded.forward(4,800);
+                encoded.stopBot(2);
+                driveTrain.backward(4, 900);
+                driveTrain.strafeLeft(38,900);
+                encoded.armtoGround();
+                driveTrain.forward(4,800);
                 break;
         }
     }

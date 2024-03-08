@@ -1,8 +1,12 @@
 package org.firstinspires.ftc.teamcode.main;
 
+import org.firstinspires.ftc.teamcode.main.Encoded;
+import org.firstinspires.ftc.teamcode.main.DriveTrain;
+
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
 
 @TeleOp (name="Teleop main")
 public class Teleop extends OpMode {
@@ -10,11 +14,14 @@ public class Teleop extends OpMode {
     double slideRightHeight = 0;
     double slideLeftHeight = 0;
     double armHeight = 0;
-    RobotEncoded robotEncoded;
+
+    Encoded encoded;
+    DriveTrain driveTrain;
 
     @Override
     public void init() {
-        robotEncoded = new RobotEncoded(hardwareMap, telemetry);
+        encoded = new Encoded(hardwareMap, telemetry);
+        driveTrain = new DriveTrain(hardwareMap, telemetry);
     }
 
     @Override
@@ -24,20 +31,20 @@ public class Teleop extends OpMode {
         double r = gamepad1.right_stick_x;
 
         if (gamepad1.right_bumper) { // driver movements
-            robotEncoded.frontLeft.setVelocity((y + x + r) * Constants.slowVal);
-            robotEncoded.frontRight.setVelocity((y - x - r) * Constants.slowVal);
-            robotEncoded.backLeft.setVelocity((y - x + r) * Constants.slowVal);
-            robotEncoded.backRight.setVelocity((y + x - r) * Constants.slowVal);
+            driveTrain.frontLeft.setVelocity((y + x + r) * Constants.slowVal);
+            driveTrain.frontRight.setVelocity((y - x - r) * Constants.slowVal);
+            driveTrain.backLeft.setVelocity((y - x + r) * Constants.slowVal);
+            driveTrain.backRight.setVelocity((y + x - r) * Constants.slowVal);
         } else if (gamepad1.left_bumper) {
-            robotEncoded.frontLeft.setPower((y + x + r) * Constants.fastVal);
-            robotEncoded.frontRight.setPower((y - x - r) * Constants.fastVal);
-            robotEncoded.backLeft.setPower((y - x + r) * Constants.fastVal);
-            robotEncoded.backRight.setPower((y + x - r) * Constants.fastVal);
+            driveTrain.frontLeft.setPower((y + x + r) * Constants.fastVal);
+            driveTrain.frontRight.setPower((y - x - r) * Constants.fastVal);
+            driveTrain.backLeft.setPower((y - x + r) * Constants.fastVal);
+            driveTrain.backRight.setPower((y + x - r) * Constants.fastVal);
         } else {
-            robotEncoded.frontLeft.setVelocity((y + x + r) * Constants.defaultVal);
-            robotEncoded.frontRight.setVelocity((y - x - r) * Constants.defaultVal);
-            robotEncoded.backLeft.setVelocity((y - x + r) * Constants.defaultVal);
-            robotEncoded.backRight.setVelocity((y + x - r) * Constants.defaultVal);
+            driveTrain.frontLeft.setVelocity((y + x + r) * Constants.defaultVal);
+            driveTrain.frontRight.setVelocity((y - x - r) * Constants.defaultVal);
+            driveTrain.backLeft.setVelocity((y - x + r) * Constants.defaultVal);
+            driveTrain.backRight.setVelocity((y + x - r) * Constants.defaultVal);
         }
 
         if (gamepad1.dpad_up) { // suspend
@@ -48,69 +55,65 @@ public class Teleop extends OpMode {
             slideRightHeight = 0;
         }
         if(gamepad1.x) {
-            robotEncoded.launchDrone();
+            encoded.launchDrone();
         }
 
         if (gamepad2.left_bumper) { // open top claw
-            robotEncoded.openTopClaw();
+            encoded.openTopClaw();
         }
         else if(gamepad2.left_trigger > 0.5) { // open bottom claw
-            robotEncoded.openBottomClaw();
+            encoded.openBottomClaw();
         }
         else if (gamepad2.right_bumper) { // close both claws
-            robotEncoded.closeClaw();
+            encoded.closeClaw();
         }
 
         if(gamepad2.y) {
-            robotEncoded.armtoMidSetLine();
+            encoded.armtoMidSetLine();
         }
         if(gamepad2.x) {
-            robotEncoded.armtoLowSetLine();
+            encoded.armtoLowSetLine();
         }
         if(gamepad2.b) {
-            robotEncoded.armScoreAuto();
+            encoded.armScoreAuto();
         }
         if(gamepad2.a) {
-            robotEncoded.armtoGround();
+            encoded.armtoGround();
         }
         if(gamepad2.dpad_up) {
-            robotEncoded.armtoPixelStack();
+            encoded.armtoPixelStack();
         }
         if(gamepad2.right_stick_y > 0.5) {
-            robotEncoded.openBottomClaw();
-            robotEncoded.openTopClaw();
+            encoded.openBottomClaw();
+            encoded.openTopClaw();
         }
 
         if (gamepad2.right_stick_y > 0.1 && armHeight >= 0) { // manual arm control
-            armHeight = robotEncoded.arm.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
+            armHeight = Encoded.arm.getCurrentPosition() / Encoded.TICKS_PER_INCH_LS;
             armHeight -= 10;
         } else if (gamepad2.right_stick_y < -0.1) {
-            armHeight = robotEncoded.arm.getCurrentPosition() / RobotEncoded.TICKS_PER_INCH_LS;
+            armHeight = Encoded.arm.getCurrentPosition() / Encoded.TICKS_PER_INCH_LS;
             armHeight += 10;
         }
 
-        double rawDifference1 = robotEncoded.slideLeft.getCurrentPosition() - slideLeftHeight * RobotEncoded.TICKS_PER_INCH_LS;
+        double rawDifference1 = encoded.slideLeft.getCurrentPosition() - slideLeftHeight * Encoded.TICKS_PER_INCH_LS;
         double difference1 = Math.abs(rawDifference1);
-        double rawDifference2 = robotEncoded.slideRight.getCurrentPosition() - slideRightHeight *RobotEncoded.TICKS_PER_INCH_LS;
+        double rawDifference2 = encoded.slideRight.getCurrentPosition() - slideRightHeight * Encoded.TICKS_PER_INCH_LS;
         double difference2 = Math.abs(rawDifference2);
 
         if (difference2 >= 30) {
-            robotEncoded.slideRight.setTargetPosition((int)(slideRightHeight * RobotEncoded.TICKS_PER_INCH_LS));
-            robotEncoded.slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robotEncoded.slideRight.setVelocity(1000);
+            encoded.slideRight.setTargetPosition((int)(slideRightHeight * Encoded.TICKS_PER_INCH_LS));
+            encoded.slideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            encoded.slideRight.setVelocity(1000);
         }
 
         if(difference1 >= 30) {
-            robotEncoded.slideLeft.setTargetPosition((int)(slideLeftHeight * RobotEncoded.TICKS_PER_INCH_LS));
-            robotEncoded.slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robotEncoded.slideLeft.setVelocity(1000);
+            encoded.slideLeft.setTargetPosition((int)(slideLeftHeight * Encoded.TICKS_PER_INCH_LS));
+            encoded.slideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            encoded.slideLeft.setVelocity(1000);
         }
 
-        telemetry.addData("claw tilt cur pos", robotEncoded.clawTilt.getPosition());
-        telemetry.addData("claw tilt target pos", robotEncoded.clawTilt.getPosition());
-        telemetry.addData("arm target position", robotEncoded.arm.getTargetPosition());
-        telemetry.addData("arm velocity",robotEncoded.arm.getVelocity());
-        telemetry.addData("arm curr pos", robotEncoded.arm.getCurrentPosition());
+        telemetry.addData("top claw position", encoded.clawTop.getPosition());
         telemetry.update();
 
         telemetry.addLine("Left joystick | ")
