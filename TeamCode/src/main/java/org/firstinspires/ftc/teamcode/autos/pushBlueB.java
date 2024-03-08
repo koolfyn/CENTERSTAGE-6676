@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="push BLUE BACK")
+@Autonomous(name="PUSH blue Back")
 public class pushBlueB extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
@@ -44,6 +44,9 @@ public class pushBlueB extends OpMode {
                 robotEncoded.closeClaw();
                 robotEncoded.backward(30,800);
                 robotEncoded.forward(4,800);
+                robotEncoded.turnRight(19.5,700);
+                robotEncoded.forward(10,800);
+                robotEncoded.strafeRight(2,800);
                 break;
 
             case RIGHT:
@@ -53,7 +56,6 @@ public class pushBlueB extends OpMode {
                 robotEncoded.backward(3,700);
                 robotEncoded.forward(4,800);
                 break;
-
         }
     }
 

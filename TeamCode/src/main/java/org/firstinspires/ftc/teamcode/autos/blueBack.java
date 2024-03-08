@@ -34,59 +34,57 @@ public class blueBack extends OpMode {
             case LEFT:
                 robotEncoded.closeClaw();
                 robotEncoded.backward(23,800);
-                robotEncoded.strafeRight(12,800);
+                robotEncoded.strafeRight(12.5,800);
                 robotEncoded.backward(4,800);
-                robotEncoded.forward(8,500);
+                robotEncoded.forward(7,500);
                 robotEncoded.turnRight(20,800);
                 robotEncoded.armScoreAuto();
-                robotEncoded.backdropClawTilt();
-                robotEncoded.forward(32,800);
+                robotEncoded.forward(27,800);
                 robotEncoded.stopBot(1);
-                robotEncoded.openClaw();
+//                robotEncoded.openClaw();
                 robotEncoded.stopBot(1);
-                robotEncoded.backward(3,800);
-                robotEncoded.strafeLeft(24,800);
+                robotEncoded.backward(4,800);
+                robotEncoded.strafeLeft(22,800);
                 robotEncoded.armtoGround();
-                robotEncoded.forward(8,800);
+                robotEncoded.forward(6,800);
                 break;
 
             case NONE:
             case MIDDLE:
                 robotEncoded.closeClaw();
-                robotEncoded.backward(30,800);
+                robotEncoded.backward(29,800);
+                robotEncoded.retractTilt();
                 robotEncoded.forward(4,800);
                 robotEncoded.turnRight(19.5,700);
                 robotEncoded.forward(10,800);
-                robotEncoded.strafeRight(2,800);
+                robotEncoded.strafeRight(3,800);
                 robotEncoded.armScoreAuto();
-                robotEncoded.backdropClawTilt();
-                robotEncoded.forward(31,800);
+                robotEncoded.forward(25,800);
                 robotEncoded.stopBot(2);
-                robotEncoded.openClaw();
+//                robotEncoded.openClaw();
                 robotEncoded.stopBot(1);
                 robotEncoded.backward(4,800);
                 robotEncoded.strafeLeft(30,800);
                 robotEncoded.armtoGround();
-                robotEncoded.forward(8,800);
+                robotEncoded.forward(4,800);
                 break;
 
             case RIGHT:
                 robotEncoded.closeClaw();
                 robotEncoded.backward(29,800);
-                robotEncoded.turnRight(20,300);
+                robotEncoded.turnRight(20.5,300);
                 robotEncoded.backward(3,700);
-                robotEncoded.forward(34,900);
                 robotEncoded.armScoreAuto();
-                robotEncoded.backdropClawTilt();
-                robotEncoded.strafeRight(4,900);
-                robotEncoded.forward(9,900);
+                robotEncoded.forward(32,900);
+                robotEncoded.strafeRight(6,900);
+                robotEncoded.forward(8,900);
                 robotEncoded.stopBot(1);
-                robotEncoded.openClaw();
-                robotEncoded.stopBot(1);
+//                robotEncoded.openClaw();
+                robotEncoded.stopBot(2);
                 robotEncoded.backward(4, 900);
-                robotEncoded.strafeLeft(40,900);
+                robotEncoded.strafeLeft(38,900);
                 robotEncoded.armtoGround();
-                robotEncoded.forward(10,900);
+                robotEncoded.forward(4,800);
                 break;
         }
     }

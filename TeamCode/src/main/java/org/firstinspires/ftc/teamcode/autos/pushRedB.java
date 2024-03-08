@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.main.RobotEncoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="push RED BACK")
+@Autonomous(name="PUSH Red Back")
 public class pushRedB extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
@@ -32,25 +32,32 @@ public class pushRedB extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(28,700);
-                robotEncoded.turnLeft(20,800);
-                robotEncoded.forward(4,800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(28,600);
+                robotEncoded.turnLeft(20,700);
+                robotEncoded.backward(3,600);
+                robotEncoded.forward(2,600);
+                //purple scored
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(28,800);
-                robotEncoded.forward(6,800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(31,600);
+                robotEncoded.retractTilt();
+                robotEncoded.forward(4,700);
+                robotEncoded.turnLeft(19.5,400);
+                //purple scored
                 break;
 
             case RIGHT:
-                robotEncoded.armOffGround();
-                robotEncoded.backward(25,800);
-                robotEncoded.turnRight(20,900);
-                robotEncoded.backward(2,700);
-                robotEncoded.forward(4,800);
+                robotEncoded.closeClaw();
+                robotEncoded.backward(20,700);
+                robotEncoded.retractTilt();
+                robotEncoded.strafeLeft(13,600);
+                robotEncoded.stopBot(1);
+                robotEncoded.backward(1,700);
+                robotEncoded.forward(3,700);
                 break;
 
         }

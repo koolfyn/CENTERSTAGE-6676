@@ -19,8 +19,10 @@ public class RobotEncoded {
     DcMotorEx slideRight;
     DcMotorEx arm;
     Telemetry telemetry;
-    Servo claw;
+    Servo clawBottom;
+    Servo clawTop;
     Servo clawTilt;
+    Servo droneLauncher;
 
     static final double TICKS_PER_MOTOR_ROTATION = 537.7;
     static final double GEAR_REDUCTION = 1;
@@ -40,9 +42,11 @@ public class RobotEncoded {
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
         slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
         slideRight = hardwareMap.get(DcMotorEx.class,"slideRight");
-        claw = hardwareMap.get(Servo.class,"claw");
+        clawBottom = hardwareMap.get(Servo.class,"clawBottom");
+        clawTop = hardwareMap.get(Servo.class,"clawTop");
         clawTilt = hardwareMap.get(Servo.class,"clawTilt");
         arm = hardwareMap.get(DcMotorEx.class,"arm");
+        droneLauncher = hardwareMap.get(Servo.class,"drone");
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -60,75 +64,70 @@ public class RobotEncoded {
 //        arm.setDirection(DcMotorSimple.Direction.REVERSE);
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        claw.scaleRange(0,1);
+        clawBottom.scaleRange(0,1);
+        clawTop.scaleRange(0,1);
     }
 
-    public void openClaw() {
-        claw.setPosition(0);
+    public void openBottomClaw() {
+        clawBottom.setPosition(0.6);
+    }
+    public void openTopClaw() {
+        clawTop.setPosition(0.3);
     }
 
-//    public void raiseArm() {
-//        arm.setTargetPosition(490);
     public void closeClaw() {
-        claw.setPosition(0.7);
+        clawBottom.setPosition(0.1);
+        clawTop.setPosition(0.4);
     }
 
     public void armtoGround() {
-        clawTilt.setPosition(0.18);
+        clawTilt.setPosition(0.59);
         arm.setTargetPosition(Constants.ground);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(1000);
+        arm.setVelocity(400);
     }
     public void armScoreAuto() {
-        clawTilt.setPosition(0.18);
-        arm.setTargetPosition(250);
+        clawTilt.setPosition(0.39);
+        arm.setTargetPosition(0);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
 
     public void armtoLowSetLine() {
+        clawTilt.setPosition(0.46);
         arm.setTargetPosition(Constants.lowSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
+
     public void armtoMidSetLine() {
         arm.setTargetPosition(Constants.medSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
+        clawTilt.setPosition(0.58);
     }
-    public void armtoHighSetLine() {
-        arm.setTargetPosition(Constants.highSetLine);
+
+    public void armtoPixelStack() {
+        arm.setTargetPosition(70);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
-        clawTilt.setPosition(0.4);
+        clawTilt.setPosition(0.6);
     }
 
-    public void parallelClawPosArm() {
-        clawTilt.setPosition(0.57);
-        arm.setTargetPosition(140);
-        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(1000);
+    public void launchDrone() {
+        armtoGround();
+        stopBot(1);
+        droneLauncher.setPosition(0.5);
     }
 
-    public void armOffGround() {
-        arm.setTargetPosition(200);
-        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(700);
+    public void retractTilt() {
+        clawTilt.setPosition(0.2);
     }
 
-//    public void lowerArm() {
-//        tiltToGround();
-//        arm.setTargetPosition(0);
-//        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        arm.setVelocity(700);
-//    }
-
-    public void backdropClawTilt() {
-        clawTilt.setPosition(0.18);
-    }
+    public void backdropClawTilt() { clawTilt.setPosition(0.18); }
 
     public void tiltToGround() {
-        clawTilt.setPosition(0.85);
+        clawTilt.setPosition(0.19);
     }
 
     public void setSlidePosition(double velocity, double distanceInches) {
