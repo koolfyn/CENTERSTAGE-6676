@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+
 import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
@@ -31,6 +32,8 @@ public class rrBlueBackGATE extends OpMode {
     @Override
     public void start() {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
+        drive.setPoseEstimate(startPose);
         visionPortal.stopStreaming();
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
@@ -155,6 +158,10 @@ public class rrBlueBackGATE extends OpMode {
                         // .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
+                TrajectorySequence test = drive.trajectorySequenceBuilder(startPose)
+                        .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0))
+                                .build();
+                        drive.followTrajectorySequence(test);
                 break;
         }
     }

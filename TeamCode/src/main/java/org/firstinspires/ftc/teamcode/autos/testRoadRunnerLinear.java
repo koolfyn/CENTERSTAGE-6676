@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.main.Encoded;
+
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
@@ -36,6 +37,7 @@ public class testRoadRunnerLinear extends LinearOpMode {
 //        TrajectorySequence backM =drive.trajectorySequenceBuilder(startPose)
 //                .build();
 //
+
 //        TrajectorySequence backR =drive.trajectorySequenceBuilder(startPose)
 //                .lineToSplineHeading(new Pose2d(23.5,-54,Math.toRadians(90)))
 //                //purple dropped
@@ -81,6 +83,7 @@ public class testRoadRunnerLinear extends LinearOpMode {
                         .addTemporalMarker(8,()-> {encoded.armtoGround();})
                         .addTemporalMarker(9,()-> {encoded.openTopClaw();})
                         .build();
+
                 drive.followTrajectorySequence(frontL);
 
                 break;
@@ -122,9 +125,9 @@ public class testRoadRunnerLinear extends LinearOpMode {
                         .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
                         .build();
                 drive.followTrajectorySequence(frontR);
+
                 break;
         }
     }
-
-
 }
+
