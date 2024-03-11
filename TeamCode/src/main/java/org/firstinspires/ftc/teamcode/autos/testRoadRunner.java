@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.main.RobotEncoded;
+import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
@@ -19,11 +19,11 @@ import org.firstinspires.ftc.vision.VisionPortal;
 public class testRoadRunner extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
-    private RobotEncoded robotEncoded;
+    private Encoded encoded;
 
     @Override
     public void init() {
-        robotEncoded = new RobotEncoded(hardwareMap, telemetry);
+        encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
     }
@@ -44,15 +44,17 @@ public class testRoadRunner extends OpMode {
         TrajectorySequence frontL = drive.trajectorySequenceBuilder(startPose)
                 .lineTo(new Vector2d(-47,-52))
                 .waitSeconds(2)
-                .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
-                .addTemporalMarker(0.5,()-> {robotEncoded.openBottomClaw();})
+                .addTemporalMarker(0,()-> {encoded.armtoGround();})
+               // .addTemporalMarker(0.5,()-> {robotEncoded.openClaw();})
+
                 //purple dropped
                 .lineToSplineHeading(new Pose2d(-35,-59,Math.toRadians(0)))
                 .waitSeconds(1)
                 .splineTo(new Vector2d(10,-59),Math.toRadians(0))
                 .splineTo(new Vector2d(48,-31),Math.toRadians(0))
-                .addTemporalMarker(5,()-> {robotEncoded.armScoreAuto();})
-                .addTemporalMarker(6,()-> {robotEncoded.openTopClaw();})
+                .addTemporalMarker(5,()-> {encoded.armScoreAuto();})
+               // .addTemporalMarker(6,()-> {robotEncoded.openClaw();})
+
                 .waitSeconds(1)
                 //yellow dropped
                 .setReversed(true)
@@ -60,8 +62,8 @@ public class testRoadRunner extends OpMode {
                 .splineTo(new Vector2d(-35,-59),Math.toRadians(180))
                 .setReversed(false)
                 .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
-                .addTemporalMarker(8,()-> {robotEncoded.armtoGround();})
-                .addTemporalMarker(9,()-> {robotEncoded.openTopClaw();})
+                .addTemporalMarker(8,()-> {encoded.armtoGround();})
+                //.addTemporalMarker(9,()-> {robotEncoded.openClaw();})
                 .build();
 
         TrajectorySequence frontM = drive.trajectorySequenceBuilder(startPose)

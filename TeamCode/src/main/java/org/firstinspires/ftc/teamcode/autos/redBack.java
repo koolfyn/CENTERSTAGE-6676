@@ -4,7 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.main.RobotEncoded;
+import org.firstinspires.ftc.teamcode.main.DriveTrain;
+import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
@@ -12,11 +13,13 @@ import org.firstinspires.ftc.vision.VisionPortal;
 public class redBack extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
-    private RobotEncoded robotEncoded;
+    private Encoded encoded;
+    private DriveTrain driveTrain;
 
     @Override
     public void init() {
-        robotEncoded = new RobotEncoded(hardwareMap, telemetry);
+        encoded = new Encoded(hardwareMap, telemetry);
+        driveTrain = new DriveTrain(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
     }
@@ -32,77 +35,77 @@ public class redBack extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(28,600);
-                robotEncoded.turnLeft(20,700);
-                robotEncoded.backward(3,600);
-                robotEncoded.forward(3,600);
+                encoded.closeClaw();
+                driveTrain.backward(28,600);
+                driveTrain.turnLeft(20,700);
+                driveTrain.backward(3,600);
+                driveTrain.forward(3,600);
                 //purple scored
-                robotEncoded.strafeLeft(8,700);
-                robotEncoded.stopBot(0.5);
-                robotEncoded.armScoreAuto();
-                robotEncoded.backdropClawTilt();
-                robotEncoded.forward(40,700);
-                robotEncoded.openTopClaw();
-                robotEncoded.stopBot(1);
-                robotEncoded.backward(16,700);
+                driveTrain.strafeLeft(8,700);
+                encoded.stopBot(0.5);
+                encoded.armScoreAuto();
+                encoded.backdropClawTilt();
+                driveTrain.forward(40,700);
+                encoded.openTopClaw();
+                encoded.stopBot(1);
+                driveTrain.backward(16,700);
                 //yellow pixel scored
-                robotEncoded.closeClaw();
-                robotEncoded.armtoGround();
-                robotEncoded.strafeRight(40,700);
-                robotEncoded.forward(10,700);
+                encoded.closeClaw();
+                encoded.armtoGround();
+                driveTrain.strafeRight(40,700);
+                driveTrain.forward(10,700);
                 //robot parked
 
                 break;
 
             case NONE:
             case MIDDLE:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(30,600);
-                robotEncoded.retractTilt();
-                robotEncoded.forward(4,700);
-                robotEncoded.turnLeft(20.5,400);
-                robotEncoded.stopBot(1);
+                encoded.closeClaw();
+                driveTrain.backward(30,600);
+                encoded.retractTilt();
+                driveTrain.forward(4,700);
+                driveTrain.turnLeft(20.5,400);
+                encoded.stopBot(1);
                 //purple scored
-                robotEncoded.strafeLeft(3,400);
-                robotEncoded.armScoreAuto();
-                robotEncoded.backdropClawTilt();
-                robotEncoded.forward(41,700);
-                robotEncoded.openTopClaw();
-                robotEncoded.stopBot(0.8);
+                driveTrain.strafeLeft(3,400);
+                encoded.armScoreAuto();
+                encoded.backdropClawTilt();
+                driveTrain.forward(41,700);
+                encoded.openTopClaw();
+                encoded.stopBot(0.8);
                 //yellow scored
-                robotEncoded.backward(10,700);
-                robotEncoded.closeClaw();
-                robotEncoded.armtoGround();
-                robotEncoded.strafeRight(27,700);
-                robotEncoded.forward(10,700);
+                driveTrain.backward(10,700);
+                encoded.closeClaw();
+                encoded.armtoGround();
+                driveTrain.strafeRight(27,700);
+                driveTrain.forward(10,700);
                 //park
 
                 break;
 
             case RIGHT:
-                robotEncoded.closeClaw();
-                robotEncoded.backward(20,700);
-                robotEncoded.retractTilt();
-                robotEncoded.strafeLeft(13,600);
-                robotEncoded.stopBot(1);
-                robotEncoded.backward(1,700);
-                robotEncoded.forward(3,700);
+                encoded.closeClaw();
+                driveTrain.backward(20,700);
+                encoded.retractTilt();
+                driveTrain.strafeLeft(13,600);
+                encoded.stopBot(1);
+                driveTrain.backward(1,700);
+                driveTrain.forward(3,700);
                 //purple pixel scored
-                robotEncoded.strafeLeft(16,700);
-                robotEncoded.backward(3,600);
-                robotEncoded.turnLeft(20,700);
-                robotEncoded.stopBot(1);
-                robotEncoded.armScoreAuto();
-                robotEncoded.forward(15,700);
-                robotEncoded.openTopClaw();
+                driveTrain.strafeLeft(16,700);
+                driveTrain.backward(3,600);
+                driveTrain.turnLeft(20,700);
+                encoded.stopBot(1);
+                encoded.armScoreAuto();
+                driveTrain.forward(15,700);
+                encoded.openTopClaw();
                 //yellow pixel scored
-                robotEncoded.stopBot(1);
-                robotEncoded.backward(12,700);
-                robotEncoded.closeClaw();
-                robotEncoded.armtoGround();
-                robotEncoded.strafeRight(22,700);
-                robotEncoded.forward(10,700);
+                encoded.stopBot(1);
+                driveTrain.backward(12,700);
+                encoded.closeClaw();
+                encoded.armtoGround();
+                driveTrain.strafeRight(22,700);
+                driveTrain.forward(10,700);
                 //robot parked
 
                 break;

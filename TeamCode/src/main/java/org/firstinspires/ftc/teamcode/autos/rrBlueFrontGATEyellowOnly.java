@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.main.RobotEncoded;
+import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
@@ -15,11 +15,11 @@ import org.firstinspires.ftc.vision.VisionPortal;
 public class rrBlueFrontGATEyellowOnly extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
-    private RobotEncoded robotEncoded;
+    private Encoded encoded;
 
     @Override
     public void init() {
-        robotEncoded = new RobotEncoded(hardwareMap, telemetry);
+        encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
     }
@@ -40,13 +40,15 @@ public class rrBlueFrontGATEyellowOnly extends OpMode {
                         .lineToConstantHeading(new Vector2d(-40, 50)) // positioning
                         .lineToLinearHeading(new Pose2d(-37, 29, Math.toRadians(180))) // orientation
                         .lineToConstantHeading(new Vector2d(-35, 29)) //slow push to spikemark
-                        .waitSeconds(.5) // drop pixel
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
+                        .addTemporalMarker(0.5,()->{robotEncoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(-38, 29)) // safe backup
                         .lineToConstantHeading(new Vector2d(-49,11)) // line up for gate
                         .lineToConstantHeading(new Vector2d(42, 11)) // fly under gate
                         .splineToLinearHeading(new Pose2d(50,41.5), Math.toRadians(0)) // to bd
-                        .waitSeconds(.5) // place yellow
-
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
+                        .addTemporalMarker(0.5,()-> {robotEncoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(43, 41.5)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -59,14 +61,15 @@ public class rrBlueFrontGATEyellowOnly extends OpMode {
             case MIDDLE:
                 drive.trajectorySequenceBuilder(new Pose2d(-35, 70, Math.toRadians(90)))
                         .lineToConstantHeading(new Vector2d(-33.5,32)) // to middle spikemark
-                        .waitSeconds(.5) // drop pixel
-                        .lineToConstantHeading(new Vector2d(-35, 41)) // backup
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
+                        .addTemporalMarker(0.5,()->{robotEncoded.openBottomClaw();})                            .lineToConstantHeading(new Vector2d(-35, 41)) // backup
                         .lineToLinearHeading(new Pose2d(-49,41, Math.toRadians(0))) // out the way of spikemark
                         .lineToConstantHeading(new Vector2d(-49,11)) // line up for gate
                         .lineToConstantHeading(new Vector2d(42, 11)) // fly under gate
                         .splineToLinearHeading(new Pose2d(50,35), Math.toRadians(0)) // to bd
-                        .waitSeconds(.5) // place yellow
-
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
+                        .addTemporalMarker(0.5,()-> {robotEncoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(43, 35)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -78,14 +81,16 @@ public class rrBlueFrontGATEyellowOnly extends OpMode {
             case RIGHT:
                 drive.trajectorySequenceBuilder(new Pose2d(-35, 70, Math.toRadians(90)))
                         .lineToConstantHeading(new Vector2d(-46,38)) // to right spikemark
-                        .waitSeconds(.5) // drop pixel
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
+                        .addTemporalMarker(0.5,()->{robotEncoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(-46, 49)) // backup
                         .lineToLinearHeading(new Pose2d(-35,49, Math.toRadians(0))) // out the way of spikemark
                         .lineToConstantHeading(new Vector2d(-35,11))
                         .lineToConstantHeading(new Vector2d(42,11))
                         .splineToLinearHeading(new Pose2d(50,28.5), Math.toRadians(0)) // to bd
-                        .waitSeconds(.5) // place yellow
-
+                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
+                        .addTemporalMarker(0.5,()-> {robotEncoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(43, 28.5)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
