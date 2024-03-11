@@ -1,42 +1,46 @@
 package org.firstinspires.ftc.teamcode.autos;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.main.Encoded;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name = "rrBlueFrontGATE")
-public class rrBlueFrontGATE extends OpMode {
+@Autonomous(name = "RR Blue Front Gate")
+public class rrBlueFrontGate extends LinearOpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private Encoded encoded;
 
     @Override
-    public void init() {
+    public void runOpMode() {
         encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
-    }
 
-    @Override
-    public void init_loop() {
-        telemetry.addData("Identified", visionProcessor.getSelection());
-    }
+        while (!isStarted()) {
+            telemetry.addData("Identified", visionProcessor.getSelection());
+            telemetry.update();
+        }
 
-    @Override
-    public void start() {
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        waitForStart();
         visionPortal.stopStreaming();
-        telemetry.addData("Identified", visionProcessor.getSelection());
+
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+
+        Pose2d startPose = (new Pose2d(-35, 70, Math.toRadians(270)));
+        drive.setPoseEstimate(startPose);
+
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                drive.trajectorySequenceBuilder(new Pose2d(-35, 70, Math.toRadians(90)))
+                TrajectorySequence blueFLG = drive.trajectorySequenceBuilder(startPose)
                         .lineToConstantHeading(new Vector2d(-40, 50)) // positioning
                         .lineToLinearHeading(new Pose2d(-37, 29, Math.toRadians(180))) // orientation
                         .lineToConstantHeading(new Vector2d(-35, 29)) //slow push to spikemark
@@ -65,15 +69,18 @@ public class rrBlueFrontGATE extends OpMode {
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
+                drive.followTrajectorySequence(blueFLG);
+
 
                 break;
 
             case NONE:
             case MIDDLE:
-                drive.trajectorySequenceBuilder(new Pose2d(-35, 70, Math.toRadians(90)))
+                TrajectorySequence blueFMG = drive.trajectorySequenceBuilder(startPose)
                         .lineToConstantHeading(new Vector2d(-33.5,32)) // to middle spikemark
                         .addTemporalMarker(0,()-> {encoded.armtoGround();})
-                        .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})                            .lineToConstantHeading(new Vector2d(-35, 41)) // backup
+                        .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
+                        .lineToConstantHeading(new Vector2d(-35, 41)) // backup
                         .lineToLinearHeading(new Pose2d(-49,41, Math.toRadians(0))) // out the way of spikemark
                         .lineToConstantHeading(new Vector2d(-49,11)) // line up for gate
                         .lineToConstantHeading(new Vector2d(42, 11)) // fly under gate
@@ -97,11 +104,12 @@ public class rrBlueFrontGATE extends OpMode {
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
+                drive.followTrajectorySequence(blueFMG);
 
                 break;
 
             case RIGHT:
-                drive.trajectorySequenceBuilder(new Pose2d(-35, 70, Math.toRadians(90)))
+                TrajectorySequence blueFRG = drive.trajectorySequenceBuilder(startPose)
                         .lineToConstantHeading(new Vector2d(-46,38)) // to right spikemark
                         .addTemporalMarker(0,()-> {encoded.armtoGround();})
                         .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
@@ -128,13 +136,11 @@ public class rrBlueFrontGATE extends OpMode {
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
+                drive.followTrajectorySequence(blueFRG);
+
                 break;
         }
     }
 
-    @Override
-    public void loop() {
-
-    }
 }
 

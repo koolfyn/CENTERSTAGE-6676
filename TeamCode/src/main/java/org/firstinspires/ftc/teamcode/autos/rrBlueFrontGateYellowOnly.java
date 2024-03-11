@@ -1,107 +1,110 @@
 package org.firstinspires.ftc.teamcode.autos;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.main.Encoded;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name = "rrBlueFrontTRUSSyellowOnly")
-public class rrBlueFrontTRUSSyellowOnly extends OpMode {
+@Autonomous(name = "RR Blue Front Gate Yellow Only")
+public class rrBlueFrontGateYellowOnly extends LinearOpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private Encoded encoded;
 
     @Override
-    public void init() {
+    public void runOpMode() {
         encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
-    }
 
-    @Override
-    public void init_loop() {
-        telemetry.addData("Identified", visionProcessor.getSelection());
-    }
+        while (!isStarted()) {
+            telemetry.addData("Identified", visionProcessor.getSelection());
+            telemetry.update();
+        }
 
-    @Override
-    public void start() {
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        waitForStart();
         visionPortal.stopStreaming();
-        telemetry.addData("Identified", visionProcessor.getSelection());
+
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+
+        Pose2d startPose = (new Pose2d(-35, 70, Math.toRadians(270)));
+        drive.setPoseEstimate(startPose);
+
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                drive.trajectorySequenceBuilder(new Pose2d(-35, 70, Math.toRadians(90)))
+                TrajectorySequence blueFLGYO = drive.trajectorySequenceBuilder(startPose)
                         .lineToConstantHeading(new Vector2d(-40, 50)) // positioning
                         .lineToLinearHeading(new Pose2d(-37, 29, Math.toRadians(180))) // orientation
                         .lineToConstantHeading(new Vector2d(-35, 29)) //slow push to spikemark
                         .addTemporalMarker(0,()-> {encoded.armtoGround();})
                         .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(-38, 29)) // safe backup
-                        .lineToConstantHeading(new Vector2d(-42, 58.5)) // orientate + line up for truss
-                        .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
-                        .splineToLinearHeading(new Pose2d(50, 35.5), Math.toRadians(0)) // to bd
+                        .lineToConstantHeading(new Vector2d(-49,11)) // line up for gate
+                        .lineToConstantHeading(new Vector2d(42, 11)) // fly under gate
+                        .splineToLinearHeading(new Pose2d(50,41.5), Math.toRadians(0)) // to bd
                         .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
                         .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
                         .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(42, 35.5)) // back up from bd
+                        .lineToConstantHeading(new Vector2d(43, 41.5)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
-
-
                         .build();
+                drive.followTrajectorySequence(blueFLGYO);
 
                 break;
 
             case NONE:
             case MIDDLE:
-                drive.trajectorySequenceBuilder(new Pose2d(-35, 70, Math.toRadians(90)))
-                        .lineToConstantHeading(new Vector2d(-35, 34)) // to spikemark
+               TrajectorySequence blueFMGYO = drive.trajectorySequenceBuilder(startPose)
+                        .lineToConstantHeading(new Vector2d(-33.5,32)) // to middle spikemark
                         .addTemporalMarker(0,()-> {encoded.armtoGround();})
                         .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
-                        .lineToConstantHeading(new Vector2d(-42, 58.5)) // orientate + line up for truss
-                        .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
-                        .splineToLinearHeading(new Pose2d(50, 35.5), Math.toRadians(0)) // to bd
+                        .lineToConstantHeading(new Vector2d(-35, 41)) // backup
+                        .lineToLinearHeading(new Pose2d(-49,41, Math.toRadians(0))) // out the way of spikemark
+                        .lineToConstantHeading(new Vector2d(-49,11)) // line up for gate
+                        .lineToConstantHeading(new Vector2d(42, 11)) // fly under gate
+                        .splineToLinearHeading(new Pose2d(50,35), Math.toRadians(0)) // to bd
                         .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
                         .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
                         .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(42, 35.5)) // back up from bd
+                        .lineToConstantHeading(new Vector2d(43, 35)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
-
                         .build();
-
+               drive.followTrajectorySequence(blueFMGYO);
 
                 break;
 
             case RIGHT:
-                drive.trajectorySequenceBuilder(new Pose2d(-35, 70, Math.toRadians(90)))
-                        .lineToConstantHeading(new Vector2d(-46, 38)) // to right spikemark
+               TrajectorySequence blueFRGYO = drive.trajectorySequenceBuilder(startPose)
+                        .lineToConstantHeading(new Vector2d(-46,38)) // to right spikemark
                         .addTemporalMarker(0,()-> {encoded.armtoGround();})
                         .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(-46, 49)) // backup
-                        .lineToLinearHeading(new Pose2d(-46, 58.5, Math.toRadians(0))) // orientate + line up for truss
-                        .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
-                        .splineToLinearHeading(new Pose2d(50, 28.5), Math.toRadians(0)) // to bd
+                        .lineToLinearHeading(new Pose2d(-35,49, Math.toRadians(0))) // out the way of spikemark
+                        .lineToConstantHeading(new Vector2d(-35,11))
+                        .lineToConstantHeading(new Vector2d(42,11))
+                        .splineToLinearHeading(new Pose2d(50,28.5), Math.toRadians(0)) // to bd
                         .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
                         .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
                         .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(42, 28.5)) // back up from bd
+                        .lineToConstantHeading(new Vector2d(43, 28.5)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
+               drive.followTrajectorySequence(blueFRGYO);
+
                 break;
         }
     }
 
-    @Override
-    public void loop() {
-
-    }
 }
 

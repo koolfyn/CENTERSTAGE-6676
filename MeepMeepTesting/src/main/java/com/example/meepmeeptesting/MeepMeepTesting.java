@@ -15,28 +15,18 @@ public class MeepMeepTesting {
                 .setConstraints(46, 46, Math.toRadians(190), Math.toRadians(190), 13.8)
                 .followTrajectorySequence(drive ->
 
-                                drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(90))) // 21 seconds
-                                        .lineToConstantHeading(new Vector2d(12,32)) // to spikemark
-                                       // .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
-                                        //.addTemporalMarker(0.5,()->{robotEncoded.openBottomClaw();})
-                                        .lineToConstantHeading(new Vector2d(12, 37)) // back up
-                                        .splineToLinearHeading(new Pose2d(50,36), Math.toRadians(0)) // to bd
-                                       // .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
-                                        //.addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
-                                        //.addTemporalMarker(0.5,()-> {robotEncoded.closeClaw();})
-                                        .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
-                                        .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(180))) // middle + orientate
-                                        .lineToConstantHeading(new Vector2d(-60,11)) // to white stack
-                                       // .addTemporalMarker(0.5, ()-> {robotEncoded.armtoPixelStack();})
-                                        //.addTemporalMarker(0.5, ()-> {robotEncoded.closeClaw();})
-                                        .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(0))) // middle + orientate
-                                        .lineToConstantHeading(new Vector2d(38,11)) // "safe spot"
-                                       .splineToConstantHeading(new Vector2d(50,36), Math.toRadians(0)) // to bd
-                                       // .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
-                                      //  .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
-                                        .lineToConstantHeading(new Vector2d(42, 36)) // back up from bd
-                                        .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
-                                        //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+                        drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(270)))
+                                .lineToConstantHeading(new Vector2d(12,30)) // to spikemark
+//                                .addTemporalMarker(0,()-> {encoded.armtoGround();})
+//                                .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
+                                .lineToConstantHeading(new Vector2d(12, 45)) // back up
+                                .splineToLinearHeading(new Pose2d(50,36), Math.toRadians(0)) // to bd
+//                                .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
+//                                .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+//                                .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+                                .lineToConstantHeading(new Vector2d(43, 36)) // back up
+                                .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
+                                //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
 
                                 .build()

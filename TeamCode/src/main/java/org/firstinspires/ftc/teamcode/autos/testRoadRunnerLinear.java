@@ -25,7 +25,6 @@ public class testRoadRunnerLinear extends LinearOpMode {
         encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
-        telemetry.addData("Identified", visionProcessor.getSelection());
 //
 //        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 //        Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
@@ -46,9 +45,6 @@ public class testRoadRunnerLinear extends LinearOpMode {
 //                .build();
 
 //
-        while (!isStarted() && !isStopRequested()) {
-            telemetry.addData("Identified", visionProcessor.getSelection());
-        }
 
         waitForStart();
         visionPortal.stopStreaming();
