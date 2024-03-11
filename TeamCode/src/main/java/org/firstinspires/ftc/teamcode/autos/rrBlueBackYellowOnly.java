@@ -37,13 +37,13 @@ public class rrBlueBackYellowOnly extends OpMode {
             case LEFT:
                 drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(90)))
                         .lineToConstantHeading(new Vector2d(23,35)) // to spikemark
-                        .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
-                        .addTemporalMarker(0.5,()->{robotEncoded.openBottomClaw();})
+                        .addTemporalMarker(0,()-> {encoded.armtoGround();})
+                        .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(23, 40)) // back up
                         .splineToLinearHeading(new Pose2d(50,42), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
-                        .addTemporalMarker(0.5,()-> {robotEncoded.closeClaw();})
+                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(43, 42)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -56,13 +56,13 @@ public class rrBlueBackYellowOnly extends OpMode {
             case MIDDLE:
                 drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(90)))
                         .lineToConstantHeading(new Vector2d(12,30)) // to spikemark
-                        .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
-                        .addTemporalMarker(0.5,()->{robotEncoded.openBottomClaw();})
+                        .addTemporalMarker(0,()-> {encoded.armtoGround();})
+                        .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(12, 35)) // back up
                         .splineToLinearHeading(new Pose2d(50,36), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
-                        .addTemporalMarker(0.5,()-> {robotEncoded.closeClaw();})
+                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(43, 36)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -75,13 +75,13 @@ public class rrBlueBackYellowOnly extends OpMode {
                         .lineToConstantHeading(new Vector2d(23,31)) // safely move
                         .lineToLinearHeading(new Pose2d(19,31, Math.toRadians(0))) // orientate
                         .lineToConstantHeading(new Vector2d(9, 30)) // right spikemark
-                        .addTemporalMarker(0,()-> {robotEncoded.armtoGround();})
-                        .addTemporalMarker(0.5,()->{robotEncoded.openBottomClaw();})
+                        .addTemporalMarker(0,()-> {encoded.armtoGround();})
+                        .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(12, 30)) // back up
                         .splineToLinearHeading(new Pose2d(50,29), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {robotEncoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {robotEncoded.openTopClaw();})
-                        .addTemporalMarker(0.5,()-> {robotEncoded.closeClaw();})
+                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(43, 29)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)

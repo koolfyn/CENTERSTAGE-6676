@@ -71,7 +71,7 @@ public class testRoadRunnerLinear extends LinearOpMode {
                         .waitSeconds(1)
                         .splineTo(new Vector2d(10,-59),Math.toRadians(0))
                         .splineTo(new Vector2d(48,-31),Math.toRadians(0))
-                        .addTemporalMarker(5,()-> {encoded.armScoreAuto();})
+                        .addTemporalMarker(2,()-> {encoded.armScoreAuto();})
                         .addTemporalMarker(6,()-> {encoded.openTopClaw();})
                         .waitSeconds(1)
                         //yellow dropped
