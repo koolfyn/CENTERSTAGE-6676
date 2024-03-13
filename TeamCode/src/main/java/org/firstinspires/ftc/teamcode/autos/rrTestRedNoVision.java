@@ -20,50 +20,34 @@ public class rrTestRedNoVision extends LinearOpMode{
     @Override
     public void runOpMode() {
         encoded = new Encoded(hardwareMap, telemetry);
-
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = (new Pose2d(-35, 70, Math.toRadians(270)));
+        Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
         drive.setPoseEstimate(startPose);
 
         waitForStart();
 
-        TrajectorySequence blueFLT = drive.trajectorySequenceBuilder(startPose)
-                .addTemporalMarker(0,()-> {encoded.closeClaw();})
-                .lineToConstantHeading(new Vector2d(-40, 50)) // positioning
-                .lineToLinearHeading(new Pose2d(-37, 37, Math.toRadians(0))) // orientation
-                .lineToConstantHeading(new Vector2d(-35, 37)) // slow push to spikemark
-                .addTemporalMarker(()-> {encoded.armtoGroundAuto();})
-                .addTemporalMarker(()->{encoded.openBottomClaw();})
-                .lineToConstantHeading(new Vector2d(-38, 40)) // safe backup
-                .lineToConstantHeading(new Vector2d(-42, 58.5)) // orientate + line up for truss
-                .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
-                .splineToLinearHeading(new Pose2d(50, 35.5), Math.toRadians(0)) // to bd
-                .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                .addDisplacementMarker(()-> {encoded.closeClaw();})
-                // if we have should
-                .lineToConstantHeading(new Vector2d(42, 35.5)) // back up from bd
-                .lineToConstantHeading(new Vector2d(42, 58.5)) // line up for truss
-                .lineToConstantHeading(new Vector2d(-42, 58.5)) // fly under truss
-                .lineToLinearHeading(new Pose2d(-47, 35, Math.toRadians(180))) // orientate + to stack
-                .lineToLinearHeading(new Pose2d(-55, 35, Math.toRadians(180))) // orientate + to stack
-                .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
-                .addDisplacementMarker (()-> {encoded.closeClaw();})
-                .lineToConstantHeading(new Vector2d(-50, 35))
-                .lineToConstantHeading(new Vector2d(-42, 58.5)) // orientate + line up for truss
-                .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
-                .splineToLinearHeading(new Pose2d(50, 35.5), Math.toRadians(0)) // to bd
-                .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                .lineToConstantHeading(new Vector2d(42, 35.5)) // back up from bd
-                .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
-                //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+        if (isStopRequested()) return;
+
+        TrajectorySequence frontM = drive.trajectorySequenceBuilder(startPose)
+                .addTemporalMarker(0,()->{encoded.closeClaw();})
+                .waitSeconds(2)
+                .lineToSplineHeading(new Pose2d(-36.5,-44.5,Math.toRadians(45)))
+                .waitSeconds(2)
+                .addTemporalMarker(1,()-> {
+                    encoded.armtoGroundAuto();})
+                .addTemporalMarker(3,()-> {encoded.openBottomClaw();})
+                .addTemporalMarker(4,()-> {encoded.armScoreAuto();})
+                //purple dropped
+                .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
+                .waitSeconds(0.5)
+                .splineTo(new Vector2d(10,-59),Math.toRadians(0))
+                .splineTo(new Vector2d(54,-42),Math.toRadians(0))
+                .waitSeconds(2)
+                .addTemporalMarker(11,()-> {encoded.openTopClaw();})
+                //yellow dropped
+                .lineTo(new Vector2d(50,-60))
                 .build();
-        drive.followTrajectorySequence(blueFLT);
-
+        drive.followTrajectorySequence(frontM);
 
     }
-    }
-
+}

@@ -45,7 +45,7 @@ public class testRoadRunner extends OpMode {
                 .lineTo(new Vector2d(-47,-52))
                 .waitSeconds(2)
                 .addTemporalMarker(0,()-> {encoded.armtoGround();})
-               // .addTemporalMarker(0.5,()-> {robotEncoded.openClaw();})
+                // .addTemporalMarker(0.5,()-> {encoded.openClaw();})
 
                 //purple dropped
                 .lineToSplineHeading(new Pose2d(-35,-59,Math.toRadians(0)))
@@ -53,7 +53,7 @@ public class testRoadRunner extends OpMode {
                 .splineTo(new Vector2d(10,-59),Math.toRadians(0))
                 .splineTo(new Vector2d(48,-31),Math.toRadians(0))
                 .addTemporalMarker(5,()-> {encoded.armScoreAuto();})
-               // .addTemporalMarker(6,()-> {robotEncoded.openClaw();})
+                // .addTemporalMarker(6,()-> {encoded.openClaw();})
 
                 .waitSeconds(1)
                 //yellow dropped
@@ -63,7 +63,7 @@ public class testRoadRunner extends OpMode {
                 .setReversed(false)
                 .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
                 .addTemporalMarker(8,()-> {encoded.armtoGround();})
-                //.addTemporalMarker(9,()-> {robotEncoded.openClaw();})
+                //.addTemporalMarker(9,()-> {encoded.openClaw();})
                 .build();
 
         TrajectorySequence frontM = drive.trajectorySequenceBuilder(startPose)
@@ -82,7 +82,7 @@ public class testRoadRunner extends OpMode {
                 .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
                 .build();
 
-        TrajectorySequence frontR = drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence frontR =drive.trajectorySequenceBuilder(startPose)
                 .lineToSplineHeading(new Pose2d(-38,-48,Math.toRadians(45)))
                 //purple dropped
                 .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
@@ -121,21 +121,22 @@ public class testRoadRunner extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-             // remember to create a start pose before trajectory creation and name them appropriately
+                // remember to create a start pose before trajectory creation and name them appropriately
                 //drive.followTrajectorySequence(frontL);
                 //drive.followTrajectory(a);
+                //robotEncoded.forward(20,1000);
 
                 break;
 
             case NONE:
             case MIDDLE:
                 //drive.followTrajectorySequence(frontM);
-
+                //robotEncoded.forward(15,1000);
                 break;
 
             case RIGHT:
                 //drive.followTrajectorySequence(backR);
-
+                //robotEncoded.forward(10,1000);
                 break;
         }
     }

@@ -40,7 +40,7 @@ public class rrBlueBackGATE extends OpMode {
             case LEFT:
                 drive.trajectorySequenceBuilder(new Pose2d(12, 74, Math.toRadians(90))) // 20 seconds
                         .lineToConstantHeading(new Vector2d(23,35)) // to spikemark
-                       //purple down
+                        //purple down
                         .addTemporalMarker(0,()-> {encoded.armtoGround();})
                         .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(23, 40)) // back up
@@ -117,7 +117,7 @@ public class rrBlueBackGATE extends OpMode {
                         //  .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
-                            .build();
+                        .build();
                 break;
 
             case RIGHT:
@@ -158,6 +158,10 @@ public class rrBlueBackGATE extends OpMode {
                         // .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
+//                TrajectorySequence test = drive.trajectorySequenceBuilder(startPose)
+//                        .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0))
+//                                .build();
+//                        drive.followTrajectorySequence(test);
                 break;
         }
     }
