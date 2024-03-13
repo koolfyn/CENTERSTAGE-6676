@@ -41,18 +41,19 @@ public class rrBlueFrontGateYellowOnly extends LinearOpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 TrajectorySequence blueFLGYO = drive.trajectorySequenceBuilder(startPose)
+                        .addTemporalMarker(0,()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(-40, 50)) // positioning
-                        .lineToLinearHeading(new Pose2d(-37, 29, Math.toRadians(180))) // orientation
+                        .lineToLinearHeading(new Pose2d(-37, 29, Math.toRadians(0))) // orientation
                         .lineToConstantHeading(new Vector2d(-35, 29)) //slow push to spikemark
-                        .addTemporalMarker(0,()-> {encoded.armtoGround();})
+                        .addTemporalMarker(0,()-> {encoded.armtoGroundAuto();})
                         .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(-38, 29)) // safe backup
                         .lineToConstantHeading(new Vector2d(-49,11)) // line up for gate
                         .lineToConstantHeading(new Vector2d(42, 11)) // fly under gate
                         .splineToLinearHeading(new Pose2d(50,41.5), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+                        .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                        .addDisplacementMarker(()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(43, 41.5)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -64,17 +65,18 @@ public class rrBlueFrontGateYellowOnly extends LinearOpMode {
             case NONE:
             case MIDDLE:
                TrajectorySequence blueFMGYO = drive.trajectorySequenceBuilder(startPose)
-                        .lineToConstantHeading(new Vector2d(-33.5,32)) // to middle spikemark
-                        .addTemporalMarker(0,()-> {encoded.armtoGround();})
-                        .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
+                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
+                       .lineToConstantHeading(new Vector2d(-33.5,32)) // to middle spikemark
+                       .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
+                       .addDisplacementMarker(()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(-35, 41)) // backup
                         .lineToLinearHeading(new Pose2d(-49,41, Math.toRadians(0))) // out the way of spikemark
                         .lineToConstantHeading(new Vector2d(-49,11)) // line up for gate
                         .lineToConstantHeading(new Vector2d(42, 11)) // fly under gate
                         .splineToLinearHeading(new Pose2d(50,35), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+                       .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                       .addDisplacementMarker(()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(43, 35)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -85,17 +87,18 @@ public class rrBlueFrontGateYellowOnly extends LinearOpMode {
 
             case RIGHT:
                TrajectorySequence blueFRGYO = drive.trajectorySequenceBuilder(startPose)
-                        .lineToConstantHeading(new Vector2d(-46,38)) // to right spikemark
-                        .addTemporalMarker(0,()-> {encoded.armtoGround();})
-                        .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
+                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
+                       .lineToConstantHeading(new Vector2d(-46,38)) // to right spikemark
+                       .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
+                       .addDisplacementMarker(()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(-46, 49)) // backup
                         .lineToLinearHeading(new Pose2d(-35,49, Math.toRadians(0))) // out the way of spikemark
                         .lineToConstantHeading(new Vector2d(-35,11))
                         .lineToConstantHeading(new Vector2d(42,11))
                         .splineToLinearHeading(new Pose2d(50,28.5), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+                       .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                       .addDisplacementMarker(()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(43, 28.5)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)

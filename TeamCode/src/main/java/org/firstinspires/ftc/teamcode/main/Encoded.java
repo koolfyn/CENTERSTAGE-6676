@@ -52,23 +52,30 @@ public class Encoded {
     }
 
     public void openBottomClaw() {
-        clawBottom.setPosition(0.6);
+        clawBottom.setPosition(0.3);
     }
     public void openTopClaw() {
-        clawTop.setPosition(0.3);
+        clawTop.setPosition(0.2);
     }
 
     public void closeClaw() {
         clawBottom.setPosition(0.2);
-        clawTop.setPosition(0.52);
+        clawTop.setPosition(0.35);
     }
 
     public void armtoGround() {
-        clawTilt.setPosition(0.59);
+        clawTilt.setPosition(0.58);
         arm.setTargetPosition(Constants.ground);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(400);
     }
+    public void armtoGroundAuto() {
+        clawTilt.setPosition(0.55);
+        arm.setTargetPosition(Constants.ground);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(400);
+    }
+
     public void armScoreAuto() {
         clawTilt.setPosition(0.39);
         arm.setTargetPosition(0);

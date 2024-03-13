@@ -40,28 +40,27 @@ public class rrBlueBackGate extends LinearOpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                TrajectorySequence blueBLG = drive.trajectorySequenceBuilder(startPose) // 20 seconds
+                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(23,35)) // to spikemark
-                       //purple down
-                        .addTemporalMarker(0,()-> {encoded.armtoGround();})
-                        .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
+                        .addDisplacementMarker(()-> {encoded.armtoGround();})
+                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(23, 40)) // back up
                         .splineToLinearHeading(new Pose2d(50,42), Math.toRadians(0)) // to bd
-                        //yellow on bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+                        .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                        .addDisplacementMarker(()-> {encoded.closeClaw();})
                         .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
                         .lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
                         .lineToConstantHeading(new Vector2d(-55,11)) // to white stack
-                        //pick up pixel stack
-                        .addTemporalMarker(0.5, ()-> {encoded.armtoPixelStack();})
-                        .addTemporalMarker(0.5, ()-> {encoded.closeClaw();})
+                       .addDisplacementMarker(()->{encoded.openBottomClaw();})
+                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                        .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
+                        .addDisplacementMarker (()-> {encoded.closeClaw();})
                         .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) //  orientate
                         .lineToConstantHeading(new Vector2d(38,11)) // "safe spot"
                         .splineToConstantHeading(new Vector2d(50,42), Math.toRadians(0)) // to bd
-                        //drop pixel stack on bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+                        .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(42, 42)) // back up from bd
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -74,24 +73,27 @@ public class rrBlueBackGate extends LinearOpMode {
             case NONE:
             case MIDDLE:
                TrajectorySequence blueBMG = drive.trajectorySequenceBuilder(startPose) // 21 seconds
-                        .lineToConstantHeading(new Vector2d(12,32)) // to spikemark
-                        .addTemporalMarker(0,()-> {encoded.armtoGround();})
-                        .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
+                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
+                       .lineToConstantHeading(new Vector2d(12,32)) // to spikemark
+                       .addDisplacementMarker(()-> {encoded.armtoGround();})
+                       .addDisplacementMarker(()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(12, 37)) // back up
                         .splineToLinearHeading(new Pose2d(50,36), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+                       .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                       .addDisplacementMarker(()-> {encoded.closeClaw();})
                         .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
                         .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(180))) // middle + orientate
                         .lineToConstantHeading(new Vector2d(-60,11)) // to white stack
-                        .addTemporalMarker(0.5, ()-> {encoded.armtoPixelStack();})
-                        .addTemporalMarker(0.5, ()-> {encoded.closeClaw();})
+                       .addDisplacementMarker(()->{encoded.openBottomClaw();})
+                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                       .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
+                       .addDisplacementMarker (()-> {encoded.closeClaw();})
                         .lineToLinearHeading(new Pose2d(0, 11, Math.toRadians(0))) // middle + orientate
                         .lineToConstantHeading(new Vector2d(38,11)) // "safe spot"
                         .splineToConstantHeading(new Vector2d(50,36), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+                       .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(42, 36)) // back up from bd
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -103,26 +105,29 @@ public class rrBlueBackGate extends LinearOpMode {
 
             case RIGHT:
                TrajectorySequence blueBRG = drive.trajectorySequenceBuilder(startPose) // 21 seconds
-                        .lineToConstantHeading(new Vector2d(23,31)) // safely move
-                        .lineToLinearHeading(new Pose2d(19,31, Math.toRadians(0))) // orientate
+                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
+                       .lineToConstantHeading(new Vector2d(23,31)) // safely move
+                        .lineToLinearHeading(new Pose2d(19,31, Math.toRadians(180))) // orientate
                         .lineToConstantHeading(new Vector2d(9, 30)) // right spikemark
-                        .addTemporalMarker(0,()-> {encoded.armtoGround();})
-                        .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
+                       .addDisplacementMarker(()-> {encoded.armtoGround();})
+                       .addDisplacementMarker(()->{encoded.openBottomClaw();})
                         .lineToConstantHeading(new Vector2d(12, 30)) // back up
                         .splineToLinearHeading(new Pose2d(50,29), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+                       .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                       .addDisplacementMarker(()-> {encoded.closeClaw();})
                         .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
                         .lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
                         .lineToConstantHeading(new Vector2d(-60,11)) // to white stack
-                        .addTemporalMarker(0.5, ()-> {encoded.armtoPixelStack();})
-                        .addTemporalMarker(0.5, ()-> {encoded.closeClaw();})
+                       .addDisplacementMarker(()->{encoded.openBottomClaw();})
+                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                       .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
+                       .addDisplacementMarker (()-> {encoded.closeClaw();})
                         .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) //  orientate
                         .lineToConstantHeading(new Vector2d(38,11)) // "safe spot"
                         .splineToConstantHeading(new Vector2d(50,29), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+                       .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(42, 29)) // back up from bd
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
