@@ -48,11 +48,11 @@ public class rrBlueFrontTruss extends LinearOpMode {
                TrajectorySequence blueFLT = drive.trajectorySequenceBuilder(startPose)
                        .addTemporalMarker(0,()-> {encoded.closeClaw();})
                        .lineToConstantHeading(new Vector2d(-40, 50)) // positioning
-                        .lineToLinearHeading(new Pose2d(-37, 29, Math.toRadians(0))) // orientation
-                        .lineToConstantHeading(new Vector2d(-35, 29)) // slow push to spikemark
+                        .lineToLinearHeading(new Pose2d(-37, 39, Math.toRadians(0))) // orientation
+                        .lineToConstantHeading(new Vector2d(-35, 39)) // slow push to spikemark
                        .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                        .lineToConstantHeading(new Vector2d(-38, 29)) // safe backup
+                        .lineToConstantHeading(new Vector2d(-38, 39)) // safe backup
                         .lineToConstantHeading(new Vector2d(-42, 58.5)) // orientate + line up for truss
                         .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
                         .splineToLinearHeading(new Pose2d(50, 35.5), Math.toRadians(0)) // to bd

@@ -40,30 +40,28 @@ public class rrBlueBackTruss extends LinearOpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 TrajectorySequence blueBLT = drive.trajectorySequenceBuilder(startPose)
-                        .addTemporalMarker(0,()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(23,34)) // to spikemark
-                        .addDisplacementMarker(()-> {encoded.armtoGround();})
-                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                        .lineToConstantHeading(new Vector2d(23, 40)) // back up
+                        //.addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
+                        .lineToConstantHeading(new Vector2d(23,40)) // to spikemark
+//                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
+                        .lineToConstantHeading(new Vector2d(28, 46)) // back up
+                        //   .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
                         .splineToLinearHeading(new Pose2d(50,42), Math.toRadians(0)) // to bd
-                        .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                        .addDisplacementMarker(()-> {encoded.closeClaw();})
+//                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(47,42)) // safely move from bd
                         .lineToLinearHeading(new Pose2d(42, 58.5, Math.toRadians(180))) // line up for truss
                         .lineToConstantHeading(new Vector2d(-42, 58.5)) // fly under truss
                         .lineToConstantHeading(new Vector2d(-47,35)) // to stack y cord
                         .lineToConstantHeading(new Vector2d(-55, 35)) // to stack
-                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                        .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
-                        .addDisplacementMarker (()-> {encoded.closeClaw();})
+//                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
+//                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
+//                        .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
+//                        .addDisplacementMarker (()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(-47,35)) // to stack y cord
                         .lineToLinearHeading(new Pose2d(-42, 58.5, Math.toRadians(0))) // lineup for truss
                         .lineToConstantHeading(new Vector2d(42, 58.5)) // line up for truss
+                        // .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
                         .splineToConstantHeading(new Vector2d(50,42), Math.toRadians(0)) // to bd
-                        .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
+//                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(42, 42)) // back up from bd
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -77,32 +75,33 @@ public class rrBlueBackTruss extends LinearOpMode {
             case MIDDLE:
                TrajectorySequence blueBMT = drive.trajectorySequenceBuilder(startPose)
                        .addTemporalMarker(0,()-> {encoded.closeClaw();})
-                       .lineToConstantHeading(new Vector2d(12,32)) // to spikemark
-                       .addDisplacementMarker(()-> {encoded.armtoGround();})
-                       .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                        .lineToConstantHeading(new Vector2d(12, 37)) // back up
-                    .splineToLinearHeading(new Pose2d(50,36), Math.toRadians(0)) // to bd
-                       .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                       .addDisplacementMarker(()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(47,42)) // safely move from bd
-                    .lineToLinearHeading(new Pose2d(42, 58.5, Math.toRadians(180))) // line up for truss
-                    .lineToConstantHeading(new Vector2d(-42, 58.5)) // fly under truss
-                    .lineToConstantHeading(new Vector2d(-47,35)) // to stack y cord
-                    .lineToConstantHeading(new Vector2d(-55, 35)) // to stack
-                       .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                       .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
-                       .addDisplacementMarker (()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(-47,35)) // to stack y cord
-                    .lineToLinearHeading(new Pose2d(-42, 58.5, Math.toRadians(0))) // lineup for truss
-                    .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
-                    .splineToConstantHeading(new Vector2d(50,36), Math.toRadians(0)) // to bd
-                       .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                        .lineToConstantHeading(new Vector2d(42, 36)) // back up from bd
-                    .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
-                    //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+                       .lineToConstantHeading(new Vector2d(12,36)) // to spikemark
+//                                .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
+//                                .addDisplacementMarker(()->{encoded.openBottomClaw();})
+                       .lineToConstantHeading(new Vector2d(12, 41)) // back up
+                       .lineToConstantHeading(new Vector2d(30, 45)) // move
+                       //  .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                       .splineToLinearHeading(new Pose2d(50,36), Math.toRadians(0)) // to bd
+//                                .addDisplacementMarker(()-> {encoded.openTopClaw();})
+//                                .addDisplacementMarker(()-> {encoded.closeClaw();})
+                       .lineToConstantHeading(new Vector2d(47,36)) // safely move from bd
+                       .lineToLinearHeading(new Pose2d(42, 58.5, Math.toRadians(180))) // line up for truss
+                       .lineToConstantHeading(new Vector2d(-42, 58.5)) // fly under truss
+                       .lineToConstantHeading(new Vector2d(-47,35)) // to stack y cord
+                       .lineToConstantHeading(new Vector2d(-55, 35)) // to stack
+//                                .addDisplacementMarker(()->{encoded.openBottomClaw();})
+//                                .addDisplacementMarker(()-> {encoded.openTopClaw();})
+//                                .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
+//                                .addDisplacementMarker (()-> {encoded.closeClaw();})
+                       .lineToConstantHeading(new Vector2d(-47,35)) // to stack y cord
+                       .lineToLinearHeading(new Pose2d(-42, 58.5, Math.toRadians(0))) // lineup for truss
+                       .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
+                       .splineToConstantHeading(new Vector2d(50,36), Math.toRadians(0)) // to bd
+//                                .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+//                                .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                       .lineToConstantHeading(new Vector2d(42, 36)) // back up from bd
+                       .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
+                       //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
                     .build();
                drive.followTrajectorySequence(blueBMT);
@@ -111,29 +110,29 @@ public class rrBlueBackTruss extends LinearOpMode {
             case RIGHT:
                 TrajectorySequence blueBRT = drive.trajectorySequenceBuilder(startPose)
                         .addTemporalMarker(0,()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(23,31)) // safely move
+                        .lineToConstantHeading(new Vector2d(23,33)) // safely move
                         .lineToLinearHeading(new Pose2d(19,31, Math.toRadians(180))) // orientate
-                        .lineToConstantHeading(new Vector2d(9, 30)) // right spikemark
-                        .addDisplacementMarker(()-> {encoded.armtoGround();})
-                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                        .lineToConstantHeading(new Vector2d(12, 30)) // back up
-                        .splineToLinearHeading(new Pose2d(50,29), Math.toRadians(0)) // to bd
-                        .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                        .addDisplacementMarker(()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(47,42)) // safely move from bd
+                        //     .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
+                        .lineToConstantHeading(new Vector2d(9, 32)) // right spikemark
+//                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
+                        .lineToConstantHeading(new Vector2d(14, 32)) // back up
+                        //   .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+                        .lineToLinearHeading(new Pose2d(50,29, Math.toRadians(0))) // to bd
+//                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                        .lineToConstantHeading(new Vector2d(42,42)) // safely move from bd
                         .lineToLinearHeading(new Pose2d(42, 58.5, Math.toRadians(180))) // line up for truss
                         .lineToConstantHeading(new Vector2d(-50, 58.5)) // fly under truss
                         .lineToConstantHeading(new Vector2d(-55, 35)) // to stack
-                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                        .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
-                        .addDisplacementMarker (()-> {encoded.closeClaw();})
+//                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
+//                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
+//                        .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
+//                        .addDisplacementMarker (()-> {encoded.closeClaw();})
+                        .lineToConstantHeading(new Vector2d(-45,35)) // safely move from bd
                         .lineToLinearHeading(new Pose2d(-50, 58.5, Math.toRadians(0))) // lineup for truss
                         .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
                         .splineToConstantHeading(new Vector2d(50,29), Math.toRadians(0)) // to bd
-                        .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
+//                        .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+//                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(42, 29)) // back up from bd
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)

@@ -40,10 +40,10 @@ public class rrBlueFrontGate extends LinearOpMode {
 
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                TrajectorySequence blueFLG = drive.trajectorySequenceBuilder(startPose)
+               TrajectorySequence blueFLG = drive.trajectorySequenceBuilder(startPose)
                         .addTemporalMarker(0,()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(-40, 50)) // positioning
-                        .lineToLinearHeading(new Pose2d(-37, 29, Math.toRadians(0))) // orientation
+                        .lineToLinearHeading(new Pose2d(-37, 33, Math.toRadians(0))) // orientation
                         .lineToConstantHeading(new Vector2d(-35, 29)) //slow push to spikemark
                         .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
                         .addDisplacementMarker(()->{encoded.openBottomClaw();})
