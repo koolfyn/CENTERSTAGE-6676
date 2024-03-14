@@ -59,7 +59,7 @@ public class Encoded {
     }
 
     public void closeClaw() {
-        clawBottom.setPosition(0.2);
+        clawBottom.setPosition(0.15);
         clawTop.setPosition(0.35);
     }
 
