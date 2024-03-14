@@ -62,6 +62,12 @@ public class Encoded {
         clawBottom.setPosition(0.2);
         clawTop.setPosition(0.35);
     }
+    public void closeTopClaw() {
+        clawTop.setPosition(0.35);
+    }
+    public void closeBottomClaw() {
+        clawBottom.setPosition(0.2);
+    }
 
     public void armtoGround() {
         clawTilt.setPosition(0.58);
