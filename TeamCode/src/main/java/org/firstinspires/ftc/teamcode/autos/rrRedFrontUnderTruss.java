@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name = "rrRedFrontUnderTruss")
+@Autonomous(name = "RR Red Front UnderTruss")
 public class rrRedFrontUnderTruss extends LinearOpMode{
     private Encoded encoded;
     private FirstVisionProcessor visionProcessor;

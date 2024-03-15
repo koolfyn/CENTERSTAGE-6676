@@ -39,7 +39,9 @@ public class pushBlueF extends OpMode {
                 encoded.closeClaw();
                 driveTrain.forward(29, 700);
                 driveTrain.turnLeft(20, 700);
-                driveTrain.forward(3, 500);
+                driveTrain.backward(3, 500);
+                encoded.armtoGroundAuto();
+                encoded.stopBot(1);
                 encoded.openBottomClaw();
                 driveTrain.backward(5, 700);
 
@@ -48,15 +50,21 @@ public class pushBlueF extends OpMode {
             case NONE:
             case MIDDLE:
                 encoded.closeClaw();
-                driveTrain.backward(30,700);
-                driveTrain.forward(24, 700);
+                driveTrain.forward(20,700);
+                encoded.armtoGroundAuto();
+                encoded.stopBot(1);
+                encoded.openBottomClaw();
+                driveTrain.backward(10, 700);
                 break;
 
             case RIGHT:
                 encoded.closeClaw();
-                driveTrain.backward(23,700);
-                driveTrain.strafeLeft(13, 700);
+                driveTrain.forward(23,700);
+                driveTrain.turnRight(20, 700);
                 driveTrain.backward(3, 500);
+                encoded.armtoGroundAuto();
+                encoded.stopBot(1);
+                encoded.openBottomClaw();
                 driveTrain.forward(5, 700);
                 break;
 

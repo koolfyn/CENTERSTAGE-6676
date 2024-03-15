@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name = "rrBlueJon")
+@Autonomous(name = "rrBlueBACKJon")
 public class rrbluejon extends LinearOpMode{
     private Encoded encoded;
     private FirstVisionProcessor visionProcessor;
@@ -31,6 +31,7 @@ public class rrbluejon extends LinearOpMode{
 
         while (!isStarted() && !isStopRequested()) {
             telemetry.addData("Identified", visionProcessor.getSelection());
+            telemetry.update();
         }
 
         waitForStart();
