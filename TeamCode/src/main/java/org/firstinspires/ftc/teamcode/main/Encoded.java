@@ -104,10 +104,10 @@ public class Encoded {
     }
 
     public void armtoPixelStack() {
-        arm.setTargetPosition(70);
+        arm.setTargetPosition(130);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
-        clawTilt.setPosition(0.6);
+        clawTilt.setPosition(0.65);
     }
 
     public void launchDrone() {

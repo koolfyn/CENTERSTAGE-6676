@@ -51,22 +51,19 @@ public class rrRedFrontUnderTruss extends LinearOpMode{
                 .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
                 //purple dropped
                 .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
-                .waitSeconds(0.5)
+                .waitSeconds(0.1)
                 .splineTo(new Vector2d(10,-59),Math.toRadians(0))
                 .splineTo(new Vector2d(53,-31),Math.toRadians(0))
                 .waitSeconds(1)
-                .addTemporalMarker(12,()-> {encoded.openTopClaw();})
+                .back(5)
+                .addTemporalMarker(9,()-> {encoded.openTopClaw();})
                 .lineTo(new Vector2d(50,-58.5))
                 //yellow dropped
                 //next few line is cycle to pixel stack not done yet
-//                .setReversed(true)
-//                .splineTo(new Vector2d(10,-58),Math.toRadians(180))
-//                .splineTo(new Vector2d(-35,-58),Math.toRadians(180))
-//                .setReversed(false)
-//                .lineToSplineHeading(new Pose2d(-54,-47,Math.toRadians(135)))
-//                .addTemporalMarker(17,()-> {
-//                    encoded.armtoPixelStack();
-//                    encoded.closeClaw();})
+                .setReversed(true)
+                .splineTo(new Vector2d(10,-58),Math.toRadians(180))
+                .splineTo(new Vector2d(-35,-58),Math.toRadians(180))
+                .setReversed(false)
                 .build();
         drive.followTrajectorySequence(frontL);
                 break;
