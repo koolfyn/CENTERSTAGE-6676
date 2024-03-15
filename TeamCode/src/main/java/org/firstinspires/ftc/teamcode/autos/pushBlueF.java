@@ -37,10 +37,10 @@ public class pushBlueF extends OpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 encoded.closeClaw();
+                encoded.armtoGroundAuto();
                 driveTrain.forward(29, 700);
                 driveTrain.turnLeft(20, 700);
-                driveTrain.backward(3, 500);
-                encoded.armtoGroundAuto();
+                driveTrain.backward(6, 500);
                 encoded.stopBot(1);
                 encoded.openBottomClaw();
                 driveTrain.backward(5, 700);
@@ -50,8 +50,8 @@ public class pushBlueF extends OpMode {
             case NONE:
             case MIDDLE:
                 encoded.closeClaw();
-                driveTrain.forward(20,700);
                 encoded.armtoGroundAuto();
+                driveTrain.forward(18,700);
                 encoded.stopBot(1);
                 encoded.openBottomClaw();
                 driveTrain.backward(10, 700);
@@ -59,13 +59,12 @@ public class pushBlueF extends OpMode {
 
             case RIGHT:
                 encoded.closeClaw();
-                driveTrain.forward(23,700);
-                driveTrain.turnRight(20, 700);
-                driveTrain.backward(3, 500);
                 encoded.armtoGroundAuto();
+                driveTrain.strafeRight(10,800);
+                driveTrain.forward(4,800);
                 encoded.stopBot(1);
                 encoded.openBottomClaw();
-                driveTrain.forward(5, 700);
+                driveTrain.backward(2,800);
                 break;
 
         }

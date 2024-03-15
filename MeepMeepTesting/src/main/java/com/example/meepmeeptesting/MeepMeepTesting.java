@@ -14,21 +14,22 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(46, 46, Math.toRadians(190), Math.toRadians(190), 13.8)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(12, -61.5, Math.toRadians(90)))
-                        .waitSeconds(1)
-                        //.addTemporalMarker(0,()->{encoded.closeClaw();})
-                        //.addTemporalMarker(1,()->{encoded.armtoGroundAuto();})
-                        .lineToSplineHeading(new Pose2d(23,-54,Math.toRadians(90)))
-                        .waitSeconds(1)
-                        //.addTemporalMarker(3,()->{encoded.openBottomClaw();})
-                       // .addTemporalMarker(4,()->{encoded.armScoreAuto();})
-                        //purple dropped
-                        .splineTo(new Vector2d(54,-40),Math.toRadians(0))
-                        .waitSeconds(2)
-                   //     .addTemporalMarker(6,()->{encoded.openTopClaw();})
-                        .lineTo(new Vector2d(52,-58.5))
-                        //yellow dropped
-                        .build()
+                        drive.trajectorySequenceBuilder(new Pose2d(12, 61.5, Math.toRadians(270)))
+                                .waitSeconds(1)
+                                //.addTemporalMarker(0,()->{encoded.closeClaw();})
+                                //.addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
+                                .lineToSplineHeading(new Pose2d(11.5,48,Math.toRadians(225)))
+                                .waitSeconds(1)
+                                //.addTemporalMarker(2,()->{encoded.openBottomClaw();})
+                                //.addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
+                                //purple dropped
+                                .lineToSplineHeading(new Pose2d(53.5,28,Math.toRadians(0)))
+                                .waitSeconds(1.5)
+                                //.addTemporalMarker(5.5,()->{encoded.openTopClaw();})
+                                //yellow dropped
+                                .back(5)
+                                .lineTo(new Vector2d(50,58.5))
+                                .build()
                                 );
 
 

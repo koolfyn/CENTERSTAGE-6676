@@ -39,12 +39,12 @@ public class rrTestRedNoVision extends LinearOpMode{
                 .waitSeconds(1)
                 .addTemporalMarker(0,()->{encoded.closeClaw();})
                 .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                .lineToSplineHeading(new Pose2d(13,46,Math.toRadians(225)))
+                .lineToSplineHeading(new Pose2d(12,49,Math.toRadians(225)))
                 .waitSeconds(1)
                 .addTemporalMarker(2,()->{encoded.openBottomClaw();})
                 .addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
                 //purple dropped
-                .lineToSplineHeading(new Pose2d(53.5,28,Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(53,28,Math.toRadians(0)))
                 .waitSeconds(1.5)
                 .addTemporalMarker(5.5,()->{encoded.openTopClaw();})
                 //yellow dropped

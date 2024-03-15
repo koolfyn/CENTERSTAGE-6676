@@ -24,12 +24,11 @@ public class rrbluejon extends LinearOpMode{
         encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
-        telemetry.addData("Identified", visionProcessor.getSelection());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = (new Pose2d(11.5, 61.5, Math.toRadians(90)));
+        Pose2d startPose = (new Pose2d(11.5, 61.5, Math.toRadians(270)));
         drive.setPoseEstimate(startPose);
 
-        while (!isStarted() && !isStopRequested()) {
+        while (!isStarted()) {
             telemetry.addData("Identified", visionProcessor.getSelection());
             telemetry.update();
         }
@@ -37,14 +36,13 @@ public class rrbluejon extends LinearOpMode{
         waitForStart();
         visionPortal.stopStreaming();
 
-        if (isStopRequested()) return;
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 TrajectorySequence backL = drive.trajectorySequenceBuilder(startPose)
                         .waitSeconds(1)
                         .addTemporalMarker(0,()->{encoded.closeClaw();})
                         .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                        .lineToSplineHeading(new Pose2d(23,46,Math.toRadians(270)))
+                        .lineToSplineHeading(new Pose2d(22,50,Math.toRadians(270)))
                         .waitSeconds(1)
                         .addTemporalMarker(2,()->{encoded.openBottomClaw();})
                         .addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
@@ -54,9 +52,10 @@ public class rrbluejon extends LinearOpMode{
                         .addTemporalMarker(5.5,()->{encoded.openTopClaw();})
                         //yellow dropped
                         .back(5)
-                        .lineTo(new Vector2d(48,58.5))
+                        .lineTo(new Vector2d(51,58.5))
                         .build();
-                drive.followTrajectorySequence(backL);;
+                drive.followTrajectorySequence(backL);
+                break;
 
             case NONE:
             case MIDDLE:
@@ -64,7 +63,7 @@ public class rrbluejon extends LinearOpMode{
                         .waitSeconds(1)
                         .addTemporalMarker(0,()->{encoded.closeClaw();})
                         .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                        .lineToSplineHeading(new Pose2d(16,42,Math.toRadians(270)))
+                        .lineToSplineHeading(new Pose2d(15,42,Math.toRadians(270)))
                         .waitSeconds(1)
                         .addTemporalMarker(2,()->{encoded.openBottomClaw();})
                         .addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
@@ -81,20 +80,21 @@ public class rrbluejon extends LinearOpMode{
                 break;
 
             case RIGHT:
-                TrajectorySequence backR =drive.trajectorySequenceBuilder(startPose)
+                TrajectorySequence backR = drive.trajectorySequenceBuilder(startPose)
                         .waitSeconds(1)
                         .addTemporalMarker(0,()->{encoded.closeClaw();})
                         .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                        .lineToSplineHeading(new Pose2d(23,-52,Math.toRadians(90)))
+                        .lineToSplineHeading(new Pose2d(11.5,48,Math.toRadians(225)))
                         .waitSeconds(1)
                         .addTemporalMarker(2,()->{encoded.openBottomClaw();})
                         .addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
                         //purple dropped
-                        .splineTo(new Vector2d(54,-40),Math.toRadians(0))
+                        .lineToSplineHeading(new Pose2d(53.5,28,Math.toRadians(0)))
                         .waitSeconds(1.5)
-                        .addTemporalMarker(5,()->{encoded.openTopClaw();})
-                        .lineTo(new Vector2d(52,-58.5))
+                        .addTemporalMarker(5.5,()->{encoded.openTopClaw();})
                         //yellow dropped
+                        .back(5)
+                        .lineTo(new Vector2d(50,58.5))
                         .build();
                 drive.followTrajectorySequence(backR);
 
