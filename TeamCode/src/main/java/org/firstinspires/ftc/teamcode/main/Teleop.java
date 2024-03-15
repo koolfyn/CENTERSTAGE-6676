@@ -61,10 +61,16 @@ public class Teleop extends OpMode {
         if (gamepad2.left_bumper) { // open top claw
             encoded.openTopClaw();
         }
-        else if(gamepad2.left_trigger > 0.5) { // open bottom claw
+        else if(gamepad2.left_trigger > 0.4) { // open bottom claw
             encoded.openBottomClaw();
         }
-        else if (gamepad2.right_bumper) { // close both claws
+        else if(gamepad2.right_bumper) {
+            encoded.closeTopClaw();
+        }
+        else if(gamepad2.right_trigger > 0.4) {
+            encoded.closeBottomClaw();
+        }
+        else if (gamepad2.dpad_down) { // close both claws
             encoded.closeClaw();
         }
 
@@ -82,10 +88,6 @@ public class Teleop extends OpMode {
         }
         if(gamepad2.dpad_up) {
             encoded.armtoPixelStack();
-        }
-        if(gamepad2.right_stick_y > 0.5) {
-            encoded.openBottomClaw();
-            encoded.openTopClaw();
         }
 
         if (gamepad2.right_stick_y > 0.1 && armHeight >= 0) { // manual arm control

@@ -45,7 +45,7 @@ public class testRoadRunner extends OpMode {
                 .lineTo(new Vector2d(-47,-52))
                 .waitSeconds(2)
                 .addTemporalMarker(0,()-> {encoded.armtoGround();})
-               // .addTemporalMarker(0.5,()-> {encoded.openClaw();})
+                // .addTemporalMarker(0.5,()-> {encoded.openClaw();})
 
                 //purple dropped
                 .lineToSplineHeading(new Pose2d(-35,-59,Math.toRadians(0)))
@@ -53,7 +53,7 @@ public class testRoadRunner extends OpMode {
                 .splineTo(new Vector2d(10,-59),Math.toRadians(0))
                 .splineTo(new Vector2d(48,-31),Math.toRadians(0))
                 .addTemporalMarker(5,()-> {encoded.armScoreAuto();})
-               // .addTemporalMarker(6,()-> {encoded.openClaw();})
+                // .addTemporalMarker(6,()-> {encoded.openClaw();})
 
                 .waitSeconds(1)
                 //yellow dropped
@@ -121,7 +121,7 @@ public class testRoadRunner extends OpMode {
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-             // remember to create a start pose before trajectory creation and name them appropriately
+                // remember to create a start pose before trajectory creation and name them appropriately
                 //drive.followTrajectorySequence(frontL);
                 //drive.followTrajectory(a);
                 //robotEncoded.forward(20,1000);

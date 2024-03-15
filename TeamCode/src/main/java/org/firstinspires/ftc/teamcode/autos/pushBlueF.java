@@ -37,10 +37,11 @@ public class pushBlueF extends OpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 encoded.closeClaw();
-                driveTrain.backward(29, 700);
+                driveTrain.forward(29, 700);
                 driveTrain.turnLeft(20, 700);
-                driveTrain.backward(3, 500);
-                driveTrain.forward(5, 700);
+                driveTrain.forward(3, 500);
+                encoded.openBottomClaw();
+                driveTrain.backward(5, 700);
 
                 break;
 
