@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name = "rrRedBackNoCycle")
+@Autonomous(name = "RR Red Back No Cycle")
 public class rrRedBackNoCycle extends LinearOpMode{
     private Encoded encoded;
     private FirstVisionProcessor visionProcessor;
@@ -29,8 +29,9 @@ public class rrRedBackNoCycle extends LinearOpMode{
         Pose2d startPose = (new Pose2d(11.5, -61.5, Math.toRadians(90)));
         drive.setPoseEstimate(startPose);
 
-        while (!isStarted() && !isStopRequested()) {
+        while (!isStarted()) {
             telemetry.addData("Identified", visionProcessor.getSelection());
+            telemetry.update();
         }
 
         waitForStart();
