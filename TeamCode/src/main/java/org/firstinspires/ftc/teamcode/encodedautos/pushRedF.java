@@ -1,6 +1,5 @@
-package org.firstinspires.ftc.teamcode.autos;
+package org.firstinspires.ftc.teamcode.encodedautos;
 
-import com.acmerobotics.roadrunner.drive.Drive;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
@@ -10,8 +9,8 @@ import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="PUSH Red Back")
-public class pushRedB extends OpMode {
+@Autonomous (name="push Red Front")
+public class pushRedF extends OpMode{
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private Encoded encoded;
@@ -22,9 +21,9 @@ public class pushRedB extends OpMode {
         encoded = new Encoded(hardwareMap, telemetry);
         driveTrain = new DriveTrain(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
-        visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
-    }
+        visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"),visionProcessor);;
 
+    }
     @Override
     public void init_loop() {
         telemetry.addData("Identified", visionProcessor.getSelection());
@@ -37,39 +36,34 @@ public class pushRedB extends OpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 encoded.closeClaw();
-                driveTrain.backward(28,600);
-                driveTrain.turnLeft(20,700);
-                driveTrain.backward(3,600);
-                driveTrain.forward(2,600);
-                //purple scored
+                driveTrain.backward(33, 700);
+                driveTrain.turnLeft(20, 350);
+                driveTrain.backward(2, 700);
+                driveTrain.forward(3, 700);
+
                 break;
 
             case NONE:
             case MIDDLE:
                 encoded.closeClaw();
-                driveTrain.backward(31,600);
-                encoded.retractTilt();
-                driveTrain.forward(4,700);
-                driveTrain.turnLeft(19.5,400);
-                //purple scored
+                driveTrain.backward(31, 500);
+                driveTrain.forward(8, 700);
+
                 break;
 
             case RIGHT:
                 encoded.closeClaw();
-                driveTrain.backward(20,700);
-                encoded.retractTilt();
-                driveTrain.strafeLeft(13,600);
-                encoded.stopBot(1);
-                driveTrain.backward(1,700);
-                driveTrain.forward(3,700);
+                driveTrain.backward(34, 700);
+                driveTrain.turnRight(20, 350);
+                driveTrain.backward(3, 500);
+                driveTrain.forward(4, 700);
+
                 break;
 
         }
-    }
 
+    }
     @Override
-    public void loop() {
-
+    public void loop () {
     }
-
 }

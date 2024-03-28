@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autos;
+package org.firstinspires.ftc.teamcode.rrautos;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name = "rrBlueBackTRUSS")
+@Autonomous(name = "RR BlueBackTRUSS")
 public class rrBlueBackTRUSS extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;

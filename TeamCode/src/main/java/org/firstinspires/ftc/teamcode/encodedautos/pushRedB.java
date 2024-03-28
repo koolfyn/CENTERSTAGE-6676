@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autos;
+package org.firstinspires.ftc.teamcode.encodedautos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -9,8 +9,8 @@ import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="PUSH blue Back")
-public class pushBlueB extends OpMode {
+@Autonomous(name="PUSH Red Back")
+public class pushRedB extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private Encoded encoded;
@@ -36,29 +36,33 @@ public class pushBlueB extends OpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 encoded.closeClaw();
-                driveTrain.backward(23,800);
-                driveTrain.strafeRight(12,800);
-                driveTrain.backward(4,800);
-                driveTrain.forward(8,500);
+                driveTrain.backward(28,600);
+                driveTrain.turnLeft(20,700);
+                driveTrain.backward(3,600);
+                driveTrain.forward(2,600);
+                //purple scored
                 break;
 
             case NONE:
             case MIDDLE:
                 encoded.closeClaw();
-                driveTrain.backward(30,800);
-                driveTrain.forward(4,800);
-                driveTrain.turnRight(19.5,700);
-                driveTrain.forward(10,800);
-                driveTrain.strafeRight(2,800);
+                driveTrain.backward(31,600);
+                encoded.retractTilt();
+                driveTrain.forward(4,700);
+                driveTrain.turnLeft(19.5,400);
+                //purple scored
                 break;
 
             case RIGHT:
                 encoded.closeClaw();
-                driveTrain.backward(29,800);
-                driveTrain.turnRight(20,300);
-                driveTrain.backward(3,700);
-                driveTrain.forward(4,800);
+                driveTrain.backward(20,700);
+                encoded.retractTilt();
+                driveTrain.strafeLeft(13,600);
+                encoded.stopBot(1);
+                driveTrain.backward(1,700);
+                driveTrain.forward(3,700);
                 break;
+
         }
     }
 
