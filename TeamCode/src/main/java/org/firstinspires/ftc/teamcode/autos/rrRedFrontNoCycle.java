@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.autos;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -14,8 +13,8 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name = "RR Red Front UnderTruss")
-public class rrRedFrontUnderTruss extends LinearOpMode{
+@Autonomous(name = "RR Red Front No Cycle")
+public class rrRedFrontNoCycle extends LinearOpMode{
     private Encoded encoded;
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
@@ -27,7 +26,7 @@ public class rrRedFrontUnderTruss extends LinearOpMode{
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
         telemetry.addData("Identified", visionProcessor.getSelection());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
+        Pose2d startPose = (new Pose2d(-37, -61.5, Math.toRadians(90)));
         drive.setPoseEstimate(startPose);
 
         while (!isStarted()) {
@@ -51,19 +50,13 @@ public class rrRedFrontUnderTruss extends LinearOpMode{
                 .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
                 //purple dropped
                 .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
-                .waitSeconds(0.1)
+                .waitSeconds(0.5)
                 .splineTo(new Vector2d(10,-59),Math.toRadians(0))
                 .splineTo(new Vector2d(53,-31),Math.toRadians(0))
                 .waitSeconds(1)
-                .back(5)
-                .addTemporalMarker(9,()-> {encoded.openTopClaw();})
+                //yellow drop
+                .addTemporalMarker(12,()-> {encoded.openTopClaw();})
                 .lineTo(new Vector2d(50,-58.5))
-                //yellow dropped
-                //next few line is cycle to pixel stack not done yet
-                .setReversed(true)
-                .splineTo(new Vector2d(10,-58),Math.toRadians(180))
-                .splineTo(new Vector2d(-35,-58),Math.toRadians(180))
-                .setReversed(false)
                 .build();
         drive.followTrajectorySequence(frontL);
                 break;
@@ -96,7 +89,7 @@ public class rrRedFrontUnderTruss extends LinearOpMode{
                         .waitSeconds(1)
                         .addTemporalMarker(0,()->{encoded.closeClaw();})
                         .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                        .lineToSplineHeading(new Pose2d(-36,-48,Math.toRadians(45)))
+                        .lineToSplineHeading(new Pose2d(-35,-48,Math.toRadians(45)))
                         .waitSeconds(1)
                         .addTemporalMarker(2,()-> {encoded.openBottomClaw();})
                         .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
@@ -104,7 +97,7 @@ public class rrRedFrontUnderTruss extends LinearOpMode{
                         .lineToSplineHeading(new Pose2d(-40,-59,Math.toRadians(0)))
                         .waitSeconds(1)
                         .splineTo(new Vector2d(10,-59),Math.toRadians(0))
-                        .splineTo(new Vector2d(54,-42),Math.toRadians(0))
+                        .splineTo(new Vector2d(54,-44),Math.toRadians(0))
                         .waitSeconds(1)
                         .addTemporalMarker(9.5,()-> {encoded.openTopClaw();})
                         //yellow dropped

@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name = "rrBlueBACKJon")
+@Autonomous(name = "rrBlueBACKNoCycle")
 public class rrbluejon extends LinearOpMode{
     private Encoded encoded;
     private FirstVisionProcessor visionProcessor;
@@ -25,7 +25,7 @@ public class rrbluejon extends LinearOpMode{
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = (new Pose2d(11.5, 61.5, Math.toRadians(270)));
+        Pose2d startPose = (new Pose2d(13, 61.5, Math.toRadians(270)));
         drive.setPoseEstimate(startPose);
 
         while (!isStarted()) {
@@ -89,7 +89,7 @@ public class rrbluejon extends LinearOpMode{
                         .addTemporalMarker(2,()->{encoded.openBottomClaw();})
                         .addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
                         //purple dropped
-                        .lineToSplineHeading(new Pose2d(53.5,28,Math.toRadians(0)))
+                        .lineToSplineHeading(new Pose2d(53.5,26,Math.toRadians(0)))
                         .waitSeconds(1.5)
                         .addTemporalMarker(5.5,()->{encoded.openTopClaw();})
                         //yellow dropped

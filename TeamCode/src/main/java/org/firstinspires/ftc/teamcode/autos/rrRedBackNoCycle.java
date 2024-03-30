@@ -26,7 +26,7 @@ public class rrRedBackNoCycle extends LinearOpMode{
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
         telemetry.addData("Identified", visionProcessor.getSelection());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = (new Pose2d(11.5, -61.5, Math.toRadians(90)));
+        Pose2d startPose = (new Pose2d(8, -61.5, Math.toRadians(90)));
         drive.setPoseEstimate(startPose);
 
         while (!isStarted()) {
@@ -70,7 +70,7 @@ public class rrRedBackNoCycle extends LinearOpMode{
                         .addTemporalMarker(2,()->{encoded.openBottomClaw();})
                         .addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
                         //purple dropped
-                        .lineToSplineHeading(new Pose2d(53.5,-34,Math.toRadians(0)))
+                        .lineToSplineHeading(new Pose2d(53.5,-36,Math.toRadians(0)))
                         .waitSeconds(1.5)
                         .addTemporalMarker(5.5,()->{encoded.openTopClaw();})
                         .back(5)
@@ -93,6 +93,7 @@ public class rrRedBackNoCycle extends LinearOpMode{
                         .splineTo(new Vector2d(54,-40),Math.toRadians(0))
                         .waitSeconds(1.5)
                         .addTemporalMarker(5,()->{encoded.openTopClaw();})
+                        .back(5)
                         .lineTo(new Vector2d(52,-58.5))
                         //yellow dropped
                         .build();
