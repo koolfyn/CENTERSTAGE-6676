@@ -34,17 +34,17 @@ public class rrBlueBackGate extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        Pose2d startPose = (new Pose2d(12, 70, Math.toRadians(270)));
+        Pose2d startPose = (new Pose2d(15, 70, Math.toRadians(270)));
         drive.setPoseEstimate(startPose);
 
         switch (visionProcessor.getSelection()) {
             case LEFT:
                TrajectorySequence blueBLG = drive.trajectorySequenceBuilder(startPose) // 20 seconds
                        .addTemporalMarker(0,()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(23,35)) // to spikemark
+                        .lineToConstantHeading(new Vector2d(23,29)) // to spikemark
                         .addDisplacementMarker(()-> {encoded.armtoGround();})
                         .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                        .lineToConstantHeading(new Vector2d(23, 40)) // back up
+                        .lineToConstantHeading(new Vector2d(23, 23)) // back up
                         .splineToLinearHeading(new Pose2d(50,42), Math.toRadians(0)) // to bd
                         .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
                         .addDisplacementMarker(()-> {encoded.openTopClaw();})

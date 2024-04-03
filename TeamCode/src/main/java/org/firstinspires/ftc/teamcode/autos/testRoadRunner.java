@@ -36,9 +36,9 @@ public class testRoadRunner extends OpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
         drive.setPoseEstimate(startPose);
-        Trajectory a = drive.trajectoryBuilder(startPose)
-                .lineTo(new Vector2d(1,1))
-                .build();
+//        Trajectory a = drive.trajectoryBuilder(startPose)
+//                .lineTo(new Vector2d(1,1))
+//                .build();
 
         TrajectorySequence frontL = drive.trajectorySequenceBuilder(startPose)
                 .lineTo(new Vector2d(-47,-52))

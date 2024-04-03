@@ -40,7 +40,7 @@ public class rrBlueFrontTruss extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        Pose2d startPose = (new Pose2d(-35, 70, Math.toRadians(270)));
+        Pose2d startPose = (new Pose2d(-30, 70, Math.toRadians(270)));
         drive.setPoseEstimate(startPose);
 
         switch (visionProcessor.getSelection()) {
