@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autos;
+package org.firstinspires.ftc.teamcode.rrautos;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 
-@Autonomous(name = "red front")
+@Autonomous(name = "1testroadrunner")
 public class testRoadRunner extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
@@ -44,14 +44,16 @@ public class testRoadRunner extends OpMode {
                 .lineTo(new Vector2d(-47,-52))
                 .waitSeconds(2)
                 .addTemporalMarker(0,()-> {encoded.armtoGround();})
-               // .addTemporalMarker(0.5,()-> {robotEncoded.openClaw();})
+                // .addTemporalMarker(0.5,()-> {encoded.openClaw();})
+
                 //purple dropped
                 .lineToSplineHeading(new Pose2d(-35,-59,Math.toRadians(0)))
                 .waitSeconds(1)
                 .splineTo(new Vector2d(10,-59),Math.toRadians(0))
                 .splineTo(new Vector2d(48,-31),Math.toRadians(0))
                 .addTemporalMarker(5,()-> {encoded.armScoreAuto();})
-               // .addTemporalMarker(6,()-> {robotEncoded.openClaw();})
+                // .addTemporalMarker(6,()-> {encoded.openClaw();})
+
                 .waitSeconds(1)
                 //yellow dropped
                 .setReversed(true)
@@ -60,7 +62,7 @@ public class testRoadRunner extends OpMode {
                 .setReversed(false)
                 .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
                 .addTemporalMarker(8,()-> {encoded.armtoGround();})
-                //.addTemporalMarker(9,()-> {robotEncoded.openClaw();})
+                //.addTemporalMarker(9,()-> {encoded.openClaw();})
                 .build();
 
         TrajectorySequence frontM = drive.trajectorySequenceBuilder(startPose)
@@ -109,24 +111,31 @@ public class testRoadRunner extends OpMode {
                 .waitSeconds(1)
                 //yellow dropped
                 .build();
+
+        Trajectory test = drive.trajectoryBuilder(startPose)
+                .splineTo(new Vector2d(10,-59),Math.toRadians(180))
+                .build();
         visionPortal.stopStreaming();
 
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-             // remember to create a start pose before trajectory creation and name them appropriately
-                drive.followTrajectorySequence(frontL);
+                // remember to create a start pose before trajectory creation and name them appropriately
+                //drive.followTrajectorySequence(frontL);
                 //drive.followTrajectory(a);
+                //robotEncoded.forward(20,1000);
+
                 break;
 
             case NONE:
             case MIDDLE:
-                drive.followTrajectorySequence(frontM);
-
+                //drive.followTrajectorySequence(frontM);
+                //robotEncoded.forward(15,1000);
                 break;
 
             case RIGHT:
-                drive.followTrajectorySequence(frontR);
+                //drive.followTrajectorySequence(backR);
+                //robotEncoded.forward(10,1000);
                 break;
         }
     }

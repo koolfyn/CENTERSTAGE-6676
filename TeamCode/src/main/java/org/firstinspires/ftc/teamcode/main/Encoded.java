@@ -59,8 +59,16 @@ public class Encoded {
     }
 
     public void closeClaw() {
-        clawBottom.setPosition(0.2);
+        clawBottom.setPosition(0.15);
         clawTop.setPosition(0.35);
+    }
+    public void closeTopClaw() {
+        clawTop.setPosition(0.35);
+    }
+    public void closeBottomClaw() {
+        clawBottom.setPosition(0.1);
+        clawTop.setPosition(0.35);
+
     }
 
     public void armtoGround() {
@@ -98,10 +106,10 @@ public class Encoded {
     }
 
     public void armtoPixelStack() {
-        arm.setTargetPosition(70);
+        arm.setTargetPosition(130);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
-        clawTilt.setPosition(0.6);
+        clawTilt.setPosition(0.65);
     }
 
     public void launchDrone() {

@@ -1,10 +1,9 @@
-package org.firstinspires.ftc.teamcode.autos;
+package org.firstinspires.ftc.teamcode.rrautos;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -14,32 +13,31 @@ import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 @Autonomous(name = "RR Blue Back Yellow Only")
-public class rrBlueBackYellowOnly extends LinearOpMode {
+public class rrBlueBackYellowOnly extends OpMode {
+
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private Encoded encoded;
 
     @Override
-    public void runOpMode() {
+    public void init() {
         encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
+    }
 
-        while (!isStarted()) {
+        @Override
+        public void init_loop() {telemetry.addData("Identified", visionProcessor.getSelection());}
+
+        @Override
+        public void start() {
+            SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+            Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
+            drive.setPoseEstimate(startPose);
+            visionPortal.stopStreaming();
             telemetry.addData("Identified", visionProcessor.getSelection());
-            telemetry.update();
-        }
-
-        waitForStart();
-        visionPortal.stopStreaming();
-
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-
-        Pose2d startPose = (new Pose2d(15, 70, Math.toRadians(270)));
-        drive.setPoseEstimate(startPose);
-
-        switch (visionProcessor.getSelection()) {
-            case LEFT:
+            switch (visionProcessor.getSelection()) {
+                case LEFT:
                 TrajectorySequence blueBLYO = drive.trajectorySequenceBuilder(startPose)
                         //.addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
                         .lineToConstantHeading(new Vector2d(23,40)) // to spikemark
@@ -47,9 +45,11 @@ public class rrBlueBackYellowOnly extends LinearOpMode {
                         .lineToConstantHeading(new Vector2d(28, 46)) // back up
                         //   .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
                         .splineToLinearHeading(new Pose2d(50,42), Math.toRadians(0)) // to bd
-//                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
 
-                        .lineToConstantHeading(new Vector2d(42, 42)) // back up from bd
+                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
+                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+                        .lineToConstantHeading(new Vector2d(43, 42)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
@@ -75,6 +75,7 @@ public class rrBlueBackYellowOnly extends LinearOpMode {
                        .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                        //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
+
                         .build();
                drive.followTrajectorySequence(blueBMYO);
 
@@ -93,8 +94,9 @@ public class rrBlueBackYellowOnly extends LinearOpMode {
                        .lineToLinearHeading(new Pose2d(50,29, Math.toRadians(0))) // to bd
 //                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
                        .lineToConstantHeading(new Vector2d(42, 29)) // back up from bd
-                       .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
+                       .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0))// spline into park (RIGHT)
                        //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+
 
                         .build();
                drive.followTrajectorySequence(blueBRYO);
@@ -103,5 +105,8 @@ public class rrBlueBackYellowOnly extends LinearOpMode {
         }
     }
 
+    @Override
+    public void loop() {
 
+    }
 }

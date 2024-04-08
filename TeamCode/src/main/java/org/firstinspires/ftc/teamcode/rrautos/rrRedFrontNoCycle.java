@@ -1,24 +1,23 @@
-package org.firstinspires.ftc.teamcode.autos;
+package org.firstinspires.ftc.teamcode.rrautos;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.main.Encoded;
+
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-
-@Autonomous(name = "1testroadrunnerLinear")
-public class testRoadRunnerLinear extends LinearOpMode {
+@Autonomous(name = "RR Red Front No Cycle")
+public class rrRedFrontNoCycle extends LinearOpMode{
+    private Encoded encoded;
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
-    private Encoded encoded;
 
     @Override
     public void runOpMode() {
@@ -45,82 +44,91 @@ public class testRoadRunnerLinear extends LinearOpMode {
 //                .build();
 
 //
+        telemetry.addData("Identified", visionProcessor.getSelection());
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        Pose2d startPose = (new Pose2d(-37, -61.5, Math.toRadians(90)));
+        drive.setPoseEstimate(startPose);
+
+        while (!isStarted()) {
+            telemetry.addData("Identified", visionProcessor.getSelection());
+            telemetry.update();
+        }
 
         waitForStart();
         visionPortal.stopStreaming();
 
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
-        drive.setPoseEstimate(startPose);
-
+        if (isStopRequested()) return;
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                TrajectorySequence frontL = drive.trajectorySequenceBuilder(startPose)
-                        .lineTo(new Vector2d(-47,-52))
+                TrajectorySequence frontL = drive.trajectorySequenceBuilder(new Pose2d(-35, -61.5, Math.toRadians(90)))
+                        .waitSeconds(1)
+                        .addTemporalMarker(0,()->{encoded.closeClaw();})
+                        .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
+                        .lineTo(new Vector2d(-47,-50))
                         .waitSeconds(2)
-                        .addTemporalMarker(0,()-> {encoded.armtoGround();})
-                        .addTemporalMarker(0.5,()-> {encoded.openBottomClaw();})
+                        .addTemporalMarker(2,()-> {encoded.openBottomClaw();})
+                        .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
                         //purple dropped
-                        .lineToSplineHeading(new Pose2d(-35,-59,Math.toRadians(0)))
-                        .waitSeconds(1)
+                        .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
+                        .waitSeconds(0.5)
                         .splineTo(new Vector2d(10,-59),Math.toRadians(0))
-                        .splineTo(new Vector2d(48,-31),Math.toRadians(0))
-                        .addTemporalMarker(5,()-> {encoded.armScoreAuto();})
-                        .addTemporalMarker(6,()-> {encoded.openTopClaw();})
+                        .splineTo(new Vector2d(53,-31),Math.toRadians(0))
                         .waitSeconds(1)
-                        //yellow dropped
-                        .setReversed(true)
-                        .splineTo(new Vector2d(10,-59),Math.toRadians(180))
-                        .splineTo(new Vector2d(-35,-59),Math.toRadians(180))
-                        .setReversed(false)
-                        .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
-                        .addTemporalMarker(8,()-> {encoded.armtoGround();})
-                        .addTemporalMarker(9,()-> {encoded.openTopClaw();})
+                        //yellow drop
+                        .addTemporalMarker(12,()-> {encoded.openTopClaw();})
+                        .lineTo(new Vector2d(50,-58.5))
                         .build();
                 drive.followTrajectorySequence(frontL);
-
                 break;
 
             case NONE:
             case MIDDLE:
                 TrajectorySequence frontM = drive.trajectorySequenceBuilder(startPose)
-                        .lineTo(new Vector2d(-37,-41))
+                        .waitSeconds(1)
+                        .addTemporalMarker(0,()->{encoded.closeClaw();})
+                        .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
+                        .lineTo(new Vector2d(-39,-42))
+                        .waitSeconds(1)
+                        .addTemporalMarker(2.5,()-> {encoded.openBottomClaw();})
+                        .addTemporalMarker(3,()-> {encoded.armScoreAuto();})
                         //purple dropped
                         .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
-                        .waitSeconds(1)
+                        .waitSeconds(0.5)
                         .splineTo(new Vector2d(10,-59),Math.toRadians(0))
-                        .splineTo(new Vector2d(48,-35),Math.toRadians(0))
-                        .waitSeconds(1)
+                        .splineTo(new Vector2d(54,-36),Math.toRadians(0))
+                        .waitSeconds(2)
+                        .addTemporalMarker(9.5,()-> {encoded.openTopClaw();})
                         //yellow dropped
-                        .setReversed(true)
-                        .splineTo(new Vector2d(10,-59),Math.toRadians(180))
-                        .splineTo(new Vector2d(-35,-59),Math.toRadians(180))
-                        .setReversed(false)
-                        .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
+                        .lineTo(new Vector2d(50,-58.5))
                         .build();
                 drive.followTrajectorySequence(frontM);
                 break;
 
             case RIGHT:
                 TrajectorySequence frontR = drive.trajectorySequenceBuilder(startPose)
-                        .lineToSplineHeading(new Pose2d(-38,-48,Math.toRadians(45)))
+                        .waitSeconds(1)
+                        .addTemporalMarker(0,()->{encoded.closeClaw();})
+                        .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
+                        .lineToSplineHeading(new Pose2d(-35,-48,Math.toRadians(45)))
+                        .waitSeconds(1)
+                        .addTemporalMarker(2,()-> {encoded.openBottomClaw();})
+                        .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
                         //purple dropped
-                        .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
+                        .lineToSplineHeading(new Pose2d(-40,-59,Math.toRadians(0)))
                         .waitSeconds(1)
                         .splineTo(new Vector2d(10,-59),Math.toRadians(0))
-                        .splineTo(new Vector2d(48,-40),Math.toRadians(0))
+                        .splineTo(new Vector2d(54,-44),Math.toRadians(0))
                         .waitSeconds(1)
+                        .addTemporalMarker(9.5,()-> {encoded.openTopClaw();})
                         //yellow dropped
-                        .setReversed(true)
-                        .splineTo(new Vector2d(10,-59),Math.toRadians(180))
-                        .splineTo(new Vector2d(-35,-59),Math.toRadians(180))
-                        .setReversed(false)
-                        .lineToSplineHeading(new Pose2d(-56,-52,Math.toRadians(130)))
+                        .lineTo(new Vector2d(50,-58.5))
                         .build();
                 drive.followTrajectorySequence(frontR);
+
                 break;
         }
     }
-
-
 }
+
+
+
