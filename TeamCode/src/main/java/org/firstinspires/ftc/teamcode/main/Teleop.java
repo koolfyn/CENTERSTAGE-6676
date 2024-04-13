@@ -59,7 +59,7 @@ public class Teleop extends OpMode {
         } else if (gamepad1.dpad_down) {
             slideLeftHeight = 0;
             slideRightHeight = 0;
-            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE);
 
         }
         if(gamepad1.x) {
