@@ -102,6 +102,3 @@ public class rrbluejon extends LinearOpMode{
         }
     }
 }
-
-
-

@@ -14,7 +14,7 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(46, 46, Math.toRadians(190), Math.toRadians(190), 13.8)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(12, 61.5, Math.toRadians(270)))
+                        drive.trajectorySequenceBuilder(new Pose2d(-37, 61.5, Math.toRadians(270)))
                                 .waitSeconds(1)
                                 //.addTemporalMarker(0,()->{encoded.closeClaw();})
                                 //.addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})

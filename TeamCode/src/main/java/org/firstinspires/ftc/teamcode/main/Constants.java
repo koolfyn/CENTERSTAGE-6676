@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.main;
 
 public class Constants {
 
-    public static final double slowVal = 500;
+    public static final double slowVal = 300;
     public static final double defaultVal = 1000;
     public static final double fastVal = 1700;
 
