@@ -20,7 +20,7 @@ public class MeepMeepTesting {
 
                                 drive.trajectorySequenceBuilder(new Pose2d(15, 74, Math.toRadians(270))) // 20 seconds
                                 .lineToConstantHeading(new Vector2d(23,46)) // to spikemark
-                                //purple down
+//purple down
 //                                .addTemporalMarker(0,()-> {encoded.armtoGround();})
 //                                .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
                                 .lineToConstantHeading(new Vector2d(23, 55)) // back up

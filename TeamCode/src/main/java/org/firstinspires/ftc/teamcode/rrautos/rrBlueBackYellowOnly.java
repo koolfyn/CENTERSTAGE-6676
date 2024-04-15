@@ -4,6 +4,8 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -13,32 +15,36 @@ import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 @Autonomous(name = "RR Blue Back Yellow Only")
-public class rrBlueBackYellowOnly extends OpMode {
+public class rrBlueBackYellowOnly extends LinearOpMode {
 
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private Encoded encoded;
 
     @Override
-    public void init() {
+    public void runOpMode() {
         encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
-    }
 
-        @Override
-        public void init_loop() {telemetry.addData("Identified", visionProcessor.getSelection());}
-
-        @Override
-        public void start() {
-            SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-            Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
-            drive.setPoseEstimate(startPose);
-            visionPortal.stopStreaming();
+        while (!isStarted()) {
             telemetry.addData("Identified", visionProcessor.getSelection());
-            switch (visionProcessor.getSelection()) {
+            telemetry.update();
+        }
+
+        waitForStart();
+        visionPortal.stopStreaming();
+
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+
+        Pose2d startPose = (new Pose2d(15, 70, Math.toRadians(270)));
+        drive.setPoseEstimate(startPose);
+
+        switch (visionProcessor.getSelection()) {
+
                 case LEFT:
                 TrajectorySequence blueBLYO = drive.trajectorySequenceBuilder(startPose)
+
                         //.addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
                         .lineToConstantHeading(new Vector2d(23,40)) // to spikemark
 //                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
@@ -105,8 +111,5 @@ public class rrBlueBackYellowOnly extends OpMode {
         }
     }
 
-    @Override
-    public void loop() {
 
-    }
 }
