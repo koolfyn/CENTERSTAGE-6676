@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autos;
+package org.firstinspires.ftc.teamcode.rrautos;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name = "RR Red Back No Cycle")
-public class rrRedBackNoCycle extends LinearOpMode{
+@Autonomous(name = "rrBlueBACKNoCycle")
+public class rrbluejon extends LinearOpMode{
     private Encoded encoded;
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
@@ -24,9 +24,8 @@ public class rrRedBackNoCycle extends LinearOpMode{
         encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
-        telemetry.addData("Identified", visionProcessor.getSelection());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = (new Pose2d(8, -61.5, Math.toRadians(90)));
+        Pose2d startPose = (new Pose2d(13, 61.5, Math.toRadians(270)));
         drive.setPoseEstimate(startPose);
 
         while (!isStarted()) {
@@ -37,24 +36,23 @@ public class rrRedBackNoCycle extends LinearOpMode{
         waitForStart();
         visionPortal.stopStreaming();
 
-        if (isStopRequested()) return;
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 TrajectorySequence backL = drive.trajectorySequenceBuilder(startPose)
                         .waitSeconds(1)
                         .addTemporalMarker(0,()->{encoded.closeClaw();})
                         .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                        .lineToSplineHeading(new Pose2d(13,-46,Math.toRadians(135)))
+                        .lineToSplineHeading(new Pose2d(22,50,Math.toRadians(270)))
                         .waitSeconds(1)
                         .addTemporalMarker(2,()->{encoded.openBottomClaw();})
                         .addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
                         //purple dropped
-                        .lineToSplineHeading(new Pose2d(53.5,-28,Math.toRadians(0)))
+                        .lineToSplineHeading(new Pose2d(53.5,40,Math.toRadians(0)))
                         .waitSeconds(1.5)
                         .addTemporalMarker(5.5,()->{encoded.openTopClaw();})
                         //yellow dropped
                         .back(5)
-                        .lineTo(new Vector2d(48,-58.5))
+                        .lineTo(new Vector2d(51,58.5))
                         .build();
                 drive.followTrajectorySequence(backL);
                 break;
@@ -65,37 +63,38 @@ public class rrRedBackNoCycle extends LinearOpMode{
                         .waitSeconds(1)
                         .addTemporalMarker(0,()->{encoded.closeClaw();})
                         .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                        .lineToSplineHeading(new Pose2d(16,-42,Math.toRadians(90)))
+                        .lineToSplineHeading(new Pose2d(15,42,Math.toRadians(270)))
                         .waitSeconds(1)
                         .addTemporalMarker(2,()->{encoded.openBottomClaw();})
                         .addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
                         //purple dropped
-                        .lineToSplineHeading(new Pose2d(53.5,-36,Math.toRadians(0)))
+                        .lineToSplineHeading(new Pose2d(53.5,34,Math.toRadians(0)))
                         .waitSeconds(1.5)
                         .addTemporalMarker(5.5,()->{encoded.openTopClaw();})
-                        .back(5)
-                        .lineTo(new Vector2d(48,-58.5))
                         //yellow dropped
+                        .back(5)
+                        .lineTo(new Vector2d(48,58.5))
+                        //park
                         .build();
                 drive.followTrajectorySequence(backM);
                 break;
 
             case RIGHT:
-                TrajectorySequence backR =drive.trajectorySequenceBuilder(startPose)
+                TrajectorySequence backR = drive.trajectorySequenceBuilder(startPose)
                         .waitSeconds(1)
                         .addTemporalMarker(0,()->{encoded.closeClaw();})
                         .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                        .lineToSplineHeading(new Pose2d(23,-52,Math.toRadians(90)))
+                        .lineToSplineHeading(new Pose2d(11.5,48,Math.toRadians(225)))
                         .waitSeconds(1)
                         .addTemporalMarker(2,()->{encoded.openBottomClaw();})
                         .addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
                         //purple dropped
-                        .splineTo(new Vector2d(54,-40),Math.toRadians(0))
+                        .lineToSplineHeading(new Pose2d(53.5,26,Math.toRadians(0)))
                         .waitSeconds(1.5)
-                        .addTemporalMarker(5,()->{encoded.openTopClaw();})
-                        .back(5)
-                        .lineTo(new Vector2d(52,-58.5))
+                        .addTemporalMarker(5.5,()->{encoded.openTopClaw();})
                         //yellow dropped
+                        .back(5)
+                        .lineTo(new Vector2d(50,58.5))
                         .build();
                 drive.followTrajectorySequence(backR);
 

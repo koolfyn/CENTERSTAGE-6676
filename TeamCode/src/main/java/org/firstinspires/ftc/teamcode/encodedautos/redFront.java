@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autos;
+package org.firstinspires.ftc.teamcode.encodedautos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -9,10 +9,9 @@ import org.firstinspires.ftc.teamcode.main.DriveTrain;
 import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
-
-@Autonomous(name="PUSH Blue Front")
-public class pushBlueF extends OpMode {
-
+@Disabled
+@Autonomous(name="red Front")
+public class redFront extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private Encoded encoded;
@@ -30,47 +29,38 @@ public class pushBlueF extends OpMode {
     public void init_loop() {
         telemetry.addData("Identified", visionProcessor.getSelection());
     }
+
     @Override
     public void start() {
         visionPortal.stopStreaming();
         telemetry.addData("Identified", visionProcessor.getSelection());
         switch (visionProcessor.getSelection()) {
             case LEFT:
-                encoded.closeClaw();
-                encoded.armtoGroundAuto();
-                driveTrain.forward(29, 700);
-                driveTrain.turnLeft(20, 700);
-                driveTrain.backward(6, 500);
-                encoded.stopBot(1);
-                encoded.openBottomClaw();
-                driveTrain.backward(5, 700);
-
+                driveTrain.forward(28,700);
+                driveTrain.turnLeft(23,700);
+                driveTrain.forward(4,700);
+                driveTrain.backward(2,700);
                 break;
 
             case NONE:
             case MIDDLE:
-                encoded.closeClaw();
-                encoded.armtoGroundAuto();
-                driveTrain.forward(18,700);
-                encoded.stopBot(1);
-                encoded.openBottomClaw();
-                driveTrain.backward(10, 700);
+                driveTrain.forward(30,900);
+                driveTrain.backward(3,900);
                 break;
 
             case RIGHT:
-                encoded.closeClaw();
-                encoded.armtoGroundAuto();
-                driveTrain.strafeRight(10,800);
-                driveTrain.forward(4,800);
-                encoded.stopBot(1);
-                encoded.openBottomClaw();
-                driveTrain.backward(2,800);
+                driveTrain.forward(28,800);
+                driveTrain.turnRight(25,900);
+                driveTrain.forward(5,700);
+                driveTrain.backward(2,700);
                 break;
 
         }
     }
+
     @Override
     public void loop() {
 
     }
+
 }

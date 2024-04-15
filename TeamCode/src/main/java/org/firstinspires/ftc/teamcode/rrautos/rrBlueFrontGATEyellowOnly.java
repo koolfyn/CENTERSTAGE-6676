@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autos;
+package org.firstinspires.ftc.teamcode.rrautos;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 @Disabled
-@Autonomous(name = "rrBlueFrontGATE")
-public class rrBlueFrontGATE extends OpMode {
+@Autonomous(name = "rrBlueFrontGATEyellowOnly")
+public class rrBlueFrontGATEyellowOnly extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
     private Encoded encoded;
@@ -50,21 +50,10 @@ public class rrBlueFrontGATE extends OpMode {
                         .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
                         .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
                         .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
-                        // if we have should
-                        .lineToConstantHeading(new Vector2d(42, 41.5)) // back up from bd
-                        .lineToSplineHeading(new Pose2d(38,11, Math.toRadians(180))) // get into position
-                        .lineToConstantHeading(new Vector2d(-41, 11)) // fly under truss
-                        .lineToConstantHeading(new Vector2d(-56, 23.7)) // go to stack
-                        .addTemporalMarker(0.5, ()-> {encoded.armtoPixelStack();})
-                        .addTemporalMarker(0.5, ()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(-41, 11)) // line up for truss
-                        .lineToConstantHeading(new Vector2d(38,11)) // get into position
-                        .splineToLinearHeading(new Pose2d(50,41.5), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                        .lineToConstantHeading(new Vector2d(42, 41.5)) // back up from bd
+                        .lineToConstantHeading(new Vector2d(43, 41.5)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+
                         .build();
 
                 break;
@@ -82,21 +71,10 @@ public class rrBlueFrontGATE extends OpMode {
                         .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
                         .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
                         .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
-                        // if we have should
-                        .lineToConstantHeading(new Vector2d(42, 35)) // back up from bd
-                        .lineToSplineHeading(new Pose2d(38,11, Math.toRadians(180))) // get into position
-                        .lineToConstantHeading(new Vector2d(-41, 11)) // fly under truss
-                        .lineToConstantHeading(new Vector2d(-56, 23.7)) // go to stack
-                        .addTemporalMarker(0.5, ()-> {encoded.armtoPixelStack();})
-                        .addTemporalMarker(0.5, ()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(-41, 11)) // line up for truss
-                        .lineToConstantHeading(new Vector2d(38,11)) // get into position
-                        .splineToLinearHeading(new Pose2d(50,35), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                        .lineToConstantHeading(new Vector2d(42, 35)) // back up from bd
+                        .lineToConstantHeading(new Vector2d(43, 35)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+
                         .build();
 
                 break;
@@ -114,20 +92,10 @@ public class rrBlueFrontGATE extends OpMode {
                         .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
                         .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
                         .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(42, 28.5)) // back up from bd
-                        .lineToSplineHeading(new Pose2d(38,11, Math.toRadians(180))) // get into position
-                        .lineToConstantHeading(new Vector2d(-35, 11)) // fly under truss
-                        .lineToConstantHeading(new Vector2d(-56, 23.7)) // go to stack
-                        .addTemporalMarker(0.5, ()-> {encoded.armtoPixelStack();})
-                        .addTemporalMarker(0.5, ()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(-35, 11)) // line up for truss
-                        .lineToConstantHeading(new Vector2d(38,11)) // get into position
-                        .splineToLinearHeading(new Pose2d(50,28.5), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                        .lineToConstantHeading(new Vector2d(42, 28.5)) // back up from bd
+                        .lineToConstantHeading(new Vector2d(43, 28.5)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+
                         .build();
                 break;
         }
