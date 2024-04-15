@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.encodedautos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -9,7 +8,7 @@ import org.firstinspires.ftc.teamcode.main.DriveTrain;
 import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
-@Disabled
+
 @Autonomous(name="PUSH blue Back")
 public class pushBlueB extends OpMode {
     private FirstVisionProcessor visionProcessor;

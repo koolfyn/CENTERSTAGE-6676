@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.rrautos;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -12,8 +11,8 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
-@Disabled
-@Autonomous(name = "rrBlueBackGATE")
+
+@Autonomous(name = "RR BlueBackGATE")
 public class rrBlueBackGATE extends OpMode {
     private FirstVisionProcessor visionProcessor;
     private VisionPortal visionPortal;
