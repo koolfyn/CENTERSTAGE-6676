@@ -46,15 +46,13 @@ public class rrBlueBackYellowOnly extends LinearOpMode {
                 TrajectorySequence blueBLYO = drive.trajectorySequenceBuilder(startPose)
 
                         //.addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
-                        .lineToConstantHeading(new Vector2d(23,40)) // to spikemark
+                        .lineToConstantHeading(new Vector2d(25,54)) // to spikemark
 //                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                        .lineToConstantHeading(new Vector2d(28, 46)) // back up
                         //   .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
                         .splineToLinearHeading(new Pose2d(50,42), Math.toRadians(0)) // to bd
-
-                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+//                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
+//                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+//                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
                         .lineToConstantHeading(new Vector2d(43, 42)) // back up
                         .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -67,7 +65,7 @@ public class rrBlueBackYellowOnly extends LinearOpMode {
             case NONE:
             case MIDDLE:
                TrajectorySequence blueBMYO = drive.trajectorySequenceBuilder(startPose)
-                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
+//                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
                        .lineToConstantHeading(new Vector2d(12,36)) // to spikemark
 //                                .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
 //                                .addDisplacementMarker(()->{encoded.openBottomClaw();})
@@ -89,7 +87,7 @@ public class rrBlueBackYellowOnly extends LinearOpMode {
 
             case RIGHT:
                TrajectorySequence blueBRYO = drive.trajectorySequenceBuilder(startPose)
-                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
+//                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
                        .lineToConstantHeading(new Vector2d(23,33)) // safely move
                        .lineToLinearHeading(new Pose2d(19,31, Math.toRadians(180))) // orientate
                        //     .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
