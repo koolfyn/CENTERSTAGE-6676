@@ -18,43 +18,18 @@ public class MeepMeepTesting {
                 .setConstraints(46, 46, Math.toRadians(190), Math.toRadians(190), 13.8)
                 .followTrajectorySequence(drive ->
 
-                                drive.trajectorySequenceBuilder(new Pose2d(15, 74, Math.toRadians(270))) // 20 seconds
-                                .lineToConstantHeading(new Vector2d(23,46)) // to spikemark
-//purple down
-//                                .addTemporalMarker(0,()-> {encoded.armtoGround();})
-//                                .addTemporalMarker(0.5,()->{encoded.openBottomClaw();})
-                                .lineToConstantHeading(new Vector2d(23, 55)) // back up
-                                .splineToLinearHeading(new Pose2d(50,42), Math.toRadians(0)) // to bd
-                                //yellow on bd
-//                                .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-//                                .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-//                                .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
-                                .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
-                                .lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
-                                .lineToConstantHeading(new Vector2d(-55,11)) // to white stack
-                                //pick up pixel stack
-//                                .addTemporalMarker(0.5, ()-> {encoded.armtoPixelStack();})
-//                                .addTemporalMarker(0.5, ()-> {encoded.closeClaw();})
-                                        .lineToConstantHeading(new Vector2d(-50,11)) // backup
-                                        .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) //  orientate
-                                .lineToConstantHeading(new Vector2d(38,11)) // "safe spot"
-                                .splineToConstantHeading(new Vector2d(50,42), Math.toRadians(0)) // to bd
-//                                //drop pixel stack on bd
-//                                .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-//                                .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-                                .lineToConstantHeading(new Vector2d(42, 42)) // back up from bd
-                                .splineToConstantHeading(new Vector2d(60,10), Math.toRadians(0)) // spline into park (RIGHT)
-                                //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
-                                //if we have enough time
-                                //.lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
-                                //.lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
-                                //.lineToConstantHeading(new Vector2d(-55,112e)) // to white stack
-                                //  .waitSeconds(.5) // pick up stack
-                                //  .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) // orientate
-                                // .lineToConstantHeading(new Vector2d(38,11)) // // "safe spot"
-                                // .splineToConstantHeading(new Vector2d(50,42), Math.toRadians(0)) // to bd
-                                // .waitSeconds(.5) // place 2nd stack
-                                // .lineToConstantHeading(new Vector2d(42, 42)) // back up from bd
+                                drive.trajectorySequenceBuilder(new Pose2d(-30, 70, Math.toRadians(270))) // 20 seconds
+
+                                        .lineToConstantHeading(new Vector2d(-46, 38)) // to right spikemark
+                                        //    .splineToLinearHeading(new Pose2d(-38,58.5), Math.toRadians(300))
+                      .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
+                                        .splineToLinearHeading(new Pose2d(52,42), Math.toRadians(0)) // to bd
+                                        // //                       .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+////                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
+////                       .addDisplacementMarker(()-> {encoded.closeClaw();})
+                                        .lineToConstantHeading(new Vector2d(43, 36)) // back up from bd
+                                           .splineToConstantHeading(new Vector2d(67,13), Math.toRadians(0)) // spline into park (RIGHT)
+//                      //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
                                 .build()
 
                                 );

@@ -45,17 +45,17 @@ public class rrBlueBackYellowOnly extends LinearOpMode {
                 case LEFT:
                 TrajectorySequence blueBLYO = drive.trajectorySequenceBuilder(startPose)
 
-                        //.addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
-                        .lineToConstantHeading(new Vector2d(25,54)) // to spikemark
-//                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                        //   .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                        .splineToLinearHeading(new Pose2d(50,42), Math.toRadians(0)) // to bd
-//                        .addTemporalMarker(0,()-> {encoded.armtoLowSetLine();})
-//                        .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
-//                        .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
-                        .lineToConstantHeading(new Vector2d(43, 42)) // back up
-                        .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
-                        //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+//                       .addTemporalMarker(0,()->{encoded.closeClaw();})
+//                       .addTemporalMarker(0.5,()-> {encoded.armtoGroundAuto();})
+                         .lineToConstantHeading(new Vector2d(24.5,54)) // to spikemark
+//                       .addTemporalMarker(2, ()->{encoded.openBottomClaw();})
+//                       .addTemporalMarker(2.5,()-> {encoded.armtoLowSetLine();})
+                         .splineToLinearHeading(new Pose2d(52,49), Math.toRadians(0)) // to bd
+//                       .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+//                       .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+                         .lineToConstantHeading(new Vector2d(47, 49)) // back up
+                         .splineToConstantHeading(new Vector2d(67,13), Math.toRadians(0)) // spline into park (RIGHT)
+//                       .splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
                         .build();
                 drive.followTrajectorySequence(blueBLYO);
@@ -66,18 +66,16 @@ public class rrBlueBackYellowOnly extends LinearOpMode {
             case MIDDLE:
                TrajectorySequence blueBMYO = drive.trajectorySequenceBuilder(startPose)
 //                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
-                       .lineToConstantHeading(new Vector2d(12,36)) // to spikemark
-//                                .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
-//                                .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                       .lineToConstantHeading(new Vector2d(12, 41)) // back up
-                       .lineToConstantHeading(new Vector2d(30, 45)) // move
-                       //  .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                       .splineToLinearHeading(new Pose2d(50,36), Math.toRadians(0)) // to bd
-//                                .addDisplacementMarker(()-> {encoded.openTopClaw();})
-//                                .addDisplacementMarker(()-> {encoded.closeClaw();})
-                       .lineToConstantHeading(new Vector2d(42, 36)) // back up from bd
-                       .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
-                       //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+//                       .addTemporalMarker(()-> {encoded.armtoGroundAuto();})
+                         .lineToConstantHeading(new Vector2d(12,54)) // to spikemark
+//                       .addTemporalMarker(2, ()->{encoded.openBottomClaw();})
+//                       .addTemporalMarker(2.5,()-> {encoded.armtoLowSetLine();})
+                         .splineToLinearHeading(new Pose2d(52,42), Math.toRadians(0)) // to bd
+//                       .addTemporalMarker(0.5, ()-> {encoded.openTopClaw();})
+//                       .addTemporalMarker(0.5,()-> {encoded.closeClaw();})
+                         .lineToConstantHeading(new Vector2d(47, 42)) // back up from bd
+                         .splineToConstantHeading(new Vector2d(67,13), Math.toRadians(0)) // spline into park (RIGHT)
+//                       .splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
 
                         .build();
@@ -88,18 +86,15 @@ public class rrBlueBackYellowOnly extends LinearOpMode {
             case RIGHT:
                TrajectorySequence blueBRYO = drive.trajectorySequenceBuilder(startPose)
 //                       .addTemporalMarker(0,()-> {encoded.closeClaw();})
-                       .lineToConstantHeading(new Vector2d(23,33)) // safely move
-                       .lineToLinearHeading(new Pose2d(19,31, Math.toRadians(180))) // orientate
-                       //     .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
-                       .lineToConstantHeading(new Vector2d(9, 32)) // right spikemark
-//                        .addDisplacementMarker(()->{encoded.openBottomClaw();})
-                       .lineToConstantHeading(new Vector2d(14, 32)) // back up
-                       //   .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-                       .lineToLinearHeading(new Pose2d(50,29, Math.toRadians(0))) // to bd
-//                        .addDisplacementMarker(()-> {encoded.openTopClaw();})
-                       .lineToConstantHeading(new Vector2d(42, 29)) // back up from bd
-                       .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0))// spline into park (RIGHT)
-                       //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+                         .lineToSplineHeading(new Pose2d(15,54, Math.toRadians(240)))
+//                       .addTemporalMarker(()->{encoded.openBottomClaw();})
+                         .lineToConstantHeading(new Vector2d(14, 32)) // back up
+//                       .addTemporalMarker(()-> {encoded.armtoLowSetLine();})
+                         .lineToSplineHeading(new Pose2d(52,36, Math.toRadians(0)))
+//                       .addTemporalMarker(()-> {encoded.openTopClaw();})
+                         .lineToConstantHeading(new Vector2d(47, 36)) // back up from bd
+                         .splineToConstantHeading(new Vector2d(67,13), Math.toRadians(0))// spline into park (RIGHT)
+//                       .splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
 
                         .build();
