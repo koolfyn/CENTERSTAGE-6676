@@ -34,6 +34,8 @@ public class Teleop extends OpMode {
         double y = -gamepad1.left_stick_y;
         double r = gamepad1.right_stick_x;
 
+        led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RAINBOW_FOREST_PALETTE);
+
         if (gamepad1.right_bumper) { // driver movements
             driveTrain.frontLeft.setVelocity((y + x + r) * Constants.slowVal);
             driveTrain.frontRight.setVelocity((y - x - r) * Constants.slowVal);
