@@ -17,6 +17,7 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(46, 46, Math.toRadians(190), Math.toRadians(190), 13.8)
                 .followTrajectorySequence(drive ->
+<<<<<<< HEAD
 
                                 drive.trajectorySequenceBuilder(new Pose2d(-30, 70, Math.toRadians(270))) // 20 seconds
 
@@ -30,6 +31,23 @@ public class MeepMeepTesting {
                                         .lineToConstantHeading(new Vector2d(43, 36)) // back up from bd
                                            .splineToConstantHeading(new Vector2d(67,13), Math.toRadians(0)) // spline into park (RIGHT)
 //                      //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
+=======
+                        drive.trajectorySequenceBuilder(new Pose2d(-37, 61.5, Math.toRadians(270)))
+                                .waitSeconds(1)
+                                //.addTemporalMarker(0,()->{encoded.closeClaw();})
+                                //.addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
+                                .lineToSplineHeading(new Pose2d(11.5,48,Math.toRadians(225)))
+                                .waitSeconds(1)
+                                //.addTemporalMarker(2,()->{encoded.openBottomClaw();})
+                                //.addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
+                                //purple dropped
+                                .lineToSplineHeading(new Pose2d(53.5,28,Math.toRadians(0)))
+                                .waitSeconds(1.5)
+                                //.addTemporalMarker(5.5,()->{encoded.openTopClaw();})
+                                //yellow dropped
+                                .back(5)
+                                .lineTo(new Vector2d(50,58.5))
+>>>>>>> master
                                 .build()
 
                                 );

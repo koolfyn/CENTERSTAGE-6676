@@ -1,15 +1,11 @@
+
 package org.firstinspires.ftc.teamcode.main;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
-import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
-import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.teamcode.main.Encoded;
+import org.firstinspires.ftc.teamcode.main.DriveTrain;
+import org.firstinspires.ftc.teamcode.main.LED;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -24,11 +20,13 @@ public class Teleop extends OpMode {
 
     Encoded encoded;
     DriveTrain driveTrain;
+    LED led;
 
     @Override
     public void init() {
         encoded = new Encoded(hardwareMap, telemetry);
         driveTrain = new DriveTrain(hardwareMap, telemetry);
+        led = new LED();
     }
 
     @Override
@@ -57,19 +55,26 @@ public class Teleop extends OpMode {
         if (gamepad1.dpad_up) { // suspend
             slideLeftHeight = Constants.suspendHeight;
             slideRightHeight = -Constants.suspendHeight;
+            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.LIGHT_CHASE_RED);
+
         } else if (gamepad1.dpad_down) {
             slideLeftHeight = 0;
             slideRightHeight = 0;
+            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE);
+
         }
         if(gamepad1.x) {
             encoded.launchDrone();
+            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
         }
 
         if (gamepad2.left_bumper) { // open top claw
             encoded.openTopClaw();
+            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RED_ORANGE);
         }
         else if(gamepad2.left_trigger > 0.4) { // open bottom claw
             encoded.openBottomClaw();
+            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.ORANGE);
         }
         else if(gamepad2.right_bumper) {
             encoded.closeTopClaw();
@@ -79,6 +84,7 @@ public class Teleop extends OpMode {
         }
         else if (gamepad2.dpad_down) { // close both claws
             encoded.closeClaw();
+            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.VIOLET);
         }
 
         if(gamepad2.y) {
@@ -129,5 +135,4 @@ public class Teleop extends OpMode {
                 .addData("x", gamepad1.left_stick_x)
                 .addData("y", gamepad1.left_stick_y);
     }
-
 }

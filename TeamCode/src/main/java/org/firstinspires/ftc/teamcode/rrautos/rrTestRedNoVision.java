@@ -58,6 +58,5 @@ public class rrTestRedNoVision extends LinearOpMode{
         drive.followTrajectorySequence(blueBLG);
 
 
-        }
     }
-
+}
