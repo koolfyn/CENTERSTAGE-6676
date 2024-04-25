@@ -1,78 +1,61 @@
 package org.firstinspires.ftc.teamcode.rrautos;
 
-
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.main.Encoded;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
-
+import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
+import org.firstinspires.ftc.vision.VisionPortal;
 
 @Autonomous(name = "No vision RR Test Red")
 public class rrTestRedNoVision extends LinearOpMode{
     public Encoded encoded;
 
-
     @Override
     public void runOpMode() {
         encoded = new Encoded(hardwareMap, telemetry);
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
+        Pose2d startPose = (new Pose2d(15, 70, Math.toRadians(270)));
         drive.setPoseEstimate(startPose);
-
 
         waitForStart();
 
-
         if (isStopRequested()) return;
 
+        TrajectorySequence blueBLG = drive.trajectorySequenceBuilder(startPose) // 20 seconds
+                .addTemporalMarker(0,()-> {encoded.closeClaw();})
+                .lineToConstantHeading(new Vector2d(23,29)) // to spikemark
+//                .addDisplacementMarker(()-> {encoded.armtoGround();})
+//                .addDisplacementMarker(()->{encoded.openBottomClaw();})
+                .lineToConstantHeading(new Vector2d(23, 23)) // back up
+                .splineToLinearHeading(new Pose2d(50,42), Math.toRadians(0)) // to bd
+//                .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+//                .addDisplacementMarker(()-> {encoded.openTopClaw();})
+//                .addDisplacementMarker(()-> {encoded.closeClaw();})
+                .lineToLinearHeading(new Pose2d(38,11)) // safely move from bd
+                .lineToLinearHeading(new Pose2d(25, 11, Math.toRadians(180))) // middle + orientate
+                .lineToConstantHeading(new Vector2d(-55,11)) // to white stack
+//                .addDisplacementMarker(()->{encoded.openBottomClaw();})
+//                .addDisplacementMarker(()-> {encoded.openTopClaw();})
+//                .addDisplacementMarker(()-> {encoded.armtoPixelStack();})
+//                .addDisplacementMarker (()-> {encoded.closeClaw();})
+                .lineToLinearHeading(new Pose2d(-40, 11, Math.toRadians(0))) //  orientate
+                .lineToConstantHeading(new Vector2d(38,11)) // "safe spot"
+                .splineToConstantHeading(new Vector2d(50,42), Math.toRadians(0)) // to bd
+//                .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
+//                .addDisplacementMarker(()-> {encoded.openTopClaw();})
+                .lineToConstantHeading(new Vector2d(42, 42)) // back up from bd
+                .splineToConstantHeading(new Vector2d(60,9), Math.toRadians(0)) // spline into park (RIGHT)
+                //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
-        TrajectorySequence backL = drive.trajectorySequenceBuilder(startPose)
-                .waitSeconds(1)
-                .addTemporalMarker(0,()->{encoded.closeClaw();})
-                .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                .lineTo(new Vector2d(-47,-50))
-                .waitSeconds(2)
-                .addTemporalMarker(2,()-> {encoded.openBottomClaw();})
-                .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
-                //purple dropped
-                .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
-                .waitSeconds(0.1)
-                .splineTo(new Vector2d(10,-59),Math.toRadians(0))
-                .splineTo(new Vector2d(53,-31),Math.toRadians(0))
-                .waitSeconds(1)
-                .back(5)
-                .addTemporalMarker(9,()-> {encoded.openTopClaw();})
-                .lineTo(new Vector2d(50,-58.5))
-        //yellow dropped
-        //next few line is cycle to pixel stack not done yet
-                .setReversed(true)
-                .splineTo(new Vector2d(10,-58),Math.toRadians(180))
-                .splineTo(new Vector2d(-35,-58),Math.toRadians(180))
-                .setReversed(false)
-                .lineToSplineHeading(new Pose2d(-54,-54,Math.toRadians(135)))
-                .forward(4)
-                .waitSeconds(1)
-                .addTemporalMarker(16,()-> {encoded.armtoPixelStack();})//16
-                .addTemporalMarker(18,()-> {encoded.closeClaw();})//17
-                .addTemporalMarker(19,()-> {encoded.armScoreAuto();})//18
-                .back(10)// grabbed and going
-                .lineToSplineHeading(new Pose2d(-36,-58,Math.toRadians(0)))
-                .waitSeconds(1)
-                .splineTo(new Vector2d(10,-59),Math.toRadians(0))
-                .splineTo(new Vector2d(53,-36),Math.toRadians(0))
-                .waitSeconds(1)
-                .addTemporalMarker(26,()-> {encoded.openBottomClaw();})
-                .addTemporalMarker(27,()-> {encoded.openTopClaw();})
-                .lineTo(new Vector2d(50,-58.5))
                 .build();
-        drive.followTrajectorySequence(backL);
-
-
+        drive.followTrajectorySequence(blueBLG);
 
 
     }

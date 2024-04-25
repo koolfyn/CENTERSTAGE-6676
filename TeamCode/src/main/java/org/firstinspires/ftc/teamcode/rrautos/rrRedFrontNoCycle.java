@@ -24,6 +24,26 @@ public class rrRedFrontNoCycle extends LinearOpMode{
         encoded = new Encoded(hardwareMap, telemetry);
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
+//
+//        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+//        Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
+//        drive.setPoseEstimate(startPose);
+
+//        TrajectorySequence backL =drive.trajectorySequenceBuilder(startPose)
+//                .build();
+//        TrajectorySequence backM =drive.trajectorySequenceBuilder(startPose)
+//                .build();
+//
+//        TrajectorySequence backR =drive.trajectorySequenceBuilder(startPose)
+//                .lineToSplineHeading(new Pose2d(23.5,-54,Math.toRadians(90)))
+//                //purple dropped
+//                .waitSeconds(1)
+//                .lineToSplineHeading(new Pose2d(48,-42,Math.toRadians(0)))
+//                .waitSeconds(1)
+//                //yellow dropped
+//                .build();
+
+//
         telemetry.addData("Identified", visionProcessor.getSelection());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         Pose2d startPose = (new Pose2d(-37, -61.5, Math.toRadians(90)));
