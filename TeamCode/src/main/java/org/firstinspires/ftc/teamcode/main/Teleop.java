@@ -55,26 +55,27 @@ public class Teleop extends OpMode {
         if (gamepad1.dpad_up) { // suspend
             slideLeftHeight = Constants.suspendHeight;
             slideRightHeight = -Constants.suspendHeight;
-            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.LIGHT_CHASE_RED);
+//            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.LIGHT_CHASE_RED);
 
         } else if (gamepad1.dpad_down) {
             slideLeftHeight = 0;
             slideRightHeight = 0;
-            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE);
+//            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE);
 
         }
         if(gamepad1.x) {
             encoded.launchDrone();
-            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
+//            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.HOT_PINK);
         }
 
         if (gamepad2.left_bumper) { // open top claw
             encoded.openTopClaw();
-            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RED_ORANGE);
+//            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RED_ORANGE);
         }
         else if(gamepad2.left_trigger > 0.4) { // open bottom claw
             encoded.openBottomClaw();
-            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.ORANGE);
+//            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.ORANGE);
+
         }
         else if(gamepad2.right_bumper) {
             encoded.closeTopClaw();
@@ -84,7 +85,7 @@ public class Teleop extends OpMode {
         }
         else if (gamepad2.dpad_down) { // close both claws
             encoded.closeClaw();
-            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.VIOLET);
+//            led.blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.VIOLET);
         }
 
         if(gamepad2.y) {
