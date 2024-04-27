@@ -81,7 +81,6 @@ public class rrBlueFrontTrussYellowOnly extends LinearOpMode {
                 drive.followTrajectorySequence(blueMTYO);
                 break;
 
-
             case RIGHT:
                 TrajectorySequence blueRTYO = drive.trajectorySequenceBuilder(startPose)
 //                        .addTemporalMarker(0,()-> {encoded.closeClaw();})

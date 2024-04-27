@@ -19,15 +19,9 @@ import org.firstinspires.ftc.vision.VisionPortal;
 @Autonomous(name = "RR Blue Front Truss")
 public class rrBlueFrontTruss extends LinearOpMode {
 
-
     private FirstVisionProcessor visionProcessor;
-
-
     private VisionPortal visionPortal;
-
-
     private Encoded encoded;
-
 
     @Override
     public void runOpMode() {
@@ -35,27 +29,18 @@ public class rrBlueFrontTruss extends LinearOpMode {
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
 
-
-
-
         while (!isStarted()) {
             telemetry.addData("Identified", visionProcessor.getSelection());
             telemetry.update();
         }
 
-
-
-
         waitForStart();
         visionPortal.stopStreaming();
 
-
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-
 
         Pose2d startPose = (new Pose2d(-30, 70, Math.toRadians(270)));
         drive.setPoseEstimate(startPose);
-
 
         switch (visionProcessor.getSelection()) {
             case LEFT:
@@ -88,9 +73,7 @@ public class rrBlueFrontTruss extends LinearOpMode {
                         .build();
                 drive.followTrajectorySequence(blueFLT);
 
-
                 break;
-
 
             case NONE:
             case MIDDLE:
@@ -124,12 +107,7 @@ public class rrBlueFrontTruss extends LinearOpMode {
 //                        .splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
                 drive.followTrajectorySequence(blueFMT);
-
-
-
-
                 break;
-
 
             case RIGHT:
                 TrajectorySequence blueFRT =  drive.trajectorySequenceBuilder(startPose)
