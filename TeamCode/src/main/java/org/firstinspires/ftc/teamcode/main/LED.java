@@ -4,6 +4,8 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.internal.system.Deadline;
@@ -20,8 +22,7 @@ import java.util.concurrent.TimeUnit;
  *
  * Displays the first pattern upon init.
  */
-@TeleOp(name="LED")
-public class LED extends OpMode {
+public class LED {
 
     /*
      * Change the pattern every 10 seconds in AUTO mode.
@@ -36,35 +37,34 @@ public class LED extends OpMode {
     RevBlinkinLedDriver blinkinLedDriver;
     RevBlinkinLedDriver.BlinkinPattern pattern;
 
+    private final OpMode opMode;
     Telemetry.Item patternName;
     Telemetry.Item display;
     DisplayKind displayKind;
     Deadline ledCycleDeadline;
     Deadline gamepadRateLimit;
 
-    protected enum DisplayKind {
+    private enum DisplayKind {
         MANUAL,
         AUTO
     }
 
-    @Override
-    public void init()
-    {
+    public LED (OpMode opMode) {
+        this.opMode = opMode;
         displayKind = DisplayKind.AUTO;
 
-        blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "LED");
+        blinkinLedDriver = opMode.hardwareMap.get(RevBlinkinLedDriver.class, "LED");
         pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
         blinkinLedDriver.setPattern(pattern);
 
-        display = telemetry.addData("Display Kind: ", displayKind.toString());
-        patternName = telemetry.addData("Pattern: ", pattern.toString());
+        display = opMode.telemetry.addData("Display Kind: ", displayKind.toString());
+        patternName = opMode.telemetry.addData("Pattern: ", pattern.toString());
 
         ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);
         gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
     }
 
-    @Override
-    public void loop()
+    public void update()
     {
         handleGamepad();
 
@@ -88,36 +88,41 @@ public class LED extends OpMode {
      * A: Manual mode, Right bumper displays the next pattern, left bumper displays the previous pattern.
      * B: Auto mode, pattern cycles, changing every LED_PERIOD seconds.
      */
-    protected void handleGamepad()
+    private void handleGamepad()
     {
         if (!gamepadRateLimit.hasExpired()) {
             return;
         }
 
-        if (gamepad1.a) {
+        if (opMode.gamepad1.a) {
             setDisplayKind(DisplayKind.MANUAL);
             gamepadRateLimit.reset();
-        } else if (gamepad1.b) {
+        } else if (opMode.gamepad1.b) {
             setDisplayKind(DisplayKind.AUTO);
             gamepadRateLimit.reset();
-        } else if ((displayKind == DisplayKind.MANUAL) && (gamepad1.left_bumper)) {
+        } else if ((displayKind == DisplayKind.MANUAL) && (opMode.gamepad1.left_bumper)) {
             pattern = pattern.previous();
             displayPattern();
             gamepadRateLimit.reset();
-        } else if ((displayKind == DisplayKind.MANUAL) && (gamepad1.right_bumper)) {
+        } else if ((displayKind == DisplayKind.MANUAL) && (opMode.gamepad1.right_bumper)) {
             pattern = pattern.next();
             displayPattern();
             gamepadRateLimit.reset();
         }
     }
 
-    protected void setDisplayKind(DisplayKind displayKind)
+    public void setPattern(RevBlinkinLedDriver.BlinkinPattern pattern)
+    {
+        blinkinLedDriver.setPattern(pattern);
+    }
+
+    private void setDisplayKind(DisplayKind displayKind)
     {
         this.displayKind = displayKind;
         display.setValue(displayKind.toString());
     }
 
-    protected void doAutoDisplay()
+    private void doAutoDisplay()
     {
         if (ledCycleDeadline.hasExpired()) {
             pattern = pattern.next();
@@ -126,7 +131,7 @@ public class LED extends OpMode {
         }
     }
 
-    protected void displayPattern()
+    private void displayPattern()
     {
         blinkinLedDriver.setPattern(pattern);
         patternName.setValue(pattern.toString());

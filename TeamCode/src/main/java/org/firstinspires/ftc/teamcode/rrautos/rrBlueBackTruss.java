@@ -26,26 +26,19 @@ public class rrBlueBackTruss extends LinearOpMode {
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
 
-
         while (!isStarted()) {
             telemetry.addData("Identified", visionProcessor.getSelection());
             telemetry.update();
         }
 
-
         waitForStart();
         visionPortal.stopStreaming();
-
-
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-
 
         Pose2d startPose = (new Pose2d(15, 70, Math.toRadians(270)));
         drive.setPoseEstimate(startPose);
 
-
         switch (visionProcessor.getSelection()) {
-
 
             case LEFT:
                 TrajectorySequence blueBLT = drive.trajectorySequenceBuilder(startPose)
@@ -72,13 +65,9 @@ public class rrBlueBackTruss extends LinearOpMode {
                         .splineToConstantHeading(new Vector2d(67,13), Math.toRadians(0)) // spline into park (RIGHT)
 //                      .splineToConstantHeading(new Vector2d(60, 58.5), Math.toRadians(0)) // spline into park (LEFT)
 
-
                         .build();
                 drive.followTrajectorySequence(blueBLT);
-
-
                 break;
-
 
             case NONE:
             case MIDDLE:
@@ -105,14 +94,9 @@ public class rrBlueBackTruss extends LinearOpMode {
                         .lineToConstantHeading(new Vector2d(43, 36)) // back up from bd
                         .splineToConstantHeading(new Vector2d(67,13), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
-
-
                         .build();
                 drive.followTrajectorySequence(blueBMT);
-
-
                 break;
-
 
             case RIGHT:
                 TrajectorySequence blueBRT = drive.trajectorySequenceBuilder(startPose)
@@ -138,7 +122,6 @@ public class rrBlueBackTruss extends LinearOpMode {
                         .lineToConstantHeading(new Vector2d(47, 36)) // back up from bd
                         .splineToConstantHeading(new Vector2d(67,13), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
-
 
                         .build();
                 drive.followTrajectorySequence(blueBRT);
