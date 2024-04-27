@@ -10,47 +10,47 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(600);
 
-       // Pose2d startPose = (new Pose2d(-35, 70, Math.toRadians(270)));
-      //  drive.setPoseEstimate(startPose);
-
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(46, 46, Math.toRadians(190), Math.toRadians(190), 13.8)
                 .followTrajectorySequence(drive ->
-<<<<<<< HEAD
-
-                                drive.trajectorySequenceBuilder(new Pose2d(-30, 70, Math.toRadians(270))) // 20 seconds
-
-                                        .lineToConstantHeading(new Vector2d(-46, 38)) // to right spikemark
-                                        //    .splineToLinearHeading(new Pose2d(-38,58.5), Math.toRadians(300))
-                      .lineToConstantHeading(new Vector2d(42, 58.5)) // fly under truss
-                                        .splineToLinearHeading(new Pose2d(52,42), Math.toRadians(0)) // to bd
-                                        // //                       .addDisplacementMarker(()-> {encoded.armtoLowSetLine();})
-////                       .addDisplacementMarker(()-> {encoded.openTopClaw();})
-////                       .addDisplacementMarker(()-> {encoded.closeClaw();})
-                                        .lineToConstantHeading(new Vector2d(43, 36)) // back up from bd
-                                           .splineToConstantHeading(new Vector2d(67,13), Math.toRadians(0)) // spline into park (RIGHT)
-//                      //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
-=======
-                        drive.trajectorySequenceBuilder(new Pose2d(-37, 61.5, Math.toRadians(270)))
+                        drive.trajectorySequenceBuilder(new Pose2d(-37, -61.5, Math.toRadians(90)))
                                 .waitSeconds(1)
                                 //.addTemporalMarker(0,()->{encoded.closeClaw();})
                                 //.addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                                .lineToSplineHeading(new Pose2d(11.5,48,Math.toRadians(225)))
-                                .waitSeconds(1)
-                                //.addTemporalMarker(2,()->{encoded.openBottomClaw();})
-                                //.addTemporalMarker(2.5,()->{encoded.armScoreAuto();})
+                                .lineTo(new Vector2d(-45,-50))
+                                .waitSeconds(2)
+                                //.addTemporalMarker(2,()-> {encoded.openBottomClaw();})
+                                //.addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
                                 //purple dropped
-                                .lineToSplineHeading(new Pose2d(53.5,28,Math.toRadians(0)))
-                                .waitSeconds(1.5)
-                                //.addTemporalMarker(5.5,()->{encoded.openTopClaw();})
-                                //yellow dropped
+                                .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
+                                .waitSeconds(0.1)
+                                .splineTo(new Vector2d(10,-59),Math.toRadians(0))
+                                .splineTo(new Vector2d(53,-29),Math.toRadians(0))
+                                .waitSeconds(1)
                                 .back(5)
-                                .lineTo(new Vector2d(50,58.5))
->>>>>>> master
-                                .build()
-
-                                );
+                                //.addTemporalMarker(9,()-> {encoded.openTopClaw();})
+                                .lineTo(new Vector2d(50,-58.5))
+                                //yellow dropped
+                                //next few line is cycle to pixel stack not done yet
+                                .setReversed(true)
+                                .splineTo(new Vector2d(10,-58),Math.toRadians(180))
+                                .splineTo(new Vector2d(-35,-58),Math.toRadians(180))
+                                .setReversed(false)
+                                .lineToSplineHeading(new Pose2d(-51,-47,Math.toRadians(140)))
+                                .waitSeconds(2)
+                                //.addTemporalMarker(17,()-> {encoded.armtoPixelStack();})
+                                //.addTemporalMarker(16,()-> {encoded.closeClaw();})
+                                //.addTemporalMarker(17,()-> {encoded.armScoreAuto();})
+                                //at pixel stack
+                                .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
+                                .waitSeconds(1)
+                                .splineTo(new Vector2d(10,-57),Math.toRadians(0))
+                                .splineTo(new Vector2d(53,-29),Math.toRadians(0))
+//                                .addTemporalMarker(18,()-> {
+//                                    encoded.openTopClaw();
+//                                    encoded.openBottomClaw();})
+                                .build());
 
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)

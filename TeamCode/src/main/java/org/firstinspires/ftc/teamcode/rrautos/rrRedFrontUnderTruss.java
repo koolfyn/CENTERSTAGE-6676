@@ -26,7 +26,7 @@ public class rrRedFrontUnderTruss extends LinearOpMode{
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
         telemetry.addData("Identified", visionProcessor.getSelection());
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        Pose2d startPose = (new Pose2d(-35, -61.5, Math.toRadians(90)));
+        Pose2d startPose = (new Pose2d(-37, -61.5, Math.toRadians(90)));
         drive.setPoseEstimate(startPose);
 
         while (!isStarted()) {
@@ -40,11 +40,11 @@ public class rrRedFrontUnderTruss extends LinearOpMode{
         if (isStopRequested()) return;
         switch (visionProcessor.getSelection()) {
             case LEFT:
-        TrajectorySequence frontL = drive.trajectorySequenceBuilder(new Pose2d(-35, -61.5, Math.toRadians(90)))
+        TrajectorySequence frontL = drive.trajectorySequenceBuilder(new Pose2d(-37, -61.5, Math.toRadians(90)))
                 .waitSeconds(1)
                 .addTemporalMarker(0,()->{encoded.closeClaw();})
                 .addTemporalMarker(0.5,()->{encoded.armtoGroundAuto();})
-                .lineTo(new Vector2d(-47,-50))
+                .lineTo(new Vector2d(-45,-50))
                 .waitSeconds(2)
                 .addTemporalMarker(2,()-> {encoded.openBottomClaw();})
                 .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
@@ -52,7 +52,7 @@ public class rrRedFrontUnderTruss extends LinearOpMode{
                 .lineToSplineHeading(new Pose2d(-36,-59,Math.toRadians(0)))
                 .waitSeconds(0.1)
                 .splineTo(new Vector2d(10,-59),Math.toRadians(0))
-                .splineTo(new Vector2d(53,-31),Math.toRadians(0))
+                .splineTo(new Vector2d(53,-29),Math.toRadians(0))
                 .waitSeconds(1)
                 .back(5)
                 .addTemporalMarker(9,()-> {encoded.openTopClaw();})
@@ -63,6 +63,19 @@ public class rrRedFrontUnderTruss extends LinearOpMode{
                 .splineTo(new Vector2d(10,-58),Math.toRadians(180))
                 .splineTo(new Vector2d(-35,-58),Math.toRadians(180))
                 .setReversed(false)
+                .lineToSplineHeading(new Pose2d(-51,-47,Math.toRadians(140)))
+                .waitSeconds(3)
+                .addTemporalMarker(17,()-> {encoded.armtoPixelStack();})
+                .addTemporalMarker(18,()-> {encoded.closeClaw();})
+                .addTemporalMarker(20,()-> {encoded.armScoreAuto();})
+                //at pixel stack
+                .lineToSplineHeading(new Pose2d(-36,-57,Math.toRadians(0)))
+                .waitSeconds(.1)
+                .splineTo(new Vector2d(10,-57),Math.toRadians(0))
+                .splineTo(new Vector2d(53,-33),Math.toRadians(0))
+                .addTemporalMarker(27,()-> {
+                    encoded.openTopClaw();
+                    encoded.openBottomClaw();})
                 .build();
         drive.followTrajectorySequence(frontL);
                 break;

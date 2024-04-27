@@ -136,4 +136,5 @@ public class LED {
         blinkinLedDriver.setPattern(pattern);
         patternName.setValue(pattern.toString());
     }
+
 }

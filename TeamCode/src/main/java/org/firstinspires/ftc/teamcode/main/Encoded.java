@@ -52,21 +52,22 @@ public class Encoded {
     }
 
     public void openBottomClaw() {
-        clawBottom.setPosition(0.3);
+        clawBottom.setPosition(0.38);
     }
     public void openTopClaw() {
-        clawTop.setPosition(0.15);
+        clawTop.setPosition(0.1);
     }
 
     public void closeClaw() {
-        clawBottom.setPosition(0.15);
-        clawTop.setPosition(0.32);
+        clawBottom.setPosition(0.11);
+        clawTop.setPosition(0.4);
     }
+
     public void closeTopClaw() {
-        clawTop.setPosition(0.35);
+        clawTop.setPosition(0.4);
     }
     public void closeBottomClaw() {
-        clawBottom.setPosition(0.15);
+        clawBottom.setPosition(0.11);
     }
 
     public void armtoGround() {
