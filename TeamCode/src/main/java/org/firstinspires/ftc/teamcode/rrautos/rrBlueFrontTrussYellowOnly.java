@@ -27,31 +27,19 @@ public class rrBlueFrontTrussYellowOnly extends LinearOpMode {
         visionProcessor = new FirstVisionProcessor();
         visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), visionProcessor);
 
-
         while (!isStarted()) {
             telemetry.addData("Identified", visionProcessor.getSelection());
             telemetry.update();
-
-
         }
-
-
-
 
         waitForStart();
         visionPortal.stopStreaming();
 
-
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-
-
         Pose2d startPose = (new Pose2d(-30, 70, Math.toRadians(270)));
         drive.setPoseEstimate(startPose);
 
-
         switch (visionProcessor.getSelection()) {
-
-
             case LEFT:
                 TrajectorySequence blueLTYO = drive.trajectorySequenceBuilder(startPose)
                         //     .addTemporalMarker(0,()->{encoded.closeClaw();})
@@ -67,18 +55,8 @@ public class rrBlueFrontTrussYellowOnly extends LinearOpMode {
                         // .lineToConstantHeading(new Vector2d(43, 42)) // back up from bd
                         .splineToConstantHeading(new Vector2d(65,13), Math.toRadians(0)) // spline into park (RIGHT)
 //                    .splineToConstantHeading(new Vector2d(65,58.5), Math.toRadians(0)) // spline into park (LEFT)
-
-
-
-
                         .build();
-
-
                 drive.followTrajectorySequence(blueLTYO);
-
-
-
-
                 break;
 
 
@@ -87,9 +65,7 @@ public class rrBlueFrontTrussYellowOnly extends LinearOpMode {
                 TrajectorySequence blueMTYO = drive.trajectorySequenceBuilder(startPose)
 //                         .addTemporalMarker(0,()-> {encoded.closeClaw();})
 
-
                         //    1.  push,  2. go under truss,  3. backdrop,   4. park
-
 
                         .lineToConstantHeading(new Vector2d(-34, 55)) // to spikemark
                         .lineToLinearHeading(new Pose2d(-46, 67, Math.toRadians(0))) // orientate + line up for truss
@@ -101,12 +77,8 @@ public class rrBlueFrontTrussYellowOnly extends LinearOpMode {
                         //     .lineToConstantHeading(new Vector2d(43, 36)) // back up from bd
                         .splineToConstantHeading(new Vector2d(65,16), Math.toRadians(0)) // spline into park (RIGHT)
 //                      //.splineToConstantHeading(new Vector2d(65,58.5), Math.toRadians(0)) // spline into park (LEFT)
-
-
                         .build();
                 drive.followTrajectorySequence(blueMTYO);
-
-
                 break;
 
 
@@ -114,9 +86,7 @@ public class rrBlueFrontTrussYellowOnly extends LinearOpMode {
                 TrajectorySequence blueRTYO = drive.trajectorySequenceBuilder(startPose)
 //                        .addTemporalMarker(0,()-> {encoded.closeClaw();})
 
-
                         //    1. push,  2. go under truss,  3. backdrop,   4. park
-
 
                         .lineToConstantHeading(new Vector2d(-45, 55)) // to right spikemark
 //                      .addDisplacementMarker(()-> {encoded.armtoGroundAuto();})
