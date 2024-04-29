@@ -67,7 +67,7 @@ public class Encoded {
         clawTop.setPosition(0.4);
     }
     public void closeBottomClaw() {
-        clawBottom.setPosition(0.11);
+        clawBottom.setPosition(0.10);
     }
 
     public void armtoGround() {
@@ -105,7 +105,7 @@ public class Encoded {
     }
 
     public void armtoPixelStack() {
-        arm.setTargetPosition(30);
+        arm.setTargetPosition(28);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
         clawTilt.setPosition(0.554);

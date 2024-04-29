@@ -54,6 +54,7 @@ public class Teleop extends OpMode {
             driveTrain.frontRight.setVelocity((y - x - r) * Constants.defaultVal);
             driveTrain.backLeft.setVelocity((y - x + r) * Constants.defaultVal);
             driveTrain.backRight.setVelocity((y + x - r) * Constants.defaultVal);
+            led.setPattern(RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE);
         }
 
         if (gamepad1.dpad_up) { // suspend
@@ -110,6 +111,7 @@ public class Teleop extends OpMode {
         if(gamepad2.dpad_up) {
             encoded.armtoPixelStack();
         }
+
 
         if (gamepad2.right_stick_y > 0.1 && armHeight >= 0) { // manual arm control
             armHeight = Encoded.arm.getCurrentPosition() / Encoded.TICKS_PER_INCH_LS;
