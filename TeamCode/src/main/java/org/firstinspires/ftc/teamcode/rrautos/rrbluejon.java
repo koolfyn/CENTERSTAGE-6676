@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.vision.FirstVisionProcessor;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name = "rrBlueBACKNoCycle")
+@Autonomous(name = "rr Blue BACK No Cycle")
 public class rrbluejon extends LinearOpMode{
     private Encoded encoded;
     private FirstVisionProcessor visionProcessor;
