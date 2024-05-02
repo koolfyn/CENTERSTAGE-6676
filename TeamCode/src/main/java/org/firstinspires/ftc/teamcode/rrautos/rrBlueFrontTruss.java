@@ -1,15 +1,11 @@
 package org.firstinspires.ftc.teamcode.rrautos;
 
 
-
-
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
-
 
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -66,24 +62,24 @@ public class rrBlueFrontTruss extends LinearOpMode {
                         .lineToLinearHeading(new Pose2d(-46, 65, Math.toRadians(0))) // orientate + line up for truss
                         .lineToConstantHeading(new Vector2d(42, 65)) // fly under truss
                         .splineToLinearHeading(new Pose2d(49.5,46), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(5.7,()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(5.85,()-> {encoded.closeClaw();})
+                        .waitSeconds(0.9)
+                        .addTemporalMarker(6.1,()-> {encoded.openTopClaw();})
                         .lineToLinearHeading(new Pose2d(42,42, Math.toRadians(182))) // back up & turn
                         .lineToConstantHeading(new Vector2d(42, 63)) // line up for truss
                         .lineToConstantHeading(new Vector2d(-42, 63)) // fly under truss
                         .lineToLinearHeading(new Pose2d(-49.8, 45, Math.toRadians(195))) // orientate + to stack
                         .lineToLinearHeading(new Pose2d(-53.8, 45, Math.toRadians(195))) // orientate + to stack
-                        .addTemporalMarker(8,()->{encoded.openBottomClaw();})
-                        .addTemporalMarker(8,()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(8.2,()-> {encoded.armtoPixelStack();})
-                        .addTemporalMarker (13.1,()-> {encoded.closeClaw();})
-                        .addTemporalMarker(13.4,()-> {encoded.armScoreAuto();})
+                        .addTemporalMarker(8.9,()->{encoded.openBottomClaw();})
+                        .addTemporalMarker(8.9,()-> {encoded.openTopClaw();})
+                        .addTemporalMarker(9.1,()-> {encoded.armtoPixelStack();})
+                        .addTemporalMarker (14,()-> {encoded.closeClaw();})
+                        .addTemporalMarker(14.3,()-> {encoded.armScoreAuto();})
                         //  .lineToConstantHeading(new Vector2d(-42, 67)) // orientate + line up for truss
                         .lineToLinearHeading(new Pose2d(-42,63, Math.toRadians(180)))
                         .lineToConstantHeading(new Vector2d(42, 63)) // fly under truss
                         .lineToSplineHeading(new Pose2d(49.5,38, Math.toRadians(0))) // to bd
-                        .addTemporalMarker(19.3,()-> {encoded.openBottomClaw();})
-                        .addTemporalMarker(19.7,()-> {encoded.openTopClaw();})
+                        .addTemporalMarker(20.2,()-> {encoded.openBottomClaw();})
+                        .addTemporalMarker(20.6,()-> {encoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(42, 40)) // back up from bd
                         .splineToConstantHeading(new Vector2d(58,16), Math.toRadians(0)) // spline into park (RIGHT)
 //                       .splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
@@ -107,7 +103,8 @@ public class rrBlueFrontTruss extends LinearOpMode {
                         .lineToLinearHeading(new Pose2d(-46, 65, Math.toRadians(0))) // orientate + line up for truss
                         .lineToConstantHeading(new Vector2d(42, 65)) // fly under truss
                         .splineToLinearHeading(new Pose2d(49.5,40), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(6.15,()-> {encoded.openTopClaw();})
+                        .waitSeconds(0.9)
+                        .addTemporalMarker(6.5,()-> {encoded.openTopClaw();})
                         //.lineToConstantHeading(new Vector2d(43, 36)) // back up from bd
                         .lineToLinearHeading(new Pose2d(42,42, Math.toRadians(182))) // back up & turn
 
@@ -118,19 +115,19 @@ public class rrBlueFrontTruss extends LinearOpMode {
                         .lineToConstantHeading(new Vector2d(-42, 63)) // fly under truss
                         .lineToLinearHeading(new Pose2d(-49.8, 48.5, Math.toRadians(200))) // orientate + to stack
                         .lineToLinearHeading(new Pose2d(-53.8, 48.5, Math.toRadians(200))) // orientate + to stack
-                        .addTemporalMarker(8.5,()->{encoded.openBottomClaw();})
-                        .addTemporalMarker(8.5,()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(8.7,()-> {encoded.armtoPixelStack();})
-                        .addTemporalMarker (13.6,()-> {encoded.closeClaw();})
-                        .addTemporalMarker(13.9,()-> {encoded.armScoreAuto();})
+                        .addTemporalMarker(9.4,()->{encoded.openBottomClaw();})
+                        .addTemporalMarker(9.4,()-> {encoded.openTopClaw();})
+                        .addTemporalMarker(9.6,()-> {encoded.armtoPixelStack();})
+                        .addTemporalMarker (14.5,()-> {encoded.closeClaw();})
+                        .addTemporalMarker(14.8,()-> {encoded.armScoreAuto();})
                         //  .lineToConstantHeading(new Vector2d(-42, 67)) // orientate + line up for truss
                         .lineToLinearHeading(new Pose2d(-42,63, Math.toRadians(180)))
                         .lineToConstantHeading(new Vector2d(42, 63)) // fly under truss
                        // .lineToConstantHeading(new Vector2d(42, 60)) // to not hit wall
                       //  .splineToLinearHeading(new Pose2d(49, 44), Math.toRadians(0)) // to bd
                         .lineToSplineHeading(new Pose2d(49.5,44, Math.toRadians(0))) // to bd
-                        .addTemporalMarker(19.5,()-> {encoded.openBottomClaw();})
-                        .addTemporalMarker(19.9,()-> {encoded.openTopClaw();})
+                        .addTemporalMarker(20.4,()-> {encoded.openBottomClaw();})
+                        .addTemporalMarker(20.8,()-> {encoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(42, 44)) // back up from bd
                         .splineToConstantHeading(new Vector2d(58,16), Math.toRadians(0)) // spline into park (RIGHT)
 //                        .splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)

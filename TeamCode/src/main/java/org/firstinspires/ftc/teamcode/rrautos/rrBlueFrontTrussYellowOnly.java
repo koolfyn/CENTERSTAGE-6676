@@ -52,20 +52,19 @@ public class rrBlueFrontTrussYellowOnly extends LinearOpMode {
         switch (visionProcessor.getSelection()) {
             case LEFT:
                 TrajectorySequence blueLTYO = drive.trajectorySequenceBuilder(startPose)
-                        .addTemporalMarker(0,()->{encoded.closeClaw();})
-//
-                        .addTemporalMarker(0.25,()-> {encoded.armtoGroundAuto();})
-                        .lineToLinearHeading(new Pose2d(-35, 55, Math.toRadians(310))) // to spikemark
-                        .addTemporalMarker(2,()-> {encoded.openBottomClaw();})
-                        .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
-                        .splineToLinearHeading(new Pose2d(-38,67), Math.toRadians(0)) // lineup for truss
-                        .lineToConstantHeading(new Vector2d(42, 67)) // fly under truss
-                        .splineToLinearHeading(new Pose2d(43,45), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(()-> {encoded.closeClaw();})
-                        // .lineToConstantHeading(new Vector2d(43, 42)) // back up from bd
-                        .splineToConstantHeading(new Vector2d(65,13), Math.toRadians(0)) // spline into park (RIGHT)
-//                    .splineToConstantHeading(new Vector2d(65,58.5), Math.toRadians(0)) // spline into park (LEFT)
+                        .addTemporalMarker(0,()-> {encoded.closeClaw();})
+                        .addTemporalMarker(0.1,()-> {encoded.armtoGroundAuto();})
+                        .lineToLinearHeading(new Pose2d(-34, 52, Math.toRadians(315))) // to spikemark
+                        .addTemporalMarker(1,()-> {encoded.openBottomClaw();})
+                        .addTemporalMarker(1.1,()-> {encoded.armScoreAuto();})
+                        .lineToLinearHeading(new Pose2d(-46, 65, Math.toRadians(0))) // orientate + line up for truss
+                        .lineToConstantHeading(new Vector2d(42, 65)) // fly under truss
+                        .splineToLinearHeading(new Pose2d(49.5,46), Math.toRadians(0)) // to bd
+                        .waitSeconds(0.9)
+                        .addTemporalMarker(6.1,()-> {encoded.openTopClaw();})
+                        .lineToConstantHeading(new Vector2d(42, 46)) // back up from bd
+                        .splineToConstantHeading(new Vector2d(58,16), Math.toRadians(0)) // spline into park (RIGHT)
+
                         .build();
                 drive.followTrajectorySequence(blueLTYO);
                 break;
@@ -77,22 +76,19 @@ public class rrBlueFrontTrussYellowOnly extends LinearOpMode {
             case MIDDLE:
                 TrajectorySequence blueMTYO = drive.trajectorySequenceBuilder(startPose)
                         .addTemporalMarker(0,()-> {encoded.closeClaw();})
-
-
-                        //    1.  push,  2. go under truss,  3. backdrop,   4. park
                         .addTemporalMarker(0.25,()-> {encoded.armtoGroundAuto();})
 
 
-                        .lineToConstantHeading(new Vector2d(-34, 55)) // to spikemark
-                        .addTemporalMarker(2,()-> {encoded.openBottomClaw();})
-                        .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
-                        .lineToLinearHeading(new Pose2d(-46, 67, Math.toRadians(0))) // orientate + line up for truss
-                        .lineToConstantHeading(new Vector2d(42, 67)) // fly under truss
-                        .splineToLinearHeading(new Pose2d(43,45), Math.toRadians(0)) // to bd
-                        .addTemporalMarker(()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(()-> {encoded.closeClaw();})
-                        //     .lineToConstantHeading(new Vector2d(43, 36)) // back up from bd
-                        .splineToConstantHeading(new Vector2d(65,16), Math.toRadians(0)) // spline into park (RIGHT)
+                        .lineToConstantHeading(new Vector2d(-32, 51)) // to spikemark
+                        .addTemporalMarker(1,()-> {encoded.openBottomClaw();})
+                        .addTemporalMarker(1.1,()-> {encoded.armScoreAuto();})
+                        .lineToLinearHeading(new Pose2d(-46, 65, Math.toRadians(0))) // orientate + line up for truss
+                        .lineToConstantHeading(new Vector2d(42, 65)) // fly under truss
+                        .splineToLinearHeading(new Pose2d(49.5,40), Math.toRadians(0)) // to bd
+                        .waitSeconds(0.9)
+                        .addTemporalMarker(6.5,()-> {encoded.openTopClaw();})
+                        .lineToConstantHeading(new Vector2d(42, 40)) // back up from bd
+                        .splineToConstantHeading(new Vector2d(58,16), Math.toRadians(0)) // spline into park (RIGHT)
 //                      //.splineToConstantHeading(new Vector2d(65,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
                 drive.followTrajectorySequence(blueMTYO);
@@ -102,25 +98,19 @@ public class rrBlueFrontTrussYellowOnly extends LinearOpMode {
             case RIGHT:
                 TrajectorySequence blueRTYO = drive.trajectorySequenceBuilder(startPose)
                         .addTemporalMarker(0,()-> {encoded.closeClaw();})
-
-
-                        //    1. push,  2. go under truss,  3. backdrop,   4. park
                         .addTemporalMarker(0.25,()-> {encoded.armtoGroundAuto();})
 
 
-                        .lineToConstantHeading(new Vector2d(-45, 55)) // to right spikemark
-                        .addTemporalMarker(2,()-> {encoded.openBottomClaw();})
-                        .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
-
-
-                        .addTemporalMarker(2.5,()-> {encoded.armScoreAuto();})
-                        .lineToLinearHeading(new Pose2d(-46, 67, Math.toRadians(0))) // orientate + line up for truss
-                        .lineToConstantHeading(new Vector2d(42, 67)) // fly under truss
-                        .lineToSplineHeading(new Pose2d(43,36, Math.toRadians(0))) // to backdrop
-                        .addTemporalMarker(()-> {encoded.openTopClaw();})
-                        .addTemporalMarker(()-> {encoded.closeClaw();})
-                        // .lineToConstantHeading(new Vector2d(47, 36)) // back up from bd
-                        .splineToConstantHeading(new Vector2d(67, 18), Math.toRadians(0)) // spline into park (RIGHT)
+                        .lineToConstantHeading(new Vector2d(-45, 57)) // to right spikemark
+                        .addTemporalMarker(1,()-> {encoded.openBottomClaw();})
+                        .addTemporalMarker(1.1,()-> {encoded.armScoreAuto();})
+                        .lineToLinearHeading(new Pose2d(-46, 63.5, Math.toRadians(0))) // orientate + line up for truss
+                        .lineToConstantHeading(new Vector2d(39, 63.5)) // fly under truss
+                        .splineToLinearHeading(new Pose2d(51,30), Math.toRadians(0)) // to bd
+                        .addTemporalMarker(5.9,()-> {encoded.openTopClaw();})
+                        .addTemporalMarker(6.1,()-> {encoded.closeClaw();})
+                        .lineToConstantHeading(new Vector2d(42, 40)) // back up from bd
+                        .splineToConstantHeading(new Vector2d(58,16), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(65,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
                 drive.followTrajectorySequence(blueRTYO);
