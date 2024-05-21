@@ -59,7 +59,7 @@ public class Encoded {
     }
 
     public void closeClaw() {
-        clawBottom.setPosition(0.11);
+        clawBottom.setPosition(0.10);
         clawTop.setPosition(0.4);
     }
 
@@ -71,27 +71,27 @@ public class Encoded {
     }
 
     public void armtoGround() {
-        clawTilt.setPosition(0.5);
+        clawTilt.setPosition(0.2);
         arm.setTargetPosition(Constants.ground);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(400);
     }
     public void armtoGroundAuto() {
-        clawTilt.setPosition(0.48);
+        clawTilt.setPosition(0.19);
         arm.setTargetPosition(Constants.ground);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(400);
     }
 
     public void armScoreAuto() {
-        clawTilt.setPosition(0.31);
-        arm.setTargetPosition(0);
+        clawTilt.setPosition(0);
+        arm.setTargetPosition(5);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
     }
 
     public void armtoLowSetLine() {
-        clawTilt.setPosition(0.35);
+        clawTilt.setPosition(0.02);
         arm.setTargetPosition(Constants.lowSetLine);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
@@ -108,7 +108,7 @@ public class Encoded {
         arm.setTargetPosition(32);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setVelocity(1000);
-        clawTilt.setPosition(0.469);
+        clawTilt.setPosition(0.154);
     }
 
     public void launchDrone() {

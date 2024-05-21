@@ -63,7 +63,7 @@ public class rrBlueBackTruss extends LinearOpMode {
                         .addTemporalMarker(15.5,()-> {encoded.openBottomClaw();})
                       .addTemporalMarker(15.7, ()-> {encoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(43, 48)) // back up from bd
-                        .splineToConstantHeading(new Vector2d(58,16), Math.toRadians(0)) // spline into park (RIGHT)
+                        .splineToConstantHeading(new Vector2d(58,14), Math.toRadians(0)) // spline into park (RIGHT)
 //                      .splineToConstantHeading(new Vector2d(60, 58.5), Math.toRadians(0)) // spline into park (LEFT)
 
                         .build();
@@ -98,7 +98,7 @@ public class rrBlueBackTruss extends LinearOpMode {
                       .addTemporalMarker(17.2, ()-> {encoded.openTopClaw();})
                         .lineToConstantHeading(new Vector2d(42, 36)) // back up from bd
 
-                        .splineToConstantHeading(new Vector2d(58,16), Math.toRadians(0)) // spline into park (RIGHT)
+                        .splineToConstantHeading(new Vector2d(58,14), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
                         .build();
                 drive.followTrajectorySequence(blueBMT);
@@ -131,7 +131,7 @@ public class rrBlueBackTruss extends LinearOpMode {
                         .addTemporalMarker(17.2, ()-> {encoded.openTopClaw();})
 
                         .lineToConstantHeading(new Vector2d(47, 36)) // back up from bd
-                        .splineToConstantHeading(new Vector2d(58,16), Math.toRadians(0)) // spline into park (RIGHT)
+                        .splineToConstantHeading(new Vector2d(58,14), Math.toRadians(0)) // spline into park (RIGHT)
                         //.splineToConstantHeading(new Vector2d(60,58.5), Math.toRadians(0)) // spline into park (LEFT)
 
                         .build();
